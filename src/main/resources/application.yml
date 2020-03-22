@@ -6,7 +6,7 @@ spring:
       additional-paths: resources/**,static/**,templates/**
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lbms?userUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/live?userUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
     username: root
     password:
     platform: mysql

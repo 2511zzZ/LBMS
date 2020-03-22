@@ -1,60 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
-<mapper namespace="priv.zzz.dao.UserDao">
+<mapper namespace="com.zzz.dao.SysUserDao">
 
 
-    <select id="getUserTotalNum" resultType="java.lang.Integer">
-        select count(*) from user
+    <select id="getTotalNum" resultType="java.lang.Integer">
+        select count(*) from sys_user
     </select>
-    <select id="getUserWithPagination" resultType="priv.zzz.model.User">
-        select * from user limit #{offset}, #{limit}
+    <select id="getUserWithPagination" resultType="com.zzz.model.SysUser">
+        select * from sys_user limit #{offset}, #{limit}
     </select>
-
-
-
-
-
-
-
-
-
-
-
-
-    <select id="getUserById" resultType="priv.zzz.model.User" parameterType="int">
-        select * from user
-        <where>
-            employee_id = #{id}
-        </where>
-    </select>
-
-    <select id="getAllUser" resultType="priv.zzz.model.User">
-        select * from user
-    </select>
-
-    <insert id="insertUser" parameterType="priv.zzz.model.User" useGeneratedKeys="true" keyProperty="employeeId">
-        insert into user (employee_id, username, password, name, gender, nickname, role)
-        values
-        (#{user.employeeId}, #{user.username}, #{user.password}, #{user.name}, #{user.gender}, #{user.nickname}, #{user.role})
-    </insert>
-
-    <delete id="deleteUser">
-        delete from user
-        <where>
-            employee_id = #{employeeId}
-        </where>
-    </delete>
-
-    <update id="updateUser" parameterType="priv.zzz.model.User">
-        update user
-        <set>
-            <if test="user.nickname!=null">
-                nickname = #{user.nickname},
-            </if>
-        </set>
-        <where>
-            username = #{user.username}
-        </where>
-    </update>
 
 </mapper>
