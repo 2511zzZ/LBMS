@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: dev
+  devtools:
+    restart:
+      additional-paths: resources/**,static/**,templates/**
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lbms?userUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    platform: mysql
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+
+  security:
+    user:
+      name: zzZ
+      password: 123456
+
+mybatis:
+  type-aliases-package: com.zzz.model
+  # 配置注解+XML方式的扫描路径
+  mapper-locations: classpath:/mybatis-mappers/*
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+logging:
+  path: D:\Projects\LBMSLogs
+
+swagger:
+  enable: true
