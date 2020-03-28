@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.AnchorDao">
+
+    <select id="getTotalNum" resultType="java.lang.Integer">
+        select count(*) from anchor
+    </select>
+    <select id="getAnchorWithPagination" resultType="com.zzz.model.Anchor">
+        select * from anchor limit #{offset}, #{limit}
+    </select>
+    <select id="getOnlineAnchorWithPagination" resultType="com.zzz.model.Anchor">
+        select * from anchor a WHERE a.anchor_id IN(SELECT anchor_id FROM anchor_online WHERE is_online = 1) LIMIT #{offset}, #{limit}
+    </select>
+    <select id="getOnlineTotalNum" resultType="java.lang.Integer">
+        select count(*) from anchor a WHERE a.anchor_id IN(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
+    </select>
+</mapper>

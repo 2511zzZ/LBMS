@@ -11,6 +11,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
     private static final long serialVersionUID = 8925514045582235838L;
     private ID id;
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
     private Date createTime = new Date();
     @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
     private Date updateTime = new Date();

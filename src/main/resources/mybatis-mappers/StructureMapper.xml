@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.StructureDao">
+
+    <select id="getTotalId" resultType="java.lang.Integer">
+        select total_id from struc_total where employee_id = #{employeeId}
+    </select>
+    <select id="getBranchIds" resultType="java.lang.Integer">
+        select employee_id from struc_branch s where s.branch_id in
+        (select branch_id from struc_manage group by branch_id)
+    </select>
+    <select id="getBranchId" resultType="java.lang.Integer">
+        select branch_id from struc_branch where employee_id = #{employeeId}
+    </select>
+    <select id="getGroupIds" resultType="java.lang.Integer">
+        select employee_id from struc_group s where s.group_id in
+        (select group_id from struc_manage where branch_id = #{branchId} group by group_id)
+    </select>
+    <select id="getGroupId" resultType="java.lang.Integer">
+        select group_id from struc_group where employee_id = #{employeeId}
+    </select>
+    <select id="getSuperBranchEmployeeId" resultType="java.lang.Integer">
+        select employee_id from struc_branch where branch_id =
+        (select branch_id from struc_manage where group_id = #{groupId} limit 1)
+    </select>
+    <select id="getTeamIds" resultType="java.lang.Integer">
+        select employee_id from struc_team s where s.team_id in
+        (select team_id from struc_manage where group_id = #{groupId} group by team_id)
+    </select>
+    <select id="getTeamId" resultType="java.lang.Integer">
+        select team_id from struc_team where employee_id = #{employeeId}
+    </select>
+    <select id="getSuperGroupEmployeeId" resultType="java.lang.Integer">
+        select employee_id from struc_group where group_id =
+        (select group_id from struc_manage where team_id = #{teamId} limit 1)
+    </select>
+    <select id="getAnchorIds" resultType="java.lang.Integer">
+        select anchor_id from anchor s where s.anchor_id in
+        (select anchor_id from struc_manage where team_id = #{teamId})
+    </select>
+</mapper>
