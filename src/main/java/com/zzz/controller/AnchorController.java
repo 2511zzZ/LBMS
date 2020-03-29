@@ -1,6 +1,8 @@
 package com.zzz.controller;
 
 import com.zzz.model.Anchor;
+import com.zzz.model.HistoryData;
+import com.zzz.model.OnlineData;
 import com.zzz.model.SysUserDetails;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -42,5 +45,10 @@ public class AnchorController {
         List<Anchor> onlineAnchorList = anchorService.getOnlineAnchors(page, pageSize);
         int total = anchorService.getOnlineTotalNum();
         return Results.success(ResponseCode.SUCCESS, total, onlineAnchorList);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public Results<Anchor> getAnchor(@RequestParam int anchorId) {
+        return Results.success(ResponseCode.SUCCESS, anchorService.getAnchor(anchorId));
     }
 }

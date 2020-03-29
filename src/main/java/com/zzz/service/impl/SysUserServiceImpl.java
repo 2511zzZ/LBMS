@@ -3,6 +3,7 @@ package com.zzz.service.impl;
 import com.zzz.dao.SysUserDao;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
+import com.zzz.model.SysUserSettings;
 import com.zzz.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,16 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public Integer getRole(int employeeId) {
         return userDao.getSimpleUserById(employeeId).getRole();
+    }
+
+    @Override
+    public SysUserSettings getSettings(int employeeId) {
+        return userDao.getSettings(employeeId);
+    }
+
+    @Override
+    public void changeSettings(int employeeId, String setting1, String setting2) {
+        SysUserSettings settings = new SysUserSettings(employeeId, setting1, setting2);
+        userDao.changeSettings(settings);
     }
 }

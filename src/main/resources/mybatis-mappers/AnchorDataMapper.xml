@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.AnchorDataDao">
+
+    <select id="getAnchorOnlineData" resultType="com.zzz.model.OnlineData">
+        select * from anchor_realtime where anchor_id = #{anchorId}
+    </select>
+    <select id="getAnchorHistoryData" resultType="com.zzz.model.HistoryData">
+        select * from anchor_history where anchor_id = #{anchorId} and date = #{date}
+    </select>
+    <select id="getAnchorHistoryDatas" resultType="com.zzz.model.HistoryData">
+        select * from anchor_history where anchor_id = #{anchorId} and date between #{begin} and #{end} limit #{offset}, #{limit}
+    </select>
+    <select id="getHistoryDataNum" resultType="java.lang.Integer">
+        select count(*) from anchor_history where anchor_id = #{anchorId} and date between #{begin} and #{end}
+    </select>
+</mapper>

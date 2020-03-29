@@ -2,6 +2,7 @@ package com.zzz.dao;
 
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
+import com.zzz.model.SysUserSettings;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface SysUserDao {
     void changePassword(int employeeId, String newPassword);
 
     void changeDetails(int employeeId, String nickname, String avatar);
+
+    SysUserSettings getSettings(int employeeId);
+
+    void changeSettings(SysUserSettings settings);
 }

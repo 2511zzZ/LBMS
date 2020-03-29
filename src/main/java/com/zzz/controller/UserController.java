@@ -2,6 +2,7 @@ package com.zzz.controller;
 
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
+import com.zzz.model.SysUserSettings;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.SysUserService;
@@ -30,5 +31,15 @@ public class UserController {
     @RequestMapping(value="/{employeeId}/role", method = RequestMethod.GET)
     public Results getRole(int employeeId){
         return Results.success(ResponseCode.SUCCESS, userService.getRole(employeeId));
+    }
+
+    @RequestMapping(value = "{employeeId}/settings", method = RequestMethod.GET)
+    public Results<SysUserSettings> getSettings(int employeeId){
+        return Results.success(ResponseCode.SUCCESS, userService.getSettings(employeeId));
+    }
+    @RequestMapping(value = "{employeeId}/settings", method = RequestMethod.PUT)
+    public Results<SysUserSettings> changeSettings(int employeeId, String setting1, String setting2){
+        userService.changeSettings(employeeId,setting1, setting2);
+        return Results.success(ResponseCode.SUCCESS);
     }
 }

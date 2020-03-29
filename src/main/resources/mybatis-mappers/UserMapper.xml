@@ -7,6 +7,9 @@
     <update id="changeDetails">
         update sys_user_details set nickname = #{nickname},avatar = #{avatar} where employee_id = #{employeeId}
     </update>
+    <update id="changeSettings">
+        update sys_user_settings set setting1 = #{setting1}, setting2 = #{setting2} where employee_id = #{employeeId}
+    </update>
 
 
     <select id="getTotalNum" resultType="java.lang.Integer">
@@ -19,7 +22,10 @@
         select * from sys_user_details where employee_id = #{employeeId}
     </select>
     <select id="getSimpleUserById" resultType="com.zzz.model.SysUser">
-        select * from sys_user where employee_id = #{employee_id}
+        select * from sys_user where employee_id = #{employeeId}
+    </select>
+    <select id="getSettings" resultType="com.zzz.model.SysUserSettings">
+        select * from sys_user_settings where employee_id = #{employeeId}
     </select>
 
 </mapper>

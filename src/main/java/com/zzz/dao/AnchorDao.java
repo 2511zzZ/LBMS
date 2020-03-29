@@ -1,8 +1,11 @@
 package com.zzz.dao;
 
 import com.zzz.model.Anchor;
+import com.zzz.model.HistoryData;
+import com.zzz.model.OnlineData;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -14,4 +17,6 @@ public interface AnchorDao {
     List<Anchor> getOnlineAnchorWithPagination(int offset, int limit);
 
     Integer getOnlineTotalNum();
+
+    Anchor getAnchorById(int anchorId);
 }

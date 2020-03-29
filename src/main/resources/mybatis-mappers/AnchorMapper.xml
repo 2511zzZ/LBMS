@@ -14,4 +14,7 @@
     <select id="getOnlineTotalNum" resultType="java.lang.Integer">
         select count(*) from anchor a WHERE a.anchor_id IN(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
     </select>
+    <select id="getAnchorById" resultType="com.zzz.model.Anchor">
+        select * from anchor where anchor_id = #{anchorId}
+    </select>
 </mapper>

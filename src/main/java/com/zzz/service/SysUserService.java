@@ -1,6 +1,7 @@
 package com.zzz.service;
 
 import com.zzz.model.SysUserDetails;
+import com.zzz.model.SysUserSettings;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface SysUserService {
     void changeDetails(int employeeId, SysUserDetails currentUser);
 
     Integer getRole(int employeeId);
+
+    SysUserSettings getSettings(int employeeId);
+
+    void changeSettings(int employeeId, String setting1, String setting2);
 }
