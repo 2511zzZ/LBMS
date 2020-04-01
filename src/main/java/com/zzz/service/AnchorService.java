@@ -17,4 +17,6 @@ public interface AnchorService {
     Integer getOnlineTotalNum();
 
     Anchor getAnchor(int anchorId);
+
+    void banAnchor(int anchorId, Date begin, Date end, String reason);
 }

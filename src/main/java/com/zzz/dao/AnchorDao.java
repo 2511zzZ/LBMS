@@ -19,4 +19,6 @@ public interface AnchorDao {
     Integer getOnlineTotalNum();
 
     Anchor getAnchorById(int anchorId);
+
+    void banAnchor(int anchorId, Date begin, Date end, String reason);
 }

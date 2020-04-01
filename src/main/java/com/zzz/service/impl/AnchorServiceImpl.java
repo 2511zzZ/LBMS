@@ -49,4 +49,9 @@ public class AnchorServiceImpl implements AnchorService {
     public Anchor getAnchor(int anchorId) {
         return anchorDao.getAnchorById(anchorId);
     }
+
+    @Override
+    public void banAnchor(int anchorId, Date begin, Date end, String reason) {
+        anchorDao.banAnchor(anchorId, begin, end, reason);
+    }
 }

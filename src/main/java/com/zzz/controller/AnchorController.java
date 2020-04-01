@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -50,5 +52,25 @@ public class AnchorController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Results<Anchor> getAnchor(@RequestParam int anchorId) {
         return Results.success(ResponseCode.SUCCESS, anchorService.getAnchor(anchorId));
+    }
+
+
+    @RequestMapping(value="ban",method = RequestMethod.POST)
+    public Results banAnchor(@RequestParam int anchorId,
+                             @RequestParam String startStr,
+                             @RequestParam String endStr,
+                             @RequestParam String reason){
+        Date begin;
+        Date end;
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
+            begin = simpleDateFormat.parse(startStr);
+            end = simpleDateFormat.parse(endStr);
+        }catch (ParseException e){
+            return Results.failure(4002, "日期格式错误");
+        }
+        anchorService.banAnchor(anchorId, begin, end, reason);
+        return Results.success(ResponseCode.SUCCESS);
+
     }
 }
