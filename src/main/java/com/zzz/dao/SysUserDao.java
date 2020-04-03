@@ -24,4 +24,6 @@ public interface SysUserDao {
     SysUserSettings getSettings(int employeeId);
 
     void changeSettings(SysUserSettings settings);
+
+    SysUser getSimpleUserByName(String username);
 }

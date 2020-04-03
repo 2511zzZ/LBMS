@@ -34,6 +34,11 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUserDetails getUser(int employeeId){return userDao.getUserById(employeeId);}
 
     @Override
+    public SysUser getSimpleUserByName(String username) {
+        return userDao.getSimpleUserByName(username);
+    }
+
+    @Override
     public boolean changePassword(int employeeId, String oldPassword, String newPassword){
         if(!(userDao.getSimpleUserById(employeeId).getPassword().equals(oldPassword))){
             return false;

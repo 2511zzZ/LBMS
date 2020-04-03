@@ -1,5 +1,6 @@
 package com.zzz.service;
 
+import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import com.zzz.model.SysUserSettings;
 
@@ -11,6 +12,8 @@ public interface SysUserService {
     Integer getTotalNum();
 
     SysUserDetails getUser(int employeeId);
+
+    SysUser getSimpleUserByName(String username);
 
     boolean changePassword(int employeeId, String oldPassword, String newPassword);
 

@@ -27,5 +27,8 @@
     <select id="getSettings" resultType="com.zzz.model.SysUserSettings">
         select * from sys_user_settings where employee_id = #{employeeId}
     </select>
+    <select id="getSimpleUserByName" resultType="com.zzz.model.SysUser">
+        select * from sys_user where BINARY username = #{username}
+    </select>
 
 </mapper>
