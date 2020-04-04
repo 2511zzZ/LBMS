@@ -26,9 +26,9 @@ public class LoginController {
         try{
             subject.login(token);
         }catch (UnknownAccountException e){
-            return Results.failure(4001,"用户名不存在");
+            return Results.failure(ResponseCode.NULL_USERNAME);
         }catch (IncorrectCredentialsException e){
-            return Results.failure(4002, "密码错误");
+            return Results.failure(ResponseCode.WRONG_PASSWORD);
         }
         return Results.success();
     }

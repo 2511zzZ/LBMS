@@ -31,7 +31,7 @@ public class UserController {
         if(userService.changePassword(employeeId, oldPassword, newPassword)){
             return Results.success(ResponseCode.SUCCESS,"修改成功");
         }
-        return Results.failure(4001, "原密码错误");
+        return Results.failure(ResponseCode.WRONG_PASSWORD);
     }
 
     @RequestMapping(value="/role", method = RequestMethod.GET)

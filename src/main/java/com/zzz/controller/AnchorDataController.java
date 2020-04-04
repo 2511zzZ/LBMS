@@ -37,7 +37,7 @@ public class AnchorDataController {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
             date = simpleDateFormat.parse(dateStr);
         }catch (ParseException e){
-            return Results.failure(5002, "日期格式错误");
+            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
         }
         return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorHistoryData(anchorId, date));
     }
@@ -54,7 +54,7 @@ public class AnchorDataController {
             begin = simpleDateFormat.parse(dateBeginStr);
             end = simpleDateFormat.parse(dateEndStr2);
         }catch (ParseException e){
-            return Results.failure(5002, "日期格式错误");
+            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
         }
         int total = anchorDataService.getHistoryDataNum(anchorId, begin, end);
         return Results.success(ResponseCode.SUCCESS, total, anchorDataService.getAnchorHistoryData(anchorId, begin, end, page, pageSize));

@@ -12,6 +12,10 @@ public enum ResponseCode {
     UNAUTHORIZED(401,"未授权, 请登录"),
     FORBIDDEN(403, "超出权限"),
 
+    BAD_DATE_FORMAT(4001, "日期格式错误"),
+    NULL_USERNAME(4011, "用户名不存在"),
+    WRONG_PASSWORD(4012, "密码错误"),
+
     UNASSORTED(-1, "未分类的错误"),
     ;
     private Integer code;
