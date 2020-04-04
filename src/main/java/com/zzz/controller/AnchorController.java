@@ -1,10 +1,12 @@
 package com.zzz.controller;
 
 import com.zzz.model.Anchor;
+import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.AnchorService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("anchor")
+@RequestMapping("/anchor")
 public class AnchorController {
 
     @Autowired
@@ -27,10 +29,6 @@ public class AnchorController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Results<Anchor> getAnchorList(@RequestParam(name="page", defaultValue = "1") int page,
                                        @RequestParam(name="pageSize", defaultValue = "30") int pageSize){
-
-//        if(page < 1){
-//            return Results.failure(ResponseCode.BAD_REQUEST);
-//        }
 
         List<Anchor> anchorList = anchorService.getAnchors(page, pageSize);
         int total = anchorService.getTotalNum();
@@ -45,13 +43,22 @@ public class AnchorController {
         return Results.success(ResponseCode.SUCCESS, total, onlineAnchorList);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public Results<Anchor> getAnchor(@RequestParam int anchorId) {
+
+        // 判断anchorId是否在权限范围内
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+
+        if(!anchorService.hasPermission(user,anchorId)){
+            return Results.failure(ResponseCode.FORBIDDEN);
+        }
+
+
         return Results.success(ResponseCode.SUCCESS, anchorService.getAnchor(anchorId));
     }
 
 
-    @RequestMapping(value="ban",method = RequestMethod.POST)
+    @RequestMapping(value="/ban",method = RequestMethod.POST)
     public Results banAnchor(@RequestParam int anchorId,
                              @RequestParam String startStr,
                              @RequestParam String endStr,
@@ -65,6 +72,13 @@ public class AnchorController {
         }catch (ParseException e){
             return Results.failure(4002, "日期格式错误");
         }
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+
+        if(!anchorService.hasPermission(user,anchorId)){
+            return Results.failure(403, "未授权");
+        }
+
         anchorService.banAnchor(anchorId, begin, end, reason);
         return Results.success(ResponseCode.SUCCESS);
 

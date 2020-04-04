@@ -20,4 +20,47 @@
     <select id="getAnchorById" resultType="com.zzz.model.Anchor">
         select * from anchor where anchor_id = #{anchorId}
     </select>
+
+    <select id="branchHasPermission" resultType="java.lang.Integer">
+        select count(*) from struc_manage where anchor_id = #{anchorId} and branch_id = #{branchId}
+    </select>
+    <select id="groupHasPermission" resultType="java.lang.Integer">
+        select count(*) from struc_manage where anchor_id = #{anchorId} and group_id = #{groupId}
+    </select>
+    <select id="teamHasPermission" resultType="java.lang.Integer">
+        select count(*) from struc_manage where anchor_id = #{anchorId} and team_id = #{teamId}
+    </select>
+
+    <select id="branchGetAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where anchor_id in (select anchor_id from struc_manage where branch_id = #{branchId}) limit #{offset}, #{limit}
+    </select>
+    <select id="groupGetAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where anchor_id in (select anchor_id from struc_manage where group_id = #{groupId}) limit #{offset}, #{limit}
+    </select>
+    <select id="teamGetAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where anchor_id in (select anchor_id from struc_manage where team_id = #{teamId}) limit #{offset}, #{limit}
+    </select>
+
+    <select id="branchGetOnlineAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where
+        anchor_id in (select anchor_id from struc_manage where branch_id = #{branchId})
+        and
+        anchor_id in(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
+        limit #{offset}, #{limit}
+    </select>
+    <select id="groupGetOnlineAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where
+        anchor_id in (select anchor_id from struc_manage where group_id = #{groupId})
+        and
+        anchor_id in(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
+        limit #{offset}, #{limit}
+    </select>
+    <select id="teamGetOnlineAnchors" resultType="com.zzz.model.Anchor">
+        select * from anchor where
+        anchor_id in (select anchor_id from struc_manage where team_id = #{teamId})
+        and
+        anchor_id in(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
+        limit #{offset}, #{limit}
+    </select>
+
 </mapper>

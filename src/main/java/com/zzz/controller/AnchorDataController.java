@@ -18,7 +18,7 @@ import java.util.Date;
 
 @RestController
 @Slf4j
-@RequestMapping("anchorData")
+@RequestMapping("/anchorData")
 public class AnchorDataController {
 
     @Autowired

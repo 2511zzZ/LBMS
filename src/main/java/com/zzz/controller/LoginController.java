@@ -1,5 +1,6 @@
 package com.zzz.controller;
 
+import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -32,13 +33,13 @@ public class LoginController {
         return Results.success();
     }
 
-    @RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
+    @RequestMapping(value = "/401", method = RequestMethod.GET)
     public Results loginFailed(){
-        return Results.failure(403, "请登录");
+        return Results.failure(ResponseCode.UNAUTHORIZED);
     }
 
-    @RequestMapping(value = "/unAuthorized", method = RequestMethod.GET)
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
     public Results unAuthorized(){
-        return Results.failure(403, "未认证");
+        return Results.failure(ResponseCode.FORBIDDEN);
     }
 }

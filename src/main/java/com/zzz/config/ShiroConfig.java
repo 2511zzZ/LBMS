@@ -36,10 +36,10 @@ public class ShiroConfig {
         filterMap.put("/login", "anon");
 
         //需要登录
-        filterMap.put("/anchor/*", "authc");
-        filterMap.put("/user/*", "authc");
+        filterMap.put("/anchor/**", "authc");
+        filterMap.put("/user/**", "authc");
         filterMap.put("/structure", "authc");
-        filterMap.put("/anchorData/*", "authc");
+        filterMap.put("/anchorData/**", "authc");
 
         //需要特定权限
         filterMap.put("/druid/stat", "roles[druid]");
@@ -47,8 +47,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         //修改认证失败的跳转页面
-        shiroFilterFactoryBean.setLoginUrl("/loginFailed");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/unAuthorized");
+        shiroFilterFactoryBean.setLoginUrl("/401");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
         return shiroFilterFactoryBean;
     }

@@ -1,7 +1,6 @@
 package com.zzz.controller;
 
 import com.zzz.model.SysUser;
-import com.zzz.model.SysUserDetails;
 import com.zzz.model.SysUserSettings;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
@@ -9,13 +8,14 @@ import com.zzz.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
