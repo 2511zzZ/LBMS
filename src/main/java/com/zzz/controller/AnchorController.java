@@ -1,13 +1,9 @@
 package com.zzz.controller;
 
 import com.zzz.model.Anchor;
-import com.zzz.model.HistoryData;
-import com.zzz.model.OnlineData;
-import com.zzz.model.SysUserDetails;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.AnchorService;
-import com.zzz.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

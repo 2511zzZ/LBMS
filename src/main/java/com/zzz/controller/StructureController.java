@@ -2,12 +2,17 @@ package com.zzz.controller;
 
 import com.zzz.model.Level;
 import com.zzz.model.Structure;
+import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.StructureService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @Slf4j

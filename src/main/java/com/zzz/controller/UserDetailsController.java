@@ -6,6 +6,7 @@ import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,16 +33,23 @@ public class UserDetailsController {
         return Results.success(ResponseCode.SUCCESS, total, userArrayList);
     }
 
-    @RequestMapping(value="/{employeeId}",method = RequestMethod.GET)
-    public Results<SysUserDetails> getUserDetails(@PathVariable int employeeId){
-        SysUserDetails user = userService.getUser(employeeId);
-        return Results.success(ResponseCode.SUCCESS, user);
+    @RequestMapping(value="/",method = RequestMethod.GET)
+    public Results<SysUserDetails> getUserDetails(){
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        int employeeId = user.getEmployeeId();
+
+        SysUserDetails userDetails = userService.getUser(employeeId);
+        return Results.success(ResponseCode.SUCCESS, userDetails);
     }
 
-    @RequestMapping(value="/{employeeId}",method = RequestMethod.PUT)
-    public Results changeUserDetails(@PathVariable int employeeId,
-                                     @RequestParam(required = false) String nickname,
+    @RequestMapping(value="/",method = RequestMethod.PUT)
+    public Results changeUserDetails(@RequestParam(required = false) String nickname,
                                      @RequestParam(required = false) String avatar){
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        int employeeId = user.getEmployeeId();
+
         SysUserDetails currentUser = userService.getUser(employeeId);
         if(!(nickname==null)){
             currentUser.setNickname(nickname);

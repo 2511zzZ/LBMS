@@ -32,11 +32,17 @@ public class ShiroConfig {
         * roles：该资源必须得到角色权限才可以访问
         */
         Map<String, String> filterMap = new LinkedHashMap<>();
-        //可使用通配符
+        //无需登录
         filterMap.put("/login", "anon");
-        filterMap.put("/druid/stat", "authc");
-        //授权过滤器
-        filterMap.put("/structure", "roles[structure:query]");
+
+        //需要登录
+        filterMap.put("/anchor/*", "authc");
+        filterMap.put("/user/*", "authc");
+        filterMap.put("/structure", "authc");
+        filterMap.put("/anchorData/*", "authc");
+
+        //需要特定权限
+        filterMap.put("/druid/stat", "roles[druid]");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
