@@ -14,4 +14,13 @@ public class SysUser extends BaseEntity<Long> {
     private String password;
     private int role;
 
+    public SysUser(){}
+
+    public SysUser(int employeeId, String username, String password, int role){
+        this.employeeId = employeeId;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
 }

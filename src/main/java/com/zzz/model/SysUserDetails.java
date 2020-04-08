@@ -17,9 +17,21 @@ public class SysUserDetails extends BaseEntity<Long> {
     private String avatar;
     private Integer role;
 
+    public SysUserDetails(){}
+
     public SysUserDetails(int employeeId, String username){
         this.employeeId = employeeId;
         this.username = username;
+    }
+
+    public SysUserDetails(int employeeId, String username, String name, String gender, String nickname, String avatar, int role){
+        this.employeeId = employeeId;
+        this.username = username;
+        this.name = name;
+        this.gender = gender;
+        this.nickname = nickname;
+        this.avatar = avatar;
+        this.role = role;
     }
 
     @Override

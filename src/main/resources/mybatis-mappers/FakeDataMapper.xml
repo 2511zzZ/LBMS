@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.FakeDataDao">
+
+    <insert id="insertAnchors" parameterType="java.util.List">
+        insert into anchor
+        (anchor_id, room_id, name, nickname, phone)
+        values
+        <foreach collection="list" item="anchor" index="index" separator=",">
+            (
+            #{anchor.anchorId},
+            #{anchor.roomId},
+            #{anchor.name},
+            #{anchor.nickname},
+            #{anchor.phone}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertUserDetails" parameterType="java.util.List">
+        insert into sys_user_details
+        (employee_id, username, name, gender, nickname, avatar, role)
+        values
+        <foreach collection="list" item="sysUserDetails" index="index" separator=",">
+            (
+            #{sysUserDetails.employeeId},
+            #{sysUserDetails.username},
+            #{sysUserDetails.name},
+            #{sysUserDetails.gender},
+            #{sysUserDetails.nickname},
+            #{sysUserDetails.avatar},
+            #{sysUserDetails.role}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertUsers" parameterType="java.util.List">
+        insert into sys_user
+        (employee_id, username, password, role)
+        values
+        <foreach collection="list" item="sysUser" index="index" separator=",">
+            (
+            #{sysUser.employeeId},
+            #{sysUser.username},
+            #{sysUser.password},
+            #{sysUser.role}
+            )
+        </foreach>
+    </insert>
+    <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">
+        select * from sys_user_details
+    </select>
+</mapper>
