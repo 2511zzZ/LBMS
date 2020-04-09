@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.TeamDataDao">
+
+    <select id="getTeamOnlineData" resultType="com.zzz.model.OnlineDatas.TeamOnlineData">
+        select * from team_realtime where team_id = #{teamId}
+    </select>
+    <select id="getTeamHistoryData" resultType="com.zzz.model.HistoryDatas.TeamHistoryData">
+        select * from team_history where team_id = #{teamId} and date = #{date}
+    </select>
+    <select id="getTeamHistoryDatas" resultType="com.zzz.model.HistoryDatas.TeamHistoryData">
+        select * from team_history where team_id = #{teamId} and date between #{begin} and #{end} limit #{offset}, #{limit}
+    </select>
+    <select id="getHistoryDataNum" resultType="java.lang.Integer">
+        select count(*) from team_history where team_id = #{teamId} and date between #{begin} and #{end}
+    </select>
+</mapper>

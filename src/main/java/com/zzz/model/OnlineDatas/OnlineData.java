@@ -1,6 +1,7 @@
-package com.zzz.model;
+package com.zzz.model.OnlineDatas;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zzz.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,13 +9,10 @@ import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class HistoryData extends BaseEntity<Long> {
-
-    private Integer anchorId;
+public class OnlineData extends BaseEntity<Long> {
     private Integer watchNum;
     private Integer gift;
     private Integer bulletScreen;
-    private Integer maxWatchNum;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date data = new Date();
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
+    private Date time = new Date();
 }

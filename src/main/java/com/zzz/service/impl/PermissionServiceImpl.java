@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.AnchorDao;
+import com.zzz.dao.PermissionDao;
 import com.zzz.dao.StructureDao;
 import com.zzz.model.SysUser;
 import com.zzz.service.PermissionService;
@@ -12,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PermissionServiceImpl implements PermissionService {
+
+    @Autowired
+    PermissionDao permissionDao;
 
     @Autowired
     AnchorDao anchorDao;
@@ -35,6 +39,23 @@ public class PermissionServiceImpl implements PermissionService {
         }else if(user.getRole()==4){
             int teamId = structureDao.getTeamId(user.getEmployeeId());
             return anchorDao.teamHasPermission(teamId, anchorId)!=0;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasTeamPermission(SysUser user, int teamId) {
+        if(user.getRole()==1){
+            return true;
+        }else if(user.getRole()==2){
+            int branchId = structureDao.getBranchId(user.getEmployeeId());
+            return permissionDao.branchHasTeamPermission(branchId,teamId)!=0;
+        }else if(user.getRole()==3){
+            int groupId = structureDao.getGroupId(user.getEmployeeId());
+            return permissionDao.groupHasTeamPermission(groupId,teamId)!=0;
+        }else if(user.getRole()==4){
+            return teamId == structureDao.getTeamId(user.getEmployeeId());
         }
 
         return false;

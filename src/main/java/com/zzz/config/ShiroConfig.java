@@ -40,6 +40,10 @@ public class ShiroConfig {
         filterMap.put("/user/**", "authc");
         filterMap.put("/structure", "authc");
         filterMap.put("/anchorData/**", "authc");
+        filterMap.put("/teamData/**", "authc");
+        filterMap.put("/groupData/**", "authc");
+        filterMap.put("/branchData/**", "authc");
+        filterMap.put("/totalData/**", "authc");
 
         //需要特定权限
         filterMap.put("/druid/stat", "roles[druid]");

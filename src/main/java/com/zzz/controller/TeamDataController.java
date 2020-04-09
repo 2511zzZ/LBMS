@@ -1,12 +1,12 @@
 package com.zzz.controller;
 
-import com.zzz.model.HistoryDatas.AnchorHistoryData;
-import com.zzz.model.OnlineDatas.AnchorOnlineData;
+import com.zzz.model.HistoryDatas.TeamHistoryData;
+import com.zzz.model.OnlineDatas.TeamOnlineData;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
-import com.zzz.service.AnchorDataService;
 import com.zzz.service.PermissionService;
+import com.zzz.service.TeamDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +21,29 @@ import java.util.Date;
 
 @RestController
 @Slf4j
-@RequestMapping("/anchorData")
-public class AnchorDataController {
+@RequestMapping("/teamData")
+public class TeamDataController {
 
     @Autowired
-    private AnchorDataService anchorDataService;
+    private TeamDataService teamDataService;
 
     @Autowired
     private PermissionService permissionService;
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId){
+    public Results<TeamOnlineData> getTeamOnlineData(@RequestParam int teamId){
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        if(!permissionService.hasPermission(user,anchorId)){
+        if(!permissionService.hasTeamPermission(user,teamId)){
             return Results.failure(ResponseCode.FORBIDDEN);
         }
 
-        return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorOnlineData(anchorId));
+        return Results.success(ResponseCode.SUCCESS, teamDataService.getTeamOnlineData(teamId));
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public Results<AnchorHistoryData> getAnchorHistoryData(@RequestParam int anchorId, @RequestParam String dateStr){
+    public Results<TeamHistoryData> getTeamHistoryData(@RequestParam int teamId, @RequestParam String dateStr){
         Date date;
         try{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
@@ -53,14 +53,14 @@ public class AnchorDataController {
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        if(!permissionService.hasPermission(user,anchorId)){
+        if(!permissionService.hasTeamPermission(user,teamId)){
             return Results.failure(ResponseCode.FORBIDDEN);
         }
 
-        return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorHistoryData(anchorId, date));
+        return Results.success(ResponseCode.SUCCESS, teamDataService.getTeamHistoryData(teamId, date));
     }
     @RequestMapping(value = "/historys", method = RequestMethod.GET)
-    public Results<AnchorHistoryData> getAnchorHistoryData(@RequestParam int anchorId,
+    public Results<TeamHistoryData> getTeamHistoryData(@RequestParam int teamId,
                                                      @RequestParam String dateBeginStr,
                                                      @RequestParam String dateEndStr2,
                                                      @RequestParam(name="page", defaultValue = "1") int page,
@@ -76,11 +76,11 @@ public class AnchorDataController {
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        if(!permissionService.hasPermission(user,anchorId)){
+        if(!permissionService.hasTeamPermission(user,teamId)){
             return Results.failure(ResponseCode.FORBIDDEN);
         }
 
-        int total = anchorDataService.getHistoryDataNum(anchorId, begin, end);
-        return Results.success(ResponseCode.SUCCESS, total, anchorDataService.getAnchorHistoryData(anchorId, begin, end, page, pageSize));
+        int total = teamDataService.getHistoryDataNum(teamId, begin, end);
+        return Results.success(ResponseCode.SUCCESS, total, teamDataService.getTeamHistoryData(teamId, begin, end, page, pageSize));
     }
 }
