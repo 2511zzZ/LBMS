@@ -8,5 +8,8 @@
     <select id="groupHasTeamPermission" resultType="java.lang.Integer">
         select count(*) from struc_manage where team_id = #{teamId} and group_id = #{groupId}
     </select>
+    <select id="branchHasGroupPermission" resultType="java.lang.Integer">
+        select count(*) from struc_manage where group_id = #{groupId} and branch_id = #{branchId}
+    </select>
 
 </mapper>

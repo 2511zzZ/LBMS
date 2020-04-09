@@ -7,4 +7,10 @@ public interface PermissionService {
     boolean hasPermission(SysUser user, int anchorId);
 
     boolean hasTeamPermission(SysUser user, int teamId);
+
+    boolean hasGroupPermission(SysUser user, int groupId);
+
+    boolean hasBranchPermission(SysUser user, int branchId);
+
+    boolean hasTotalPermission(SysUser user, int totalId);
 }

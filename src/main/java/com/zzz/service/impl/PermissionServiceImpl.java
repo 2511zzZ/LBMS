@@ -60,4 +60,35 @@ public class PermissionServiceImpl implements PermissionService {
 
         return false;
     }
+
+    @Override
+    public boolean hasGroupPermission(SysUser user, int groupId) {
+
+        if(user.getRole()==1){
+            return true;
+        }else if(user.getRole()==2){
+            int branchId = structureDao.getBranchId(user.getEmployeeId());
+            return permissionDao.branchHasGroupPermission(branchId,groupId)!=0;
+        }else if(user.getRole()==3){
+            return groupId == structureDao.getGroupId(user.getEmployeeId());
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasBranchPermission(SysUser user, int branchId) {
+        if(user.getRole()==1){
+            return true;
+        }else if(user.getRole()==2){
+            return branchId == structureDao.getBranchId(user.getEmployeeId());
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasTotalPermission(SysUser user, int totalId) {
+        return user.getRole() == 1;
+    }
 }

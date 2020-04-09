@@ -1,0 +1,43 @@
+package com.zzz.service.impl;
+
+import com.zzz.dao.TotalDataDao;
+import com.zzz.model.HistoryDatas.TotalHistoryData;
+import com.zzz.model.OnlineDatas.TotalOnlineData;
+import com.zzz.service.TotalDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+@Transactional(propagation = Propagation.REQUIRED)
+public class TotalDataServiceImpl implements TotalDataService {
+
+    @Autowired
+    TotalDataDao totalDataDao;
+
+
+    @Override
+    public TotalOnlineData getTotalOnlineData(int totalId) {
+        return totalDataDao.getTotalOnlineData(totalId);
+    }
+
+    @Override
+    public TotalHistoryData getTotalHistoryData(int totalId, Date date) {
+        return totalDataDao.getTotalHistoryData(totalId, date);
+    }
+
+    @Override
+    public List<TotalHistoryData> getTotalHistoryData(int totalId, Date begin, Date end, int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return totalDataDao.getTotalHistoryDatas(totalId, begin, end, offset, pageSize);
+    }
+
+    @Override
+    public Integer getHistoryDataNum(int totalId, Date begin, Date end) {
+        return totalDataDao.getHistoryDataNum(totalId, begin, end);
+    }
+}
