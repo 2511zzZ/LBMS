@@ -1,5 +1,6 @@
 package com.zzz.controller;
 
+import com.zzz.fakedata.MD5;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +20,7 @@ public class LoginController {
     public Results login(String username, String password){
         Subject subject = SecurityUtils.getSubject();
         //封装用户数据
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, MD5.DoMD5(password));
 
         // 执行登录方法
         // 无异常则判断为登录成功

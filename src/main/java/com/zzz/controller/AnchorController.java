@@ -5,6 +5,7 @@ import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.AnchorService;
+import com.zzz.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class AnchorController {
 
     @Autowired
     private AnchorService anchorService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Results<Anchor> getAnchorList(@RequestParam(name="page", defaultValue = "1") int page,
@@ -49,7 +53,7 @@ public class AnchorController {
         // 判断anchorId是否在权限范围内
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
-        if(!anchorService.hasPermission(user,anchorId)){
+        if(!permissionService.hasPermission(user,anchorId)){
             return Results.failure(ResponseCode.FORBIDDEN);
         }
 
@@ -75,7 +79,7 @@ public class AnchorController {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
-        if(!anchorService.hasPermission(user,anchorId)){
+        if(!permissionService.hasPermission(user,anchorId)){
             return Results.failure(403, "未授权");
         }
 

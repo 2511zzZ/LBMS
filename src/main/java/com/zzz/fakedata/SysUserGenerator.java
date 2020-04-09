@@ -61,7 +61,7 @@ public class SysUserGenerator {
             SysUser user = new SysUser(
                     userDetails.getEmployeeId(),
                     userDetails.getUsername(),
-                    FakeDataUtils.DoMD5("123456"),
+                    MD5.DoMD5("123456"),
                     userDetails.getRole()
             );
             userList.add(user);

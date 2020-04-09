@@ -7,9 +7,6 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 public class FakeDataUtils {
@@ -56,19 +53,6 @@ public class FakeDataUtils {
         String[] secondNum = {"3", "5", "8"};
         String last = String.valueOf((int)(Math.random()*900000000+100000000));
         return firstNum + secondNum[new Random().nextInt(3)] + last;
-    }
-
-    public static String DoMD5(String password){
-        String encryptedPassword = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            encryptedPassword = new BigInteger(1, md.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return encryptedPassword;
     }
 
     public static String toPinyin(String ChineseLanguage){

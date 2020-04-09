@@ -2,10 +2,13 @@ package com.zzz.controller;
 
 import com.zzz.model.HistoryData;
 import com.zzz.model.OnlineData;
+import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
 import com.zzz.service.AnchorDataService;
+import com.zzz.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +27,18 @@ public class AnchorDataController {
     @Autowired
     private AnchorDataService anchorDataService;
 
+    @Autowired
+    private PermissionService permissionService;
+
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
     public Results<OnlineData> getAnchorOnlineData(@RequestParam int anchorId){
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(!permissionService.hasPermission(user,anchorId)){
+            return Results.failure(ResponseCode.FORBIDDEN);
+        }
+
         return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorOnlineData(anchorId));
     }
 
@@ -39,6 +51,12 @@ public class AnchorDataController {
         }catch (ParseException e){
             return Results.failure(ResponseCode.BAD_DATE_FORMAT);
         }
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(!permissionService.hasPermission(user,anchorId)){
+            return Results.failure(ResponseCode.FORBIDDEN);
+        }
+
         return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorHistoryData(anchorId, date));
     }
     @RequestMapping(value = "/historys", method = RequestMethod.GET)
@@ -56,6 +74,12 @@ public class AnchorDataController {
         }catch (ParseException e){
             return Results.failure(ResponseCode.BAD_DATE_FORMAT);
         }
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(!permissionService.hasPermission(user,anchorId)){
+            return Results.failure(ResponseCode.FORBIDDEN);
+        }
+
         int total = anchorDataService.getHistoryDataNum(anchorId, begin, end);
         return Results.success(ResponseCode.SUCCESS, total, anchorDataService.getAnchorHistoryData(anchorId, begin, end, page, pageSize));
     }

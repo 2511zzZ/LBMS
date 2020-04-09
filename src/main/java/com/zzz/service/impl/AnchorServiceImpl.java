@@ -85,24 +85,4 @@ public class AnchorServiceImpl implements AnchorService {
     public void banAnchor(int anchorId, Date begin, Date end, String reason) {
         anchorDao.banAnchor(anchorId, begin, end, reason);
     }
-
-    @Override
-    public boolean hasPermission(SysUser user, int anchorId) {
-
-        //1.总经理 2.分区经理  3.超管 4.管理员
-        if(user.getRole()==1){
-            return true;
-        }else if(user.getRole()==2){
-            int branchId = structureDao.getBranchId(user.getEmployeeId());
-            return anchorDao.branchHasPermission(branchId,anchorId)!=0;
-        }else if(user.getRole()==3){
-            int groupId = structureDao.getGroupId(user.getEmployeeId());
-            return anchorDao.groupHasPermission(groupId,anchorId)!=0;
-        }else if(user.getRole()==4){
-            int teamId = structureDao.getTeamId(user.getEmployeeId());
-            return anchorDao.teamHasPermission(teamId, anchorId)!=0;
-        }
-
-        return false;
-    }
 }
