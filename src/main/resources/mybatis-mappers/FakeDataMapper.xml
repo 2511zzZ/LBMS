@@ -45,7 +45,27 @@
             )
         </foreach>
     </insert>
+    <insert id="insertIntoTotal">
+        insert into struc_total values (null, #{totalId}, #{levelName}, #{employeeId})
+    </insert>
+    <insert id="insertIntoBranch">
+        insert into struc_branch values (null, #{branchId}, #{levelName}, #{employeeId})
+    </insert>
+    <insert id="insertIntoGroup">
+        insert into struc_group values (null, #{groupId}, #{levelName}, #{employeeId})
+    </insert>
+    <insert id="insertIntoTeam">
+        insert into struc_team values (null, #{teamId}, #{levelName}, #{employeeId})
+    </insert>
+    <insert id="insertStrucManage">
+        insert into struc_manage value (null, #{anchorId}, #{teamId}, #{groupId}, #{branchId})
+    </insert>
+
+
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">
         select * from sys_user_details
+    </select>
+    <select id="queryAllUsers" resultType="com.zzz.model.SysUser">
+        select * from sys_user
     </select>
 </mapper>

@@ -1,8 +1,6 @@
 package com.zzz.lbms;
 
-import com.zzz.dao.FakeDataDao;
-import com.zzz.fakedata.AnchorGenerator;
-import com.zzz.fakedata.SysUserGenerator;
+import com.zzz.service.fakedata.FakeDataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,20 +9,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class FakeData {
 
     @Autowired
-    FakeDataDao fakeDataDao;
+    FakeDataService fakeDataService;
 
     @Test
     void insertAnchors(){
-        fakeDataDao.insertAnchors(AnchorGenerator.fakeAnchors());
+        fakeDataService.insertAnchors();
     }
 
     @Test
     void insertUserDetails(){
-        fakeDataDao.insertUserDetails(SysUserGenerator.fakeUserDetails());
+        fakeDataService.insertUserDetails();
     }
 
     @Test
     void insertUsers(){
-        fakeDataDao.insertUsers(SysUserGenerator.fakeUsers(fakeDataDao.queryAllUserDetails()));
+        fakeDataService.insertUsers();
     }
+
+    @Test
+    void insertStructures() {fakeDataService.insertStructures(); }
+
+    @Test
+    void insertStruManage() {fakeDataService.insertStrucManage();}
+
 }

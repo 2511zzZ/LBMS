@@ -16,5 +16,17 @@ public interface FakeDataDao {
 
     List<SysUserDetails> queryAllUserDetails();
 
+    List<SysUser> queryAllUsers();
+
     int insertUsers(List<SysUser> userList);
+
+    void insertIntoTotal(int totalId, String levelName, Integer employeeId);
+
+    void insertIntoBranch(int branchId, String levelName, Integer employeeId);
+
+    void insertIntoGroup(int groupId, String levelName, Integer employeeId);
+
+    void insertIntoTeam(int teamId, String levelName, Integer employeeId);
+
+    void insertStrucManage(int anchorId, int teamId, int groupId, int branchId);
 }
