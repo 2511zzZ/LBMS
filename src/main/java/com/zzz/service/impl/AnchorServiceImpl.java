@@ -85,4 +85,9 @@ public class AnchorServiceImpl implements AnchorService {
     public void banAnchor(int anchorId, Date begin, Date end, String reason) {
         anchorDao.banAnchor(anchorId, begin, end, reason);
     }
+
+    @Override
+    public List<Anchor> recommendAnchors() {
+        return anchorDao.recommendAnchors();
+    }
 }

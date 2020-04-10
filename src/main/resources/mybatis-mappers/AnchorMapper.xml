@@ -62,5 +62,11 @@
         anchor_id in(SELECT anchor_id FROM anchor_online WHERE is_online = 1)
         limit #{offset}, #{limit}
     </select>
+    <select id="recommendAnchors" resultType="com.zzz.model.Anchor">
+        select * from
+        (select A.*, watch_num
+        from anchor as A join anchor_realtime as R on R.anchor_id = A.anchor_id
+        ) t order by watch_num desc limit 3
+    </select>
 
 </mapper>

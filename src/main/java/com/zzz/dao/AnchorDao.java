@@ -35,4 +35,6 @@ public interface AnchorDao {
     List<Anchor> groupGetOnlineAnchors(Integer groupId, int offset, int limit);
 
     List<Anchor> teamGetOnlineAnchors(Integer teamId, int offset, int limit);
+
+    List<Anchor> recommendAnchors();
 }

@@ -85,6 +85,11 @@ public class AnchorController {
 
         anchorService.banAnchor(anchorId, begin, end, reason);
         return Results.success(ResponseCode.SUCCESS);
+    }
 
+    @RequestMapping(value="/recommend", method = RequestMethod.GET)
+    public Results<Anchor> anchorRecommend(){
+        List<Anchor> anchors = anchorService.recommendAnchors();
+        return Results.success(ResponseCode.SUCCESS, anchors.size(), anchors);
     }
 }
