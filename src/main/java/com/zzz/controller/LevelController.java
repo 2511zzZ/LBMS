@@ -24,7 +24,6 @@ public class LevelController {
     private LevelService levelService;
 
 
-    //todo: level接口的权限配置
     @RequestMapping(value="/team", method = RequestMethod.GET)
     public Results<Team> getTeamByParam(@RequestParam(required = false) Integer teamId,
                                      @RequestParam(required = false) String teamName,

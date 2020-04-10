@@ -40,13 +40,21 @@ public class ShiroConfig {
         filterMap.put("/user/**", "authc");
         filterMap.put("/structure", "authc");
         filterMap.put("/anchorData/**", "authc");
-        filterMap.put("/teamData/**", "authc");
-        filterMap.put("/groupData/**", "authc");
-        filterMap.put("/branchData/**", "authc");
-        filterMap.put("/totalData/**", "authc");
 
         //需要特定权限
         filterMap.put("/druid/stat", "roles[druid]");
+
+        //查询直播数据
+        filterMap.put("/teamData/**", "roles[team]");
+        filterMap.put("/groupData/**", "roles[group]");
+        filterMap.put("/branchData/**", "roles[branch]");
+        filterMap.put("/totalData/**", "roles[total]");
+
+        //查询某一小组或查询小组列表
+        filterMap.put("/team/**", "roles[group]");
+        filterMap.put("/group/**", "roles[branch]");
+        filterMap.put("/branch/**", "roles[total]");
+        filterMap.put("/total/**", "roles[total]");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 

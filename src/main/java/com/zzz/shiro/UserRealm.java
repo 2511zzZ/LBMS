@@ -3,7 +3,6 @@ package com.zzz.shiro;
 
 import com.zzz.model.SysUser;
 import com.zzz.service.SysUserService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -27,6 +26,19 @@ public class UserRealm extends AuthorizingRealm {
 
         if(user.getUsername().equals("zzZ")){
             info.addRoles(Permissions.adminPerms);
+        }
+
+        if(user.getRole()<=4){
+            info.addRoles(Permissions.teamPerms);
+        }
+        if(user.getRole()<=3){
+            info.addRoles(Permissions.groupPerms);
+        }
+        if(user.getRole()<=2){
+            info.addRoles(Permissions.branchPerms);
+        }
+        if(user.getRole()<=1){
+            info.addRoles(Permissions.totalPerms);
         }
 
         // 添加资源权限
