@@ -5,7 +5,9 @@ import com.zzz.model.SysUserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class SysUserGenerator {
@@ -29,6 +31,8 @@ public class SysUserGenerator {
     public static List<SysUserDetails> fakeUserDetails(){
         List<SysUserDetails> userDetailsList = new ArrayList<>();
 
+        Set<String> names = new HashSet<>();
+
         for(int i=1;i<=FakeDataConfig.userNum;i++) {
             int role = 4;
             if (i == 1) {
@@ -40,6 +44,12 @@ public class SysUserGenerator {
             }
 
             String name = FakeDataUtils.randomName();
+
+            // 保证name和username不重复
+            while(names.contains(name)){
+                name = FakeDataUtils.randomName();
+            }
+            names.add(name);
 
             SysUserDetails userDetails = new SysUserDetails(
                     i,

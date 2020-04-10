@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.LevelDao">
+
+    <select id="getTeamByParam" resultType="com.zzz.model.levels.Team">
+        select * from struc_team where 1 = 1
+        <if test="teamId!=null">
+            and team_id = #{teamId}
+        </if>
+        <if test="teamName!=null and teamName!=''">
+            and team_name rlike #{teamName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    <select id="getTeams" resultType="com.zzz.model.levels.Team">
+        select * from struc_team limit #{offset}, #{limit}
+    </select>
+    <select id="getTeamTotalNum" resultType="java.lang.Integer">
+        select count(*) from struc_team
+    </select>
+    <select id="getTeamNumWithParam" resultType="java.lang.Integer">
+        select count(*) from struc_team where 1 = 1
+        <if test="teamId!=null">
+            and team_id = #{teamId}
+        </if>
+        <if test="teamName!=null and teamName!=''">
+            and team_name rlike #{teamName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+    </select>
+
+    <select id="getGroupByParam" resultType="com.zzz.model.levels.Group">
+        select * from struc_group where 1 = 1
+        <if test="groupId!=null">
+            and group_id = #{groupId}
+        </if>
+        <if test="groupName!=null and groupName!=''">
+            and group_name rlike #{groupName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    <select id="getGroups" resultType="com.zzz.model.levels.Group">
+        select * from struc_group limit #{offset}, #{limit}
+    </select>
+    <select id="getGroupTotalNum" resultType="java.lang.Integer">
+        select count(*) from struc_group
+    </select>
+    <select id="getGroupNumWithParam" resultType="java.lang.Integer">
+        select count(*) from struc_group where 1 = 1
+        <if test="groupId!=null">
+            and group_id = #{groupId}
+        </if>
+        <if test="groupName!=null and groupName!=''">
+            and group_name rlike #{groupName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+    </select>
+
+    <select id="getBranchByParam" resultType="com.zzz.model.levels.Branch">
+        select * from struc_branch where 1 = 1
+        <if test="branchId!=null">
+            and branch_id = #{branchId}
+        </if>
+        <if test="branchName!=null and branchName!=''">
+            and branch_name rlike #{branchName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+        limit #{offset}, #{limit}
+    </select>
+    <select id="getBranchs" resultType="com.zzz.model.levels.Branch">
+        select * from struc_branch limit #{offset}, #{limit}
+    </select>
+    <select id="getBranchTotalNum" resultType="java.lang.Integer">
+        select count(*) from struc_branch
+    </select>
+    <select id="getBranchNumWithParam" resultType="java.lang.Integer">
+        select count(*) from struc_branch where 1 = 1
+        <if test="branchId!=null">
+            and branch_id = #{branchId}
+        </if>
+        <if test="branchName!=null and branchName!=''">
+            and branch_name rlike #{branchName}
+        </if>
+        <if test="employeeId!=null">
+            and employee_id = #{employeeId}
+        </if>
+    </select>
+
+    <select id="getTotal" resultType="com.zzz.model.levels.Total">
+        select * from struc_total
+    </select>
+
+
+</mapper>

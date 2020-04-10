@@ -27,7 +27,6 @@ public class FakeDataService {
         fakeDataDao.insertUserDetails(SysUserGenerator.fakeUserDetails());
     }
 
-    //todo: 判断username是否重复
     public void insertUsers(){
         fakeDataDao.insertUsers(SysUserGenerator.fakeUsers(fakeDataDao.queryAllUserDetails()));
     }
