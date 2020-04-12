@@ -1,7 +1,8 @@
 package com.zzz.lbms;
 
-import com.zzz.dao.FakeDataDao;
+import com.zzz.quartz.QuartzScheduler;
 import org.junit.jupiter.api.Test;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 class LbmsApplicationTests {
 
     @Autowired
-    FakeDataDao fakeDataDao;
+    QuartzScheduler quartzScheduler;
 
     @Test
     void contextLoads() {
@@ -35,4 +36,10 @@ class LbmsApplicationTests {
         }
     }
 
+    @Test
+    void quartzTest() throws SchedulerException, InterruptedException {
+        System.out.println("定时任务开始");
+        quartzScheduler.startJob();
+        Thread.sleep(2000);
+    }
 }
