@@ -40,4 +40,9 @@ public class TeamDataServiceImpl implements TeamDataService {
     public Integer getHistoryDataNum(int teamId, Date begin, Date end) {
         return teamDataDao.getHistoryDataNum(teamId, begin, end);
     }
+
+    @Override
+    public TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime) {
+        return teamDataDao.calTeamRealtimeDataFromAnchors(teamId, datetime);
+    }
 }

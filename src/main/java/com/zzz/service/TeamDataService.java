@@ -15,4 +15,6 @@ public interface TeamDataService {
     List<TeamHistoryData> getTeamHistoryData(int teamId, Date begin, Date end, int page, int pageSize);
 
     Integer getHistoryDataNum(int teamId, Date begin, Date end);
+
+    TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime);
 }

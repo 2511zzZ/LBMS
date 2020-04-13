@@ -18,7 +18,7 @@ public class RealtimeDataGenerator {
     */
 
 
-    public static List<AnchorOnlineData> fakeAnchorOnlineData(List<Integer> anchorIds){
+    public static List<AnchorOnlineData> fakeAnchorOnlineData(List<Integer> anchorIds, Date datetime){
 
         List<AnchorOnlineData> realTimeData = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class RealtimeDataGenerator {
                     FakeDataUtils.randomWatchNum(),
                     FakeDataUtils.randomGift(),
                     FakeDataUtils.randomBulletScreen(),
-                    new Date()
+                    datetime
             ));
         }
         return realTimeData;

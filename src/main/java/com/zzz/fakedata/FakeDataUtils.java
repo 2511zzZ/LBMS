@@ -82,7 +82,7 @@ public class FakeDataUtils {
     }
 
     public static int randomWatchNum() {
-        return (int)(Math.random()*10000);
+        return (int)(Math.random()*1000);
     }
 
     public static int randomGift() {

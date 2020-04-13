@@ -94,5 +94,20 @@ public class LevelServiceImpl implements LevelService {
         return levelDao.getTotal();
     }
 
+    @Override
+    public List<Integer> getTeamIds() {
+        return levelDao.getTeamIds();
+    }
+
+    @Override
+    public List<Integer> getGroupIds() {
+        return levelDao.getGroupIds();
+    }
+
+    @Override
+    public List<Integer> getBranchIds() {
+        return levelDao.getBranchIds();
+    }
+
 
 }

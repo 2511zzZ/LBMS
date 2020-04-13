@@ -101,6 +101,15 @@
     <select id="getTotal" resultType="com.zzz.model.levels.Total">
         select * from struc_total
     </select>
+    <select id="getTeamIds" resultType="java.lang.Integer">
+        select team_id from struc_manage group by team_id
+    </select>
+    <select id="getGroupIds" resultType="java.lang.Integer">
+        select group_id from struc_manage group by group_id
+    </select>
+    <select id="getBranchIds" resultType="java.lang.Integer">
+        select branch_id from struc_manage group by branch_id
+    </select>
 
 
 </mapper>

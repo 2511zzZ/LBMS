@@ -14,4 +14,15 @@
     <select id="getHistoryDataNum" resultType="java.lang.Integer">
         select count(*) from total_history where total_id = #{totalId} and date between #{begin} and #{end}
     </select>
+    <select id="calTotalRealtimeDataFromBranchs" resultType="com.zzz.model.OnlineDatas.TotalOnlineData">
+        select
+        #{totalId} as total_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        time as time
+        from branch_realtime where branch_id in
+        (select branch_id from struc_manage group by branch_id)
+        and time = #{datetime}
+    </select>
 </mapper>

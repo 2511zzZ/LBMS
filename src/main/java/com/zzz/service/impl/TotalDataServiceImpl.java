@@ -40,4 +40,9 @@ public class TotalDataServiceImpl implements TotalDataService {
     public Integer getHistoryDataNum(int totalId, Date begin, Date end) {
         return totalDataDao.getHistoryDataNum(totalId, begin, end);
     }
+
+    @Override
+    public TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime) {
+        return totalDataDao.calTotalRealtimeDataFromBranchs(totalId, datetime);
+    }
 }

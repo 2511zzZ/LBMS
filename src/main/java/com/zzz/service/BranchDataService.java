@@ -15,4 +15,6 @@ public interface BranchDataService {
     List<BranchHistoryData> getBranchHistoryData(int branchId, Date begin, Date end, int page, int pageSize);
 
     Integer getHistoryDataNum(int branchId, Date begin, Date end);
+
+    BranchOnlineData calBranchRealtimeDataFromGroups(int branchId, Date datetime);
 }

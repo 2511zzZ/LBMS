@@ -40,4 +40,9 @@ public class BranchDataServiceImpl implements BranchDataService {
     public Integer getHistoryDataNum(int branchId, Date begin, Date end) {
         return branchDataDao.getHistoryDataNum(branchId, begin, end);
     }
+
+    @Override
+    public BranchOnlineData calBranchRealtimeDataFromGroups(int branchId, Date datetime) {
+        return branchDataDao.calBranchRealtimeDataFromGroups(branchId, datetime);
+    }
 }

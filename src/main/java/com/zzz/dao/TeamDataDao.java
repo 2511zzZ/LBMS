@@ -16,4 +16,6 @@ public interface TeamDataDao {
     List<TeamHistoryData> getTeamHistoryDatas(int teamId, Date begin, Date end, int offset, int limit);
 
     Integer getHistoryDataNum(int teamId, Date begin, Date end);
+
+    TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime);
 }

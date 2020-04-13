@@ -16,4 +16,6 @@ public interface BranchDataDao {
     List<BranchHistoryData> getBranchHistoryDatas(int branchId, Date begin, Date end, int offset, int limit);
 
     Integer getHistoryDataNum(int branchId, Date begin, Date end);
+
+    BranchOnlineData calBranchRealtimeDataFromGroups(int branchId, Date datetime);
 }

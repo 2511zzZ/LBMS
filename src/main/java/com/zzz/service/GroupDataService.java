@@ -15,4 +15,6 @@ public interface GroupDataService {
     List<GroupHistoryData> getGroupHistoryData(int groupId, Date begin, Date end, int page, int pageSize);
 
     Integer getHistoryDataNum(int groupId, Date begin, Date end);
+
+    GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime);
 }

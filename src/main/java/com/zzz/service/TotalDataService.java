@@ -15,4 +15,6 @@ public interface TotalDataService {
     List<TotalHistoryData> getTotalHistoryData(int totalId, Date begin, Date end, int page, int pageSize);
 
     Integer getHistoryDataNum(int totalId, Date begin, Date end);
+
+    TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
 }

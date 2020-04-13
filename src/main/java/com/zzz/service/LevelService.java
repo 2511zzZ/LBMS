@@ -37,4 +37,10 @@ public interface LevelService {
 
 
     Total getTotal();
+
+    List<Integer> getTeamIds();
+
+    List<Integer> getGroupIds();
+
+    List<Integer> getBranchIds();
 }

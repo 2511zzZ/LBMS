@@ -14,4 +14,15 @@
     <select id="getHistoryDataNum" resultType="java.lang.Integer">
         select count(*) from group_history where group_id = #{groupId} and date between #{begin} and #{end}
     </select>
+    <select id="calGroupRealtimeDataFromTeams" resultType="com.zzz.model.OnlineDatas.GroupOnlineData">
+        select
+        #{groupId} as group_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        time as time
+        from team_realtime where team_id in
+        (select team_id from struc_manage where group_id = #{groupId} group by team_id)
+        and time = #{datetime}
+    </select>
 </mapper>

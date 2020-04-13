@@ -75,6 +75,54 @@
             )
         </foreach>
     </insert>
+    <insert id="insertTeamRealtimeData">
+        insert into team_realtime
+        (team_id, watch_num, gift, bullet_screen, time)
+        values
+        <foreach collection="list" item="teamOnlineData" index="index" separator=",">
+            (
+            #{teamOnlineData.teamId},
+            #{teamOnlineData.watchNum},
+            #{teamOnlineData.gift},
+            #{teamOnlineData.bulletScreen},
+            #{teamOnlineData.time}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertGroupRealtimeData">
+        insert into group_realtime
+        (group_id, watch_num, gift, bullet_screen, time)
+        values
+        <foreach collection="list" item="groupOnlineData" index="index" separator=",">
+            (
+            #{groupOnlineData.groupId},
+            #{groupOnlineData.watchNum},
+            #{groupOnlineData.gift},
+            #{groupOnlineData.bulletScreen},
+            #{groupOnlineData.time}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertBranchRealtimeData">
+        insert into branch_realtime
+        (branch_id, watch_num, gift, bullet_screen, time)
+        values
+        <foreach collection="list" item="branchOnlineData" index="index" separator=",">
+            (
+            #{branchOnlineData.branchId},
+            #{branchOnlineData.watchNum},
+            #{branchOnlineData.gift},
+            #{branchOnlineData.bulletScreen},
+            #{branchOnlineData.time}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertTotalRealtimeData">
+        insert into total_realtime
+        (total_id, watch_num, gift, bullet_screen, time)
+        values
+        ( #{totalId}, #{watchNum}, #{gift}, #{bulletScreen}, #{time})
+    </insert>
 
 
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">

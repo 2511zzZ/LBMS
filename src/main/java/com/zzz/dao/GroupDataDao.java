@@ -16,4 +16,6 @@ public interface GroupDataDao {
     List<GroupHistoryData> getGroupHistoryDatas(int groupId, Date begin, Date end, int offset, int limit);
 
     Integer getHistoryDataNum(int groupId, Date begin, Date end);
+
+    GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime);
 }

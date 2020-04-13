@@ -40,4 +40,9 @@ public class GroupDataServiceImpl implements GroupDataService {
     public Integer getHistoryDataNum(int groupId, Date begin, Date end) {
         return groupDataDao.getHistoryDataNum(groupId, begin, end);
     }
+
+    @Override
+    public GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime) {
+        return groupDataDao.calGroupRealtimeDataFromTeams(groupId, datetime);
+    }
 }

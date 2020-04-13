@@ -14,7 +14,7 @@ public class OnlineData extends BaseEntity<Long> {
     private Integer gift;
     private Integer bulletScreen;
     @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
-    private Date time = new Date();
+    private Date time;
 
     public OnlineData(){}
 

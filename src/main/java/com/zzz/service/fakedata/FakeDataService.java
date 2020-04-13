@@ -4,7 +4,7 @@ import com.zzz.dao.FakeDataDao;
 import com.zzz.fakedata.AnchorGenerator;
 import com.zzz.fakedata.FakeDataConfig;
 import com.zzz.fakedata.SysUserGenerator;
-import com.zzz.model.OnlineDatas.AnchorOnlineData;
+import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,11 +58,27 @@ public class FakeDataService {
 
     public void insertStrucManage(){
         for(int i=1;i<=FakeDataConfig.anchorNum;i++){
-            fakeDataDao.insertStrucManage(i, i/10+1, i/100+1, i/1000+1);
+            fakeDataDao.insertStrucManage(i, (i-1)/10+1, (i-1)/100+1, (i-1)/1000+1);
         }
     }
 
     public void insertRealtimeData(List<AnchorOnlineData> anchorOnlineData) {
         fakeDataDao.insertRealtimeData(anchorOnlineData);
+    }
+
+    public void insertTeamRealtimeData(List<TeamOnlineData> teamOnlineData) {
+        fakeDataDao.insertTeamRealtimeData(teamOnlineData);
+    }
+
+    public void insertGroupRealtimeData(List<GroupOnlineData> groupOnlineData) {
+        fakeDataDao.insertGroupRealtimeData(groupOnlineData);
+    }
+
+    public void insertBranchRealtimeData(List<BranchOnlineData> branchOnlineData) {
+        fakeDataDao.insertBranchRealtimeData(branchOnlineData);
+    }
+
+    public void insertTotalRealtimeData(TotalOnlineData totalOnlineData) {
+        fakeDataDao.insertTotalRealtimeData(totalOnlineData);
     }
 }

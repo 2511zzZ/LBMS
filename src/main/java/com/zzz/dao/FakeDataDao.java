@@ -1,7 +1,7 @@
 package com.zzz.dao;
 
 import com.zzz.model.Anchor;
-import com.zzz.model.OnlineDatas.AnchorOnlineData;
+import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import org.apache.ibatis.annotations.Mapper;
@@ -32,4 +32,12 @@ public interface FakeDataDao {
     void insertStrucManage(int anchorId, int teamId, int groupId, int branchId);
 
     void insertRealtimeData(List<AnchorOnlineData> anchorOnlineData);
+
+    void insertTeamRealtimeData(List<TeamOnlineData> teamOnlineData);
+
+    void insertGroupRealtimeData(List<GroupOnlineData> groupOnlineData);
+
+    void insertBranchRealtimeData(List<BranchOnlineData> branchOnlineData);
+
+    void insertTotalRealtimeData(TotalOnlineData totalOnlineData);
 }

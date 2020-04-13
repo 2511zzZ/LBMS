@@ -16,4 +16,6 @@ public interface TotalDataDao {
     List<TotalHistoryData> getTotalHistoryDatas(int totalId, Date begin, Date end, int offset, int limit);
 
     Integer getHistoryDataNum(int totalId, Date begin, Date end);
+
+    TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
 }
