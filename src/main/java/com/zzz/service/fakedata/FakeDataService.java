@@ -4,6 +4,7 @@ import com.zzz.dao.FakeDataDao;
 import com.zzz.fakedata.AnchorGenerator;
 import com.zzz.fakedata.FakeDataConfig;
 import com.zzz.fakedata.SysUserGenerator;
+import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,4 +62,7 @@ public class FakeDataService {
         }
     }
 
+    public void insertRealtimeData(List<AnchorOnlineData> anchorOnlineData) {
+        fakeDataDao.insertRealtimeData(anchorOnlineData);
+    }
 }

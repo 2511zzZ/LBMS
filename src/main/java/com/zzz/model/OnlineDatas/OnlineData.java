@@ -15,4 +15,13 @@ public class OnlineData extends BaseEntity<Long> {
     private Integer bulletScreen;
     @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
     private Date time = new Date();
+
+    public OnlineData(){}
+
+    public OnlineData(int watchNum, int gift, int bulletScreen, Date time){
+        this.watchNum = watchNum;
+        this.gift = gift;
+        this.bulletScreen = bulletScreen;
+        this.time = time;
+    }
 }

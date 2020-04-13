@@ -19,4 +19,6 @@ public interface AnchorService {
     void banAnchor(int anchorId, Date begin, Date end, String reason);
 
     List<Anchor> recommendAnchors();
+
+    List<Integer> getAnchorIds();
 }

@@ -81,4 +81,18 @@ public class FakeDataUtils {
             return (girl.contains(s)) ? "女" : "男";
     }
 
+    public static int randomWatchNum() {
+        return (int)(Math.random()*10000);
+    }
+
+    public static int randomGift() {
+        if(Math.random()>0.3){
+            return 0;
+        }
+        return (int)(Math.random()*100);
+    }
+
+    public static int randomBulletScreen() {
+        return (int)(Math.random()*1000);
+    }
 }

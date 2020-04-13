@@ -68,5 +68,8 @@
         from anchor as A join anchor_realtime as R on R.anchor_id = A.anchor_id
         ) t order by watch_num desc limit 3
     </select>
+    <select id="getAnchorIds" resultType="java.lang.Integer">
+        select anchor_id from anchor
+    </select>
 
 </mapper>

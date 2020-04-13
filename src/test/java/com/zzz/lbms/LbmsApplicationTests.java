@@ -40,6 +40,6 @@ class LbmsApplicationTests {
     void quartzTest() throws SchedulerException, InterruptedException {
         System.out.println("定时任务开始");
         quartzScheduler.startJob();
-        Thread.sleep(2000);
+        Thread.sleep(60000);
     }
 }

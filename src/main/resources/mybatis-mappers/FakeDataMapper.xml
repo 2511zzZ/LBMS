@@ -61,6 +61,21 @@
         insert into struc_manage value (null, #{anchorId}, #{teamId}, #{groupId}, #{branchId})
     </insert>
 
+    <insert id="insertRealtimeData" parameterType="java.util.List">
+        insert into anchor_realtime
+        (anchor_id, watch_num, gift, bullet_screen, time)
+        values
+        <foreach collection="list" item="anchorOnlineData" index="index" separator=",">
+            (
+            #{anchorOnlineData.anchorId},
+            #{anchorOnlineData.watchNum},
+            #{anchorOnlineData.gift},
+            #{anchorOnlineData.bulletScreen},
+            #{anchorOnlineData.time}
+            )
+        </foreach>
+    </insert>
+
 
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">
         select * from sys_user_details

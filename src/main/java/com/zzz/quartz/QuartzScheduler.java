@@ -83,7 +83,10 @@ public class QuartzScheduler {
         // JobDetail 是具体Job实例
         JobDetail jobDetail = JobBuilder.newJob(GenerateAnchorOnlineDataJob.class).withIdentity("anchorData", "online").build();
         // 基于表达式构建触发器
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/5 * * * * ?");
+        // corn从左到右（用空格隔开）：秒 分 小时 月份中的日期 月份 星期中的日期 年份
+        // *代表匹配该域的任意值
+        // 每分钟触发
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 * * * * ?");
         // CronTrigger表达式触发器 继承于Trigger
         // TriggerBuilder 用于构建触发器实例
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("anchorData", "online")

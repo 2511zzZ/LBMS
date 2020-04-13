@@ -90,4 +90,9 @@ public class AnchorServiceImpl implements AnchorService {
     public List<Anchor> recommendAnchors() {
         return anchorDao.recommendAnchors();
     }
+
+    @Override
+    public List<Integer> getAnchorIds() {
+        return anchorDao.getAnchorIds();
+    }
 }
