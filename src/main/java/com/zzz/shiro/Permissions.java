@@ -33,6 +33,7 @@ public class Permissions {
     //total
     private static String[] totalPermsList = new String[]{
             "total",
+            "alarm",
     };
     public static Set<String> totalPerms = new HashSet<>(Arrays.asList(totalPermsList));
 }

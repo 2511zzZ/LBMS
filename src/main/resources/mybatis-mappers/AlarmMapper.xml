@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.AlarmDao">
+    <update id="setThresholdAndMaxNum">
+        update sys_settings set threshold = #{newThreshold}, max_alarm_num = #{maxTipNum}
+    </update>
+
+    <select id="getThreshold" resultType="java.lang.Integer">
+        select threshold from sys_settings
+    </select>
+    <select id="getMaxTipNum" resultType="java.lang.Integer">
+        select max_alarm_num from sys_settings
+    </select>
+    <select id="getSumTipNum" resultType="java.lang.Integer">
+        select sum(tip_num) from anchor_tip_off
+        where time &lt;= #{timeNow} and anchor_id = #{anchorId}
+        order by time desc limit #{threshold}
+    </select>
+</mapper>

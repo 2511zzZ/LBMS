@@ -56,6 +56,9 @@ public class ShiroConfig {
         filterMap.put("/branch/**", "roles[total]");
         filterMap.put("/total/**", "roles[total]");
 
+        //查询或修改举报相关设置项
+        filterMap.put("/alarm/**", "roles[alarm]");
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         //修改认证失败的跳转页面
