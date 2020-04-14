@@ -1,13 +1,10 @@
 package com.zzz.service.impl;
 
-import com.zzz.dao.AnchorDao;
 import com.zzz.dao.StructureDao;
 import com.zzz.dao.SysUserDao;
-import com.zzz.model.Anchor;
 import com.zzz.model.Level;
 import com.zzz.model.Structure;
 import com.zzz.model.SysUser;
-import com.zzz.service.AnchorService;
 import com.zzz.service.StructureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,5 +75,10 @@ public class StructureServiceImpl implements StructureService {
                 break;
         }
         return structure;
+    }
+
+    @Override
+    public int getEmployeeIdByAnchor(int anchorId) {
+        return structureDao.getEmployeeIdByAnchor(anchorId);
     }
 }

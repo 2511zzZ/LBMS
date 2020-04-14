@@ -38,4 +38,7 @@
         select anchor_id from anchor s where s.anchor_id in
         (select anchor_id from struc_manage where team_id = #{teamId})
     </select>
+    <select id="getEmployeeIdByAnchor" resultType="java.lang.Integer">
+        select team_id from struc_manage where anchor_id = #{anchorId}
+    </select>
 </mapper>

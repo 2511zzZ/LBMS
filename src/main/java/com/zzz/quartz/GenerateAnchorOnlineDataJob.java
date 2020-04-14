@@ -44,7 +44,6 @@ public class GenerateAnchorOnlineDataJob implements Job{
     @Override
     public void execute(JobExecutionContext arg0) {
         before();
-        System.out.println("测试：anchor的总数为：" + anchorService.getTotalNum());
 
 
         // 删除毫秒，否则存入数据库时可能导致进位
@@ -56,16 +55,18 @@ public class GenerateAnchorOnlineDataJob implements Job{
         // 随便测一组数据
 //        Integer[] anchorIds = {10, 11, 12, 13};
 //        List<Integer> anchorIdList = Arrays.asList(anchorIds);
-
 //        List<AnchorOnlineData> anchorOnlineData = RealtimeDataGenerator.fakeAnchorOnlineData(anchorIdList, datetime);
 //        fakeDataService.insertRealtimeData(anchorOnlineData);
+
+        // 插入anchor举报数据
+        fakeDataService.insertAnchorTipOff(RealtimeDataGenerator.fakeAnchorTipOffData(anchorService.getAnchorIds(), datetime));
+
         // 插入anchor数据
         fakeDataService.insertRealtimeData(RealtimeDataGenerator.fakeAnchorOnlineData(anchorService.getAnchorIds(), datetime));
 
         //插入team数据
         List<TeamOnlineData> teamOnlineData = new ArrayList<>();
         for(int teamId:levelService.getTeamIds()){
-//        int teamId = 2;
             teamOnlineData.add(teamDataService.calTeamRealtimeDataFromAnchors(teamId, datetime));
         }
         fakeDataService.insertTeamRealtimeData(teamOnlineData);
@@ -87,6 +88,7 @@ public class GenerateAnchorOnlineDataJob implements Job{
         // 插入total数据
         TotalOnlineData totalOnlineData = totalDataService.calTotalRealtimeDataFromBranchs(levelService.getTotal().getTotalId(), datetime);
         fakeDataService.insertTotalRealtimeData(totalOnlineData);
+
         after();
     }
 

@@ -15,6 +15,7 @@ public class QuartzScheduler {
     // 开始执行所有任务
     public void startJob() throws SchedulerException {
         startJob1(scheduler);
+        startJob2(scheduler);
         scheduler.start();
     }
 
@@ -81,7 +82,7 @@ public class QuartzScheduler {
     private void startJob1(Scheduler scheduler) throws SchedulerException {
         // 通过JobBuilder构建JobDetail实例，JobDetail规定只能是实现Job接口的实例
         // JobDetail 是具体Job实例
-        JobDetail jobDetail = JobBuilder.newJob(GenerateAnchorOnlineDataJob.class).withIdentity("anchorData", "online").build();
+        JobDetail jobDetail = JobBuilder.newJob(GenerateAnchorOnlineDataJob.class).withIdentity("online", "DataGenerator").build();
         // 基于表达式构建触发器
         // corn从左到右（用空格隔开）：秒 分 小时 月份中的日期 月份 星期中的日期 年份
         // *代表匹配该域的任意值
@@ -89,8 +90,17 @@ public class QuartzScheduler {
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 * * * * ?");
         // CronTrigger表达式触发器 继承于Trigger
         // TriggerBuilder 用于构建触发器实例
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("anchorData", "online")
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("online", "DataGenerator")
                 .withSchedule(cronScheduleBuilder).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
+
+    private void startJob2(Scheduler scheduler) throws SchedulerException {
+        JobDetail jobDetail = JobBuilder.newJob(DetectionAnchorTipOffJob.class).withIdentity("anchorTipOff", "AlarmSystem").build();
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 * * * * ?");
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("anchorTipOff", "AlarmSystem")
+                .withSchedule(cronScheduleBuilder).build();
+        scheduler.scheduleJob(jobDetail, cronTrigger);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.zzz.fakedata;
 
+import com.zzz.model.AnchorTipOff;
 import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import org.springframework.stereotype.Component;
 
@@ -32,5 +33,22 @@ public class RealtimeDataGenerator {
             ));
         }
         return realTimeData;
+    }
+
+    /*
+    * anchor_id
+    * tip_num
+    * time
+    */
+    public static List<AnchorTipOff> fakeAnchorTipOffData(List<Integer> anchorIds, Date datetime){
+        List<AnchorTipOff> anchorTipOffData = new ArrayList<>();
+        for(Integer anchorId: anchorIds){
+            anchorTipOffData.add(new AnchorTipOff(
+                    anchorId,
+                    FakeDataUtils.randomTipOff(),
+                    datetime
+            ));
+        }
+        return anchorTipOffData;
     }
 }

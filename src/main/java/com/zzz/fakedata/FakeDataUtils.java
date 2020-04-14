@@ -95,4 +95,12 @@ public class FakeDataUtils {
     public static int randomBulletScreen() {
         return (int)(Math.random()*1000);
     }
+
+    public static int randomTipOff() {
+        return 10;
+//        if(Math.random()>0.5){
+//            return 0;
+//        }
+//        return (int)(Math.random()*30);
+    }
 }

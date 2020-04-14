@@ -123,6 +123,18 @@
         values
         ( #{totalId}, #{watchNum}, #{gift}, #{bulletScreen}, #{time})
     </insert>
+    <insert id="insertAnchorTipOff">
+        insert into anchor_tip_off
+        (anchor_id, tip_num, time)
+        values
+        <foreach collection="list" item="anchorTipOff" index="index" separator=",">
+            (
+            #{anchorTipOff.anchorId},
+            #{anchorTipOff.tipNum},
+            #{anchorTipOff.time}
+            )
+        </foreach>
+    </insert>
 
 
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">

@@ -1,6 +1,5 @@
 package com.zzz.dao;
 
-import com.zzz.model.Anchor;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,4 +26,6 @@ public interface StructureDao {
     Integer getSuperGroupEmployeeId(int teamId);
 
     List<Integer> getAnchorIds(int teamId);
+
+    int getEmployeeIdByAnchor(int anchorId);
 }

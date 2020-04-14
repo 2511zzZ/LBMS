@@ -1,6 +1,7 @@
 package com.zzz.dao;
 
 import com.zzz.model.Anchor;
+import com.zzz.model.AnchorTipOff;
 import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
@@ -40,4 +41,6 @@ public interface FakeDataDao {
     void insertBranchRealtimeData(List<BranchOnlineData> branchOnlineData);
 
     void insertTotalRealtimeData(TotalOnlineData totalOnlineData);
+
+    void insertAnchorTipOff(List<AnchorTipOff> fakeAnchorTipOffData);
 }
