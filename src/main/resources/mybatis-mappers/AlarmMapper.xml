@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
 <mapper namespace="com.zzz.dao.AlarmDao">
+    <insert id="insertAlarm">
+        insert into anchor_alarm values
+        (
+        null,
+        #{alarmId},
+        #{anchorId},
+        #{teamId},
+        #{status},
+        #{startTime},
+        #{endTime}
+        )
+    </insert>
     <update id="setThresholdAndMaxNum">
         update sys_settings set threshold = #{newThreshold}, max_alarm_num = #{maxTipNum}
+    </update>
+    <update id="processAlarm">
+        update anchor_alarm set status = #{operation}, end_time = #{endTime} where alarm_id = #{alarmId}
     </update>
 
     <select id="getThreshold" resultType="java.lang.Integer">
@@ -15,5 +30,8 @@
         select sum(tip_num) from anchor_tip_off
         where time &lt;= #{timeNow} and anchor_id = #{anchorId}
         order by time desc limit #{threshold}
+    </select>
+    <select id="getAnchorIdByAlarm" resultType="java.lang.Integer">
+        select anchor_id from anchor_alarm where alarm_id = #{alarmId}
     </select>
 </mapper>

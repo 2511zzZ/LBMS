@@ -21,7 +21,9 @@ public interface AnchorDao {
     void banAnchor(int anchorId, Date begin, Date end, String reason);
 
     Integer branchHasPermission(int branchId, int anchorId);
+
     Integer groupHasPermission(int groupId, int anchorId);
+
     Integer teamHasPermission(int teamId, int anchorId);
 
     List<Anchor> branchGetAnchors(Integer branchId, int offset, int limit);

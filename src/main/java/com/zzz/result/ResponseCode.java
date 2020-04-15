@@ -13,8 +13,10 @@ public enum ResponseCode {
     FORBIDDEN(403, "超出权限"),
 
     BAD_DATE_FORMAT(4001, "日期格式错误"),
+    BAD_OPERATION(4002, "无法识别的操作"),
     NULL_USERNAME(4011, "用户名不存在"),
     WRONG_PASSWORD(4012, "密码错误"),
+    ANCHOR_DONT_EXIST(4013, "主播不存在"),
 
     UNASSORTED(-1, "未分类的错误"),
     ;

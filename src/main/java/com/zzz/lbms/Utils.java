@@ -2,6 +2,7 @@ package com.zzz.lbms;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
@@ -11,4 +12,42 @@ public class Utils {
         return simpleDateFormat.parse(dateStr);
     }
 
+    public static String generateAlarmId(int anchorId, Date startTime){
+        // anchorId + minute唯一确定一条警报
+        //202004151332 00004
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(startTime);
+        int year = cal.get(java.util.Calendar.YEAR);
+        String yearStr = String.valueOf(year%100);
+        int month = cal.get(java.util.Calendar.MONTH) + 1; //月份从0开始
+        int day = cal.get(java.util.Calendar.DATE);//获取日
+        int hour = cal.get(Calendar.HOUR_OF_DAY);//小时（calendar.HOUR 12小时制，calendar.HOUR_OF_DAY 24小时）
+        int minute = cal.get(java.util.Calendar.MINUTE);//分
+
+        String dateStr = yearStr + datePaddingZero(month) + datePaddingZero(day) + datePaddingZero(hour) + datePaddingZero(minute);
+
+        String anchorStr = anchorIdPaddingZero(anchorId);
+
+        return dateStr + anchorStr;
+
+    }
+
+    private static String datePaddingZero(int i){
+        return i>=10 ? ""+i : "0"+i;
+    }
+    private static String anchorIdPaddingZero(int anchorId){
+        if(anchorId<10){
+            return "0000" + anchorId;
+        }
+        if(anchorId<100){
+            return "000" + anchorId;
+        }
+        if(anchorId<1000){
+            return "00" + anchorId;
+        }
+        if(anchorId<10000){
+            return "0" + anchorId;
+        }
+        return anchorId+"";
+    }
 }

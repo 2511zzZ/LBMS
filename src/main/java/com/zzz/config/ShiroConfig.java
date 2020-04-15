@@ -40,6 +40,7 @@ public class ShiroConfig {
         filterMap.put("/user/**", "authc");
         filterMap.put("/structure", "authc");
         filterMap.put("/anchorData/**", "authc");
+        filterMap.put("/alarm/**", "authc");
 
         //需要特定权限
         filterMap.put("/druid/stat", "roles[druid]");
@@ -57,7 +58,7 @@ public class ShiroConfig {
         filterMap.put("/total/**", "roles[total]");
 
         //查询或修改举报相关设置项
-        filterMap.put("/alarm/**", "roles[alarm]");
+        filterMap.put("/alarm/settings/**", "roles[sys_setting]");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
