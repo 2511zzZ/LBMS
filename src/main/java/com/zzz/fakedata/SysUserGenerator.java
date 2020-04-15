@@ -1,5 +1,6 @@
 package com.zzz.fakedata;
 
+import com.zzz.lbms.Utils;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,7 @@ public class SysUserGenerator {
             SysUser user = new SysUser(
                     userDetails.getEmployeeId(),
                     userDetails.getUsername(),
-                    MD5.DoMD5("123456"),
+                    Utils.DoMD5("123456"),
                     userDetails.getRole()
             );
             userList.add(user);

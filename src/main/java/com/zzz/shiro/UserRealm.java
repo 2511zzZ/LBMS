@@ -1,7 +1,6 @@
 package com.zzz.shiro;
 
-
-import com.zzz.fakedata.MD5;
+import com.zzz.lbms.Utils;
 import com.zzz.model.SysUser;
 import com.zzz.service.SysUserService;
 import org.apache.shiro.authc.*;
@@ -66,8 +65,8 @@ public class UserRealm extends AuthorizingRealm {
 
         // 跳过数据库验证
         if(token.getUsername().equals(adminUsername)){
-            user = new SysUser(0, adminUsername, MD5.DoMD5(adminPassword), 1);
-            return new SimpleAuthenticationInfo(user, MD5.DoMD5(adminPassword), "");
+            user = new SysUser(0, adminUsername, Utils.DoMD5(adminPassword), 1);
+            return new SimpleAuthenticationInfo(user, Utils.DoMD5(adminPassword), "");
         }
 
 

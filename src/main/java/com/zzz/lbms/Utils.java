@@ -1,5 +1,8 @@
 package com.zzz.lbms;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,7 +17,7 @@ public class Utils {
 
     public static String generateAlarmId(int anchorId, Date startTime){
         // anchorId + minute唯一确定一条警报
-        //202004151332 00004
+        // 202004151332 00004
         Calendar cal = Calendar.getInstance();
         cal.setTime(startTime);
         int year = cal.get(java.util.Calendar.YEAR);
@@ -24,12 +27,26 @@ public class Utils {
         int hour = cal.get(Calendar.HOUR_OF_DAY);//小时（calendar.HOUR 12小时制，calendar.HOUR_OF_DAY 24小时）
         int minute = cal.get(java.util.Calendar.MINUTE);//分
 
+        // 也可以使用MySQL的LPAD函数实现左填充
         String dateStr = yearStr + datePaddingZero(month) + datePaddingZero(day) + datePaddingZero(hour) + datePaddingZero(minute);
 
         String anchorStr = anchorIdPaddingZero(anchorId);
 
         return dateStr + anchorStr;
 
+    }
+
+    public static String DoMD5(String password){
+        String encryptedPassword;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            encryptedPassword = new BigInteger(1, md.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return encryptedPassword;
     }
 
     private static String datePaddingZero(int i){
