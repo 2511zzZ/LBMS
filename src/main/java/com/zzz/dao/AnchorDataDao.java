@@ -16,4 +16,6 @@ public interface AnchorDataDao {
     List<AnchorHistoryData> getAnchorHistoryDatas(int anchorId, Date begin, Date end, int offset, int limit);
 
     Integer getHistoryDataNum(int anchorId, Date begin, Date end);
+
+    List<AnchorHistoryData> calAnchorHistoryFromRealtime(Date date);
 }

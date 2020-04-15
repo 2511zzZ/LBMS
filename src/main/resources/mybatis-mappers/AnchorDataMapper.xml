@@ -14,4 +14,15 @@
     <select id="getHistoryDataNum" resultType="java.lang.Integer">
         select count(*) from anchor_history where anchor_id = #{anchorId} and date between #{begin} and #{end}
     </select>
+    <select id="calAnchorHistoryFromRealtime" resultType="com.zzz.model.HistoryDatas.AnchorHistoryData">
+        select anchor_id,
+        avg(watch_num) as watch_num,
+        sum(gift) as gift,
+        avg(bullet_screen) as bullet_screen,
+        max(watch_num) as max_watch_num,
+        date_add(#{date}, interval -1 day) as date
+        from anchor_realtime
+        where time between date_add(#{date}, interval -1 day) and #{date}
+        group by anchor_id
+    </select>
 </mapper>

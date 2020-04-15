@@ -135,6 +135,21 @@
             )
         </foreach>
     </insert>
+    <insert id="insertAnchorHistoryData">
+        insert into anchor_history
+        (anchor_id, watch_num, gift, bullet_screen, max_watch_num, date)
+        values
+        <foreach collection="list" item="anchorHistoryData" index="index" separator=",">
+            (
+            #{anchorHistoryData.anchorId},
+            #{anchorHistoryData.watchNum},
+            #{anchorHistoryData.gift},
+            #{anchorHistoryData.bulletScreen},
+            #{anchorHistoryData.maxWatchNum},
+            #{anchorHistoryData.date}
+            )
+        </foreach>
+    </insert>
 
 
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">

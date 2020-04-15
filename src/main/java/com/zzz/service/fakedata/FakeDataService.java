@@ -5,6 +5,7 @@ import com.zzz.fakedata.AnchorGenerator;
 import com.zzz.fakedata.FakeDataConfig;
 import com.zzz.fakedata.SysUserGenerator;
 import com.zzz.model.AnchorTipOff;
+import com.zzz.model.HistoryDatas.AnchorHistoryData;
 import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,9 @@ public class FakeDataService {
 
     public void insertAnchorTipOff(List<AnchorTipOff> fakeAnchorTipOffData) {
         fakeDataDao.insertAnchorTipOff(fakeAnchorTipOffData);
+    }
+
+    public void insertAnchorHistoryData(List<AnchorHistoryData> anchorHistoryData) {
+        fakeDataDao.insertAnchorHistoryData(anchorHistoryData);
     }
 }

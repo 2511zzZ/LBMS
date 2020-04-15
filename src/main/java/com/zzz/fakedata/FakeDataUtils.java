@@ -97,10 +97,9 @@ public class FakeDataUtils {
     }
 
     public static int randomTipOff() {
-        return 10;
-//        if(Math.random()>0.5){
-//            return 0;
-//        }
-//        return (int)(Math.random()*30);
+        if(Math.random()>0.5){
+            return 0;
+        }
+        return (int)(Math.random()*30);
     }
 }

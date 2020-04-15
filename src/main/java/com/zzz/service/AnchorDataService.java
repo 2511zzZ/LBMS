@@ -15,4 +15,6 @@ public interface AnchorDataService {
     List<AnchorHistoryData> getAnchorHistoryData(int anchorId, Date begin, Date end, int page, int pageSize);
 
     Integer getHistoryDataNum(int anchorId, Date begin, Date end);
+
+    List<AnchorHistoryData> calAnchorHistoryFromRealtime(Date date);
 }

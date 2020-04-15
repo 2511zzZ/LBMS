@@ -42,9 +42,9 @@ public class FakeData {
     void OnlineDataGenerate() throws SchedulerException, InterruptedException {
         System.out.println("定时任务开始");
         quartzScheduler.startJob();
-        // 线程等待时间必须>=一分钟
+        // 线程等待时间必须大于一分钟
         // 否则可能线程可能在定时任务尚未执行时shutdown
-        Thread.sleep(70000);
+        Thread.sleep(120000);
     }
 
 }

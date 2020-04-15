@@ -39,4 +39,9 @@ public class AnchorDataServiceImpl implements AnchorDataService {
     public Integer getHistoryDataNum(int anchorId, Date begin, Date end) {
         return anchorDataDao.getHistoryDataNum(anchorId, begin, end);
     }
+
+    @Override
+    public List<AnchorHistoryData> calAnchorHistoryFromRealtime(Date date) {
+        return anchorDataDao.calAnchorHistoryFromRealtime(date);
+    }
 }

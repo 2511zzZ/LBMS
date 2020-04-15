@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Mapper
 public interface AlarmDao {
-    int getThreshold();
+    Integer getThreshold();
 
-    int getMaxTipNum();
+    Integer getMaxTipNum();
 
-    int getSumTipNum(int anchorId, Date timeNow, int threshold);
+    Integer getSumTipNum(int anchorId, Date timeNow, int threshold);
 
     void setThresholdAndMaxNum(int newThreshold, int maxTipNum);
 

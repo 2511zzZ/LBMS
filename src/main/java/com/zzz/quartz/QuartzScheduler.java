@@ -16,6 +16,7 @@ public class QuartzScheduler {
     public void startJob() throws SchedulerException {
         startJob1(scheduler);
         startJob2(scheduler);
+        startJob3(scheduler);
         scheduler.start();
     }
 
@@ -99,6 +100,14 @@ public class QuartzScheduler {
         JobDetail jobDetail = JobBuilder.newJob(DetectionAnchorTipOffJob.class).withIdentity("anchorTipOff", "AlarmSystem").build();
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 * * * * ?");
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("anchorTipOff", "AlarmSystem")
+                .withSchedule(cronScheduleBuilder).build();
+        scheduler.scheduleJob(jobDetail, cronTrigger);
+    }
+
+    private void startJob3(Scheduler scheduler) throws SchedulerException {
+        JobDetail jobDetail = JobBuilder.newJob(GenerateHistoryDataJob.class).withIdentity("History", "DataGenerator").build();
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0 * * ?");
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("History", "DataGenerator")
                 .withSchedule(cronScheduleBuilder).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }

@@ -28,8 +28,9 @@
     </select>
     <select id="getSumTipNum" resultType="java.lang.Integer">
         select sum(tip_num) from anchor_tip_off
-        where time &lt;= #{timeNow} and anchor_id = #{anchorId}
-        order by time desc limit #{threshold}
+        where time between date_add(#{timeNow}, interval -#{threshold} minute) and #{timeNow}
+        and anchor_id = #{anchorId}
+        order by time
     </select>
     <select id="getAnchorIdByAlarm" resultType="java.lang.Integer">
         select anchor_id from anchor_alarm where alarm_id = #{alarmId}

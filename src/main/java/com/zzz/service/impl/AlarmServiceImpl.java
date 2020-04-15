@@ -29,7 +29,11 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public int getSumTipNum(int anchorId, Date timeNow, int threshold) {
-        return alarmDao.getSumTipNum(anchorId, timeNow, threshold);
+        Integer sum = alarmDao.getSumTipNum(anchorId, timeNow, threshold);
+        if(sum==null){
+            return 0;
+        }
+        return sum;
     }
 
     @Override
