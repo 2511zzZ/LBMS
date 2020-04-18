@@ -1,5 +1,8 @@
 package com.zzz.controller;
 
+import com.zzz.exception.AnchorNotExistException;
+import com.zzz.exception.BadOperationException;
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
@@ -44,30 +47,30 @@ public class AlarmController {
     }
 
     @RequestMapping(value="/sumAlarmNum", method = RequestMethod.GET)
-    public Results<Integer> getSumAlarmNum(@RequestParam int anchorId){
+    public Results<Integer> getSumAlarmNum(@RequestParam int anchorId) throws ForBiddenException {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
         return Results.success(ResponseCode.SUCCESS, alarmService.getSumTipNum(anchorId, new Date(), alarmService.getThreshold()));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Results processAlarm(@RequestParam String alarmId,
-                                @RequestParam int operation){
+                                @RequestParam int operation) throws BadOperationException, AnchorNotExistException, ForBiddenException {
         if(alarmService.getAnchorIdByAlarm(alarmId)==null){
-            return Results.failure(ResponseCode.ANCHOR_DONT_EXIST);
+            throw new AnchorNotExistException();
         }
         int anchorId = alarmService.getAnchorIdByAlarm(alarmId);
 
         if(operation!=2 && operation!=3){
-            return Results.failure(ResponseCode.BAD_OPERATION);
+            throw new BadOperationException();
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         alarmService.processAlarm(alarmId, operation);

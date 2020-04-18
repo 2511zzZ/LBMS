@@ -1,5 +1,6 @@
 package com.zzz.controller;
 
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.Anchor;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
@@ -48,13 +49,13 @@ public class AnchorController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Results<Anchor> getAnchor(@RequestParam int anchorId) {
+    public Results<Anchor> getAnchor(@RequestParam int anchorId) throws ForBiddenException {
 
         // 判断anchorId是否在权限范围内
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
 

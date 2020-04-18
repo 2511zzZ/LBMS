@@ -1,5 +1,6 @@
 package com.zzz.controller;
 
+import com.zzz.exception.WrongPasswordException;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserSettings;
 import com.zzz.result.ResponseCode;
@@ -23,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = "/password", method = RequestMethod.PUT)
     public Results changePassword(@RequestParam String oldPassword,
-                                  @RequestParam String newPassword){
+                                  @RequestParam String newPassword) throws WrongPasswordException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         int employeeId = user.getEmployeeId();
@@ -31,7 +32,7 @@ public class UserController {
         if(userService.changePassword(employeeId, oldPassword, newPassword)){
             return Results.success(ResponseCode.SUCCESS,"修改成功");
         }
-        return Results.failure(ResponseCode.WRONG_PASSWORD);
+        throw new WrongPasswordException();
     }
 
     @RequestMapping(value="/role", method = RequestMethod.GET)

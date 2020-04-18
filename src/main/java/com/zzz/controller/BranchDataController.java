@@ -1,5 +1,7 @@
 package com.zzz.controller;
 
+import com.zzz.exception.BadDateFormatException;
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.SysUser;
@@ -32,29 +34,29 @@ public class BranchDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<BranchOnlineData> getBranchOnlineData(@RequestParam int branchId){
+    public Results<BranchOnlineData> getBranchOnlineData(@RequestParam int branchId) throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasBranchPermission(user,branchId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         return Results.success(ResponseCode.SUCCESS, branchDataService.getBranchOnlineData(branchId));
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public Results<BranchHistoryData> getBranchHistoryData(@RequestParam int branchId, @RequestParam String dateStr){
+    public Results<BranchHistoryData> getBranchHistoryData(@RequestParam int branchId, @RequestParam String dateStr) throws BadDateFormatException, ForBiddenException {
         Date date;
         try{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
             date = simpleDateFormat.parse(dateStr);
         }catch (ParseException e){
-            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
+            throw new BadDateFormatException();
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasBranchPermission(user,branchId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         return Results.success(ResponseCode.SUCCESS, branchDataService.getBranchHistoryData(branchId, date));
@@ -64,7 +66,7 @@ public class BranchDataController {
                                                      @RequestParam String dateBeginStr,
                                                      @RequestParam String dateEndStr2,
                                                      @RequestParam(name="page", defaultValue = "1") int page,
-                                                     @RequestParam(name="pageSize", defaultValue = "30") int pageSize){
+                                                     @RequestParam(name="pageSize", defaultValue = "30") int pageSize) throws BadDateFormatException, ForBiddenException {
         Date begin;
         Date end;
         try{
@@ -72,12 +74,12 @@ public class BranchDataController {
             begin = simpleDateFormat.parse(dateBeginStr);
             end = simpleDateFormat.parse(dateEndStr2);
         }catch (ParseException e){
-            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
+            throw new BadDateFormatException();
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasBranchPermission(user,branchId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         int total = branchDataService.getHistoryDataNum(branchId, begin, end);

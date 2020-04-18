@@ -9,7 +9,7 @@ import java.util.List;
 public class Results<T>  implements Serializable {
 
     int count;//数据数量
-    Integer code;//代码
+    Integer status;//代码
     String msg;//信息
     List<T> datas;//返回数据
     T data;//任何类型条件
@@ -19,13 +19,13 @@ public class Results<T>  implements Serializable {
 
     public Results(Integer code, String msg) {
         super();
-        this.code = code;
+        this.status = code;
         this.msg = msg;
     }
 
 
     public Results(Integer code, String msg, T data, Integer count, List<T> datas) {
-        this.code = code;
+        this.status = code;
         this.msg = msg;
         this.data = data;
         this.count = count;

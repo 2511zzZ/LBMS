@@ -1,5 +1,7 @@
 package com.zzz.controller;
 
+import com.zzz.exception.BadDateFormatException;
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.HistoryDatas.AnchorHistoryData;
 import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.SysUser;
@@ -32,29 +34,29 @@ public class AnchorDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId){
+    public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId) throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorOnlineData(anchorId));
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public Results<AnchorHistoryData> getAnchorHistoryData(@RequestParam int anchorId, @RequestParam String dateStr){
+    public Results<AnchorHistoryData> getAnchorHistoryData(@RequestParam int anchorId, @RequestParam String dateStr) throws BadDateFormatException, ForBiddenException {
         Date date;
         try{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
             date = simpleDateFormat.parse(dateStr);
         }catch (ParseException e){
-            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
+            throw new BadDateFormatException();
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorHistoryData(anchorId, date));
@@ -64,7 +66,7 @@ public class AnchorDataController {
                                                      @RequestParam String dateBeginStr,
                                                      @RequestParam String dateEndStr2,
                                                      @RequestParam(name="page", defaultValue = "1") int page,
-                                                     @RequestParam(name="pageSize", defaultValue = "30") int pageSize){
+                                                     @RequestParam(name="pageSize", defaultValue = "30") int pageSize) throws BadDateFormatException, ForBiddenException {
         Date begin;
         Date end;
         try{
@@ -72,12 +74,12 @@ public class AnchorDataController {
             begin = simpleDateFormat.parse(dateBeginStr);
             end = simpleDateFormat.parse(dateEndStr2);
         }catch (ParseException e){
-            return Results.failure(ResponseCode.BAD_DATE_FORMAT);
+            throw new BadDateFormatException();
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){
-            return Results.failure(ResponseCode.FORBIDDEN);
+            throw new ForBiddenException();
         }
 
         int total = anchorDataService.getHistoryDataNum(anchorId, begin, end);
