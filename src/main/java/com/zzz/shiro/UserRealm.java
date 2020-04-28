@@ -28,8 +28,6 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
-
-
         if(user.getUsername().equals(adminUsername)){
             info.addRoles(Permissions.adminPerms);
         }
@@ -46,21 +44,12 @@ public class UserRealm extends AuthorizingRealm {
         if(user.getRole()<=1){
             info.addRoles(Permissions.totalPerms);
         }
-
-        // 添加资源权限
-        // info.addStringPermission("structure:query");
-
-        // 添加身份权限
-//        info.addRole("structure:query");
-
-
         return info;
     }
 
     @Override
     //执行认证逻辑
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token1) throws AuthenticationException {
-
         UsernamePasswordToken token = (UsernamePasswordToken)token1;
 
         // 跳过数据库验证

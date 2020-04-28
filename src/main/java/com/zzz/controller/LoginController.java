@@ -26,7 +26,6 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         //封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        System.out.println(password);
         // 执行登录方法
         // 无异常则判断为登录成功
         String sessionId = null;
