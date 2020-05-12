@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private SysUserService userService;
 
-    @RequestMapping(value = "/password", method = RequestMethod.PUT)
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
     public Results changePassword(@RequestParam String oldPassword,
                                   @RequestParam String newPassword) throws WrongPasswordException {
 

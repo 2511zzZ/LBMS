@@ -5,7 +5,6 @@ import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import com.zzz.model.SysUserSettings;
 import com.zzz.service.SysUserService;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

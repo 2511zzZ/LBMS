@@ -36,7 +36,7 @@ public class UserDetailsController {
         return Results.success(ResponseCode.SUCCESS, total, userArrayList);
     }
 
-    @RequestMapping(value="/",method = RequestMethod.GET)
+    @RequestMapping(value="",method = RequestMethod.GET)
     public Results<SysUserDetails> getUserDetails(){
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
@@ -46,7 +46,7 @@ public class UserDetailsController {
         return Results.success(ResponseCode.SUCCESS, userDetails);
     }
 
-    @RequestMapping(value="/",method = RequestMethod.PUT)
+    @RequestMapping(value="",method = {RequestMethod.PUT, RequestMethod.POST})
     public Results changeUserDetails(@RequestParam(required = false) String nickname,
                                      @RequestParam(required = false) String avatar){
 

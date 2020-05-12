@@ -76,7 +76,10 @@ public class AlarmController {
         alarmService.processAlarm(alarmId, operation);
         return Results.success();
     }
-    // 警报测试接口 不开放
+
+    // TODO: 根据employeeId获取全部警报
+
+    // 警报测试接口
 //    @RequestMapping(value="/", method = RequestMethod.POST)
 //    public Results newAnchorAlarm(@RequestParam int anchorId,
 //                                  @RequestParam String startTime){
