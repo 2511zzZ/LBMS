@@ -21,8 +21,8 @@ public class BranchDataServiceImpl implements BranchDataService {
 
 
     @Override
-    public BranchOnlineData getBranchOnlineData(int branchId) {
-        return branchDataDao.getBranchOnlineData(branchId);
+    public List<BranchOnlineData> getBranchOnlineData(int branchId, Date datetime) {
+        return branchDataDao.getBranchOnlineData(branchId, datetime);
     }
 
     @Override

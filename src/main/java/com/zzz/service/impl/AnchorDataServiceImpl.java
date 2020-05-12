@@ -20,8 +20,8 @@ public class AnchorDataServiceImpl implements AnchorDataService {
     AnchorDataDao anchorDataDao;
 
     @Override
-    public AnchorOnlineData getAnchorOnlineData(int anchorId) {
-        return anchorDataDao.getAnchorOnlineData(anchorId);
+    public List<AnchorOnlineData> getAnchorOnlineData(int anchorId, Date datetime) {
+        return anchorDataDao.getAnchorOnlineData(anchorId, datetime);
     }
 
     @Override

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,14 +35,15 @@ public class AnchorDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId) throws ForBiddenException {
+    public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId,
+                                                         @RequestParam Date datetime) throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){
             throw new ForBiddenException();
         }
-
-        return Results.success(ResponseCode.SUCCESS, anchorDataService.getAnchorOnlineData(anchorId));
+        List<AnchorOnlineData> anchorOnlineData = anchorDataService.getAnchorOnlineData(anchorId, datetime);
+        return Results.success(ResponseCode.SUCCESS, anchorOnlineData.size(), anchorOnlineData);
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)

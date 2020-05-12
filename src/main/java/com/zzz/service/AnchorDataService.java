@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AnchorDataService {
 
-    AnchorOnlineData getAnchorOnlineData(int anchorId);
+    List<AnchorOnlineData> getAnchorOnlineData(int anchorId, Date datetime);
 
     AnchorHistoryData getAnchorHistoryData(int anchorId, Date date);
 

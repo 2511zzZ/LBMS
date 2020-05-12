@@ -3,7 +3,7 @@
 <mapper namespace="com.zzz.dao.GroupDataDao">
 
     <select id="getGroupOnlineData" resultType="com.zzz.model.OnlineDatas.GroupOnlineData">
-        select * from group_realtime where group_id = #{groupId}
+        select * from group_realtime where group_id = #{groupId} and time between DATE_ADD(#{datetime}, interval -1 DAY) and #{datetime}
     </select>
     <select id="getGroupHistoryData" resultType="com.zzz.model.HistoryDatas.GroupHistoryData">
         select * from group_history where group_id = #{groupId} and date = #{date}

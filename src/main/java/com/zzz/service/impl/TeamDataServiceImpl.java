@@ -21,8 +21,8 @@ public class TeamDataServiceImpl implements TeamDataService {
 
 
     @Override
-    public TeamOnlineData getTeamOnlineData(int teamId) {
-        return teamDataDao.getTeamOnlineData(teamId);
+    public List<TeamOnlineData> getTeamOnlineData(int teamId, Date datetime) {
+        return teamDataDao.getTeamOnlineData(teamId, datetime);
     }
 
     @Override

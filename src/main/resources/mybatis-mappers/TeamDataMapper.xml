@@ -3,7 +3,7 @@
 <mapper namespace="com.zzz.dao.TeamDataDao">
 
     <select id="getTeamOnlineData" resultType="com.zzz.model.OnlineDatas.TeamOnlineData">
-        select * from team_realtime where team_id = #{teamId}
+        select * from team_realtime where team_id = #{teamId} and time between DATE_ADD(#{datetime}, interval -1 DAY) and #{datetime}
     </select>
     <select id="getTeamHistoryData" resultType="com.zzz.model.HistoryDatas.TeamHistoryData">
         select * from team_history where team_id = #{teamId} and date = #{date}

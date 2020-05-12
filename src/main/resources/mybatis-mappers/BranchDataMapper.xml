@@ -3,7 +3,7 @@
 <mapper namespace="com.zzz.dao.BranchDataDao">
 
     <select id="getBranchOnlineData" resultType="com.zzz.model.OnlineDatas.BranchOnlineData">
-        select * from branch_realtime where branch_id = #{branchId}
+        select * from branch_realtime where branch_id = #{branchId} and time between DATE_ADD(#{datetime}, interval -1 DAY) and #{datetime}
     </select>
     <select id="getBranchHistoryData" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
         select * from branch_history where branch_id = #{branchId} and date = #{date}

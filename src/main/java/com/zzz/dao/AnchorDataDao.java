@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface AnchorDataDao {
-    AnchorOnlineData getAnchorOnlineData(int anchorId);
+    List<AnchorOnlineData> getAnchorOnlineData(int anchorId, Date datetime);
 
     AnchorHistoryData getAnchorHistoryData(int anchorId, Date date);
 

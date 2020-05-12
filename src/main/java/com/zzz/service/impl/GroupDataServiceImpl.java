@@ -21,8 +21,8 @@ public class GroupDataServiceImpl implements GroupDataService {
 
 
     @Override
-    public GroupOnlineData getGroupOnlineData(int groupId) {
-        return groupDataDao.getGroupOnlineData(groupId);
+    public List<GroupOnlineData> getGroupOnlineData(int groupId, Date datetime) {
+        return groupDataDao.getGroupOnlineData(groupId, datetime);
     }
 
     @Override

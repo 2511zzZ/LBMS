@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface TotalDataDao {
-    TotalOnlineData getTotalOnlineData(int totalId);
+    List<TotalOnlineData> getTotalOnlineData(int totalId, Date datetime);
 
     TotalHistoryData getTotalHistoryData(int totalId, Date date);
 

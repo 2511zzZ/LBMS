@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TeamDataService {
 
-    TeamOnlineData getTeamOnlineData(int teamId);
+    List<TeamOnlineData> getTeamOnlineData(int teamId, Date datetime);
 
     TeamHistoryData getTeamHistoryData(int teamId, Date date);
 

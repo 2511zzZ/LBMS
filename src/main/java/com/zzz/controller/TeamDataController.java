@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,14 +35,15 @@ public class TeamDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<TeamOnlineData> getTeamOnlineData(@RequestParam int teamId) throws ForBiddenException {
+    public Results<TeamOnlineData> getTeamOnlineData(@RequestParam int teamId,
+                                                     @RequestParam Date datetime) throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasTeamPermission(user,teamId)){
             throw new ForBiddenException();
         }
-
-        return Results.success(ResponseCode.SUCCESS, teamDataService.getTeamOnlineData(teamId));
+        List<TeamOnlineData> teamOnlineData = teamDataService.getTeamOnlineData(teamId, datetime);
+        return Results.success(ResponseCode.SUCCESS, teamOnlineData.size(), teamOnlineData);
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)

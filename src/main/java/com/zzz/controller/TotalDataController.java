@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,14 +35,24 @@ public class TotalDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<TotalOnlineData> getTotalOnlineData(@RequestParam int totalId) throws ForBiddenException {
+    public Results<TotalOnlineData> getTotalOnlineData(@RequestParam int totalId,
+                                                       @RequestParam String datetimeStr) throws ForBiddenException, BadDateFormatException {
+
+        Date datetime;
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
+            datetime = simpleDateFormat.parse(datetimeStr);
+        }catch (ParseException e){
+            throw new BadDateFormatException();
+        }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasTotalPermission(user,totalId)){
             throw new ForBiddenException();
         }
 
-        return Results.success(ResponseCode.SUCCESS, totalDataService.getTotalOnlineData(totalId));
+        List<TotalOnlineData> totalOnlineData = totalDataService.getTotalOnlineData(totalId, datetime);
+        return Results.success(ResponseCode.SUCCESS, totalOnlineData.size(), totalOnlineData);
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)

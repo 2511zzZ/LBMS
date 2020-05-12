@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface TeamDataDao {
-    TeamOnlineData getTeamOnlineData(int teamId);
+    List<TeamOnlineData> getTeamOnlineData(int teamId, Date datetime);
 
     TeamHistoryData getTeamHistoryData(int teamId, Date date);
 

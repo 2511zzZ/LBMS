@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -34,14 +35,15 @@ public class BranchDataController {
 
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
-    public Results<BranchOnlineData> getBranchOnlineData(@RequestParam int branchId) throws ForBiddenException {
+    public Results<BranchOnlineData> getBranchOnlineData(@RequestParam int branchId,
+                                                         @RequestParam Date datetime) throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasBranchPermission(user,branchId)){
             throw new ForBiddenException();
         }
-
-        return Results.success(ResponseCode.SUCCESS, branchDataService.getBranchOnlineData(branchId));
+        List<BranchOnlineData> branchOnlineData = branchDataService.getBranchOnlineData(branchId, datetime);
+        return Results.success(ResponseCode.SUCCESS, branchOnlineData.size(), branchOnlineData);
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)

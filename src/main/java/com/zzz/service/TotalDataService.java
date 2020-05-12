@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TotalDataService {
 
-    TotalOnlineData getTotalOnlineData(int totalId);
+    List<TotalOnlineData> getTotalOnlineData(int totalId, Date datetime);
 
     TotalHistoryData getTotalHistoryData(int totalId, Date date);
 

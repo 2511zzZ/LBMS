@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BranchDataService {
 
-    BranchOnlineData getBranchOnlineData(int branchId);
+    List<BranchOnlineData> getBranchOnlineData(int branchId, Date datetime);
 
     BranchHistoryData getBranchHistoryData(int branchId, Date date);
 

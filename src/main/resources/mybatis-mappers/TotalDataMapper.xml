@@ -3,7 +3,7 @@
 <mapper namespace="com.zzz.dao.TotalDataDao">
 
     <select id="getTotalOnlineData" resultType="com.zzz.model.OnlineDatas.TotalOnlineData">
-        select * from total_realtime where total_id = #{totalId}
+        select * from total_realtime where total_id = #{totalId} and time between DATE_ADD(#{datetime}, interval -1 DAY) and #{datetime}
     </select>
     <select id="getTotalHistoryData" resultType="com.zzz.model.HistoryDatas.TotalHistoryData">
         select * from total_history where total_id = #{totalId} and date = #{date}

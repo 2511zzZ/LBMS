@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface BranchDataDao {
-    BranchOnlineData getBranchOnlineData(int branchId);
+    List<BranchOnlineData> getBranchOnlineData(int branchId, Date datetime);
 
     BranchHistoryData getBranchHistoryData(int branchId, Date date);
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.zzz.dao.AnchorDataDao">
 
     <select id="getAnchorOnlineData" resultType="com.zzz.model.OnlineDatas.AnchorOnlineData">
-        select * from anchor_realtime where anchor_id = #{anchorId}
+        select * from anchor_realtime where anchor_id = #{anchorId} and time between DATE_ADD(#{datetime}, interval -1 DAY) and #{datetime}Q
     </select>
     <select id="getAnchorHistoryData" resultType="com.zzz.model.HistoryDatas.AnchorHistoryData">
         select * from anchor_history where anchor_id = #{anchorId} and date = #{date}

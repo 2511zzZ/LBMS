@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GroupDataService {
 
-    GroupOnlineData getGroupOnlineData(int groupId);
+    List<GroupOnlineData> getGroupOnlineData(int groupId, Date datetime);
 
     GroupHistoryData getGroupHistoryData(int groupId, Date date);
 

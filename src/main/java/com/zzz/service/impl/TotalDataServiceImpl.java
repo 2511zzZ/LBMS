@@ -21,8 +21,8 @@ public class TotalDataServiceImpl implements TotalDataService {
 
 
     @Override
-    public TotalOnlineData getTotalOnlineData(int totalId) {
-        return totalDataDao.getTotalOnlineData(totalId);
+    public List<TotalOnlineData> getTotalOnlineData(int totalId, Date datetime) {
+        return totalDataDao.getTotalOnlineData(totalId, datetime);
     }
 
     @Override
