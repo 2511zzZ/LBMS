@@ -1,6 +1,7 @@
 package com.zzz.dao;
 
 import com.zzz.model.HistoryDatas.TotalHistoryData;
+import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,10 @@ public interface TotalDataDao {
     Integer getHistoryDataNum(int totalId, Date begin, Date end);
 
     TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
+
+    List<BranchOnlineData> getBranchOnlineRank();
+
+    Integer getSumWatch();
+
+    TotalOnlineData getLastOnlineData();
 }

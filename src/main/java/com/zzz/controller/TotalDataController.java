@@ -3,6 +3,7 @@ package com.zzz.controller;
 import com.zzz.exception.BadDateFormatException;
 import com.zzz.exception.ForBiddenException;
 import com.zzz.model.HistoryDatas.TotalHistoryData;
+import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
@@ -72,6 +73,7 @@ public class TotalDataController {
 
         return Results.success(ResponseCode.SUCCESS, totalDataService.getTotalHistoryData(totalId, date));
     }
+
     @RequestMapping(value = "/historys", method = RequestMethod.GET)
     public Results<TotalHistoryData> getTotalHistoryData(@RequestParam int totalId,
                                                      @RequestParam String dateBeginStr,
@@ -95,5 +97,22 @@ public class TotalDataController {
 
         int total = totalDataService.getHistoryDataNum(totalId, begin, end);
         return Results.success(ResponseCode.SUCCESS, total, totalDataService.getTotalHistoryData(totalId, begin, end, page, pageSize));
+    }
+
+    @RequestMapping(value = "/onlineRank", method = RequestMethod.GET)
+    public Results<BranchOnlineData> getBranchOnlineRank(){
+        List<BranchOnlineData> branchOnlineData = totalDataService.getBranchOnlineRank();
+        int total = branchOnlineData.size();
+        return Results.success(ResponseCode.SUCCESS, total, branchOnlineData);
+    }
+
+    @RequestMapping(value = "/sumWatch", method = RequestMethod.GET)
+    public Results<Integer> getSumWatch(){
+        return Results.success(ResponseCode.SUCCESS, totalDataService.getSumWatch());
+    }
+
+    @RequestMapping(value = "/lastOnlineData", method = RequestMethod.GET)
+    public Results<TotalOnlineData> getLastOnlineData(){
+        return Results.success(ResponseCode.SUCCESS, totalDataService.getLastOnlineData());
     }
 }

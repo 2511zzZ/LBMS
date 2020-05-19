@@ -2,6 +2,7 @@ package com.zzz.service.impl;
 
 import com.zzz.dao.TotalDataDao;
 import com.zzz.model.HistoryDatas.TotalHistoryData;
+import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
 import com.zzz.service.TotalDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,20 @@ public class TotalDataServiceImpl implements TotalDataService {
     @Override
     public TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime) {
         return totalDataDao.calTotalRealtimeDataFromBranchs(totalId, datetime);
+    }
+
+    @Override
+    public List<BranchOnlineData> getBranchOnlineRank() {
+        return totalDataDao.getBranchOnlineRank();
+    }
+
+    @Override
+    public Integer getSumWatch() {
+        return totalDataDao.getSumWatch();
+    }
+
+    @Override
+    public TotalOnlineData getLastOnlineData() {
+        return totalDataDao.getLastOnlineData();
     }
 }

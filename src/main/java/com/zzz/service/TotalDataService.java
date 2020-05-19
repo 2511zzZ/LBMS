@@ -1,6 +1,7 @@
 package com.zzz.service;
 
 import com.zzz.model.HistoryDatas.TotalHistoryData;
+import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
 
 import java.util.Date;
@@ -17,4 +18,10 @@ public interface TotalDataService {
     Integer getHistoryDataNum(int totalId, Date begin, Date end);
 
     TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
+
+    List<BranchOnlineData> getBranchOnlineRank();
+
+    Integer getSumWatch();
+
+    TotalOnlineData getLastOnlineData();
 }
