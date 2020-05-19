@@ -1,5 +1,6 @@
 package com.zzz.dao;
 
+import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.HistoryDatas.TotalHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
@@ -25,4 +26,6 @@ public interface TotalDataDao {
     Integer getSumWatch();
 
     TotalOnlineData getLastOnlineData();
+
+    List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end);
 }

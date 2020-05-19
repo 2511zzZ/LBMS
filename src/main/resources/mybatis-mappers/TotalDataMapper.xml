@@ -35,4 +35,13 @@
     <select id="getLastOnlineData" resultType="com.zzz.model.OnlineDatas.TotalOnlineData">
         select * from total_realtime ORDER BY time desc limit 1
     </select>
+    <select id="getBranchHistoryRank" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
+        select
+        branch_id as branch_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen
+        from branch_history
+        where date BETWEEN #{begin} and #{end} GROUP BY branch_id
+    </select>
 </mapper>

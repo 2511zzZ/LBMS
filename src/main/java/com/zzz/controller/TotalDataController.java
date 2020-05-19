@@ -2,6 +2,7 @@ package com.zzz.controller;
 
 import com.zzz.exception.BadDateFormatException;
 import com.zzz.exception.ForBiddenException;
+import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.HistoryDatas.TotalHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
@@ -114,5 +115,27 @@ public class TotalDataController {
     @RequestMapping(value = "/lastOnlineData", method = RequestMethod.GET)
     public Results<TotalOnlineData> getLastOnlineData(){
         return Results.success(ResponseCode.SUCCESS, totalDataService.getLastOnlineData());
+    }
+
+    @RequestMapping(value = "/historyRank", method = RequestMethod.GET)
+    public Results<BranchHistoryData> getBranchHistoryRank(@RequestParam String dateBeginStr,
+                                                           @RequestParam String dateEndStr2) throws BadDateFormatException, ForBiddenException {
+        Date begin;
+        Date end;
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");//注意月份是MM
+            begin = simpleDateFormat.parse(dateBeginStr);
+            end = simpleDateFormat.parse(dateEndStr2);
+        }catch (ParseException e){
+            throw new BadDateFormatException();
+        }
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(!permissionService.hasTotalPermission(user,1)){
+            throw new ForBiddenException();
+        }
+        List<BranchHistoryData> branchHistoryData = totalDataService.getBranchHistoryRank(begin, end);
+        int total = branchHistoryData.size();
+        return Results.success(ResponseCode.SUCCESS, total, branchHistoryData);
     }
 }

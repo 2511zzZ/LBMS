@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.TotalDataDao;
+import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.HistoryDatas.TotalHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.TotalOnlineData;
@@ -60,5 +61,10 @@ public class TotalDataServiceImpl implements TotalDataService {
     @Override
     public TotalOnlineData getLastOnlineData() {
         return totalDataDao.getLastOnlineData();
+    }
+
+    @Override
+    public List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end) {
+        return totalDataDao.getBranchHistoryRank(begin, end);
     }
 }
