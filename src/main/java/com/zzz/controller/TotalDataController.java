@@ -134,6 +134,7 @@ public class TotalDataController {
         if(!permissionService.hasTotalPermission(user,1)){
             throw new ForBiddenException();
         }
+
         List<BranchHistoryData> branchHistoryData = totalDataService.getBranchHistoryRank(begin, end);
         int total = branchHistoryData.size();
         return Results.success(ResponseCode.SUCCESS, total, branchHistoryData);

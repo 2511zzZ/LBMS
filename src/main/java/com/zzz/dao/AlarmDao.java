@@ -1,9 +1,11 @@
 package com.zzz.dao;
 
 import com.zzz.model.AnchorAlarm;
+import com.zzz.model.AnchorAlarmTrans;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface AlarmDao {
@@ -20,4 +22,10 @@ public interface AlarmDao {
     Integer getAnchorIdByAlarm(String alarmId);
 
     void processAlarm(String alarmId, int operation, Date endTime);
+
+    List<AnchorAlarmTrans> getAlarms(Integer employeeId);
+
+    void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
+
+    AnchorAlarm getAlarmById(String alarmId);
 }

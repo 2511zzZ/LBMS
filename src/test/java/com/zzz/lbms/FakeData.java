@@ -41,10 +41,10 @@ public class FakeData {
     @Test
     void OnlineDataGenerate() throws SchedulerException, InterruptedException {
         System.out.println("定时任务开始");
+        // 包含主播实时数据生成、警报检测与生成、历史数据的计算三个任务
         quartzScheduler.startJob();
-        // 线程等待时间必须大于一分钟
-        // 否则可能线程可能在定时任务尚未执行时shutdown
-        Thread.sleep(120000);
+        // 线程等待时间至少大于一分钟，否则可能线程可能在定时任务尚未执行时shutdown
+        Thread.sleep(60*60*1000);
     }
 
 }

@@ -2,10 +2,14 @@ package com.zzz.quartz;
 
 import com.zzz.controller.websocket.WebSocketServer;
 import com.zzz.lbms.Utils;
+import com.zzz.model.Anchor;
 import com.zzz.model.AnchorAlarm;
+import com.zzz.model.AnchorAlarmTrans;
+import com.zzz.model.SysUserDetails;
 import com.zzz.service.AlarmService;
 import com.zzz.service.AnchorService;
 import com.zzz.service.StructureService;
+import com.zzz.service.SysUserService;
 import lombok.SneakyThrows;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -27,6 +31,9 @@ public class DetectionAnchorTipOffJob implements Job{
     @Autowired
     StructureService structureService;
 
+    @Autowired
+    SysUserService userService;
+
     @SneakyThrows
     @Override
     public void execute(JobExecutionContext arg0) {
@@ -40,21 +47,31 @@ public class DetectionAnchorTipOffJob implements Job{
         int max_tip_num = alarmService.getMaxTipNum();
 
         for(int anchorId:anchorService.getAnchorIds()){
+            // 获取最近举报总数
             int sumTipNum = alarmService.getSumTipNum(anchorId, datetime, threshold);
             if(sumTipNum >= max_tip_num){
                 // 向anchorId的直接上级发送websocket警报
                 int superiorEmployeeId = structureService.getEmployeeIdByAnchor(anchorId);
                 String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(datetime);
                 String message = dateStr + ":" + anchorId + "号主播收到了"+sumTipNum+"次警报";
-                // 1:待处理 2:已封禁 3:已解除 4:超时自动封禁
+                // 1:待处理 2:已封禁 3:已解除 4:超时
                 int status = 1;
-                alarmService.insertAlarm(new AnchorAlarm(
-                        Utils.generateAlarmId(anchorId, datetime),
-                        anchorId,
-                        superiorEmployeeId,
-                        status,
-                        datetime,
-                        null
+                Anchor anchor = anchorService.getAnchor(anchorId);
+                String reason = anchorId + "号主播" + anchor.getName() + "被频繁举报";
+                String alarmId = Utils.generateAlarmId(anchorId, datetime);
+                // 插入警报基础信息表
+                alarmService.insertAlarm(new AnchorAlarm(alarmId, anchorId, anchor.getName(), reason, status, datetime,
+                        null, null, null, null
+                ));
+                // 插入警报传输信息表
+                SysUserDetails currentUser = userService.getUser(superiorEmployeeId);
+                alarmService.insertAlarmTrans(new AnchorAlarmTrans(
+                        alarmId, superiorEmployeeId,
+                        currentUser.getName(),
+                        currentUser.getRole(),
+                        0,0,
+                        datetime
+
                 ));
                 WebSocketServer.sendInfo(message,String.valueOf(superiorEmployeeId));
             }

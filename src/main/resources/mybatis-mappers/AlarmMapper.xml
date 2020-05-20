@@ -7,10 +7,27 @@
         null,
         #{alarmId},
         #{anchorId},
-        #{teamId},
+        #{anchorName},
+        #{reason},
         #{status},
         #{startTime},
-        #{endTime}
+        #{endTime},
+        #{finalDealId},
+        #{finalDealName},
+        #{dealRole}
+        )
+    </insert>
+    <insert id="insertAlarmTrans">
+        insert into anchor_alarm_trans values
+        (
+        null,
+        #{alarmId},
+        #{employeeId},
+        #{username},
+        #{role},
+        #{isTimeout},
+        #{isDelete},
+        #{time}
         )
     </insert>
     <update id="setThresholdAndMaxNum">
@@ -34,5 +51,11 @@
     </select>
     <select id="getAnchorIdByAlarm" resultType="java.lang.Integer">
         select anchor_id from anchor_alarm where alarm_id = #{alarmId}
+    </select>
+    <select id="getAlarms" resultType="com.zzz.model.AnchorAlarmTrans">
+        select * from anchor_alarm_trans where employee_id = #{employeeId}
+    </select>
+    <select id="getAlarmById" resultType="com.zzz.model.AnchorAlarm">
+        select * from anchor_alarm where alarm_id = #{alarmId}
     </select>
 </mapper>

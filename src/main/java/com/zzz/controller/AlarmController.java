@@ -3,6 +3,7 @@ package com.zzz.controller;
 import com.zzz.exception.AnchorNotExistException;
 import com.zzz.exception.BadOperationException;
 import com.zzz.exception.ForBiddenException;
+import com.zzz.model.AnchorAlarmTrans;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -78,6 +80,15 @@ public class AlarmController {
     }
 
     // TODO: 根据employeeId获取全部警报
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Results<AnchorAlarmTrans> getAlarmsTrans() {
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmService.getAlarms();
+        for(AnchorAlarmTrans alarmTrans: anchorAlarmTrans){
+            alarmTrans.setAlarm(alarmService.getAlarmById(alarmTrans.getAlarmId()));
+        }
+        return Results.success(ResponseCode.SUCCESS, anchorAlarmTrans.size(), anchorAlarmTrans);
+    }
 
     // 警报测试接口
 //    @RequestMapping(value="/", method = RequestMethod.POST)

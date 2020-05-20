@@ -1,8 +1,10 @@
 package com.zzz.service;
 
 import com.zzz.model.AnchorAlarm;
+import com.zzz.model.AnchorAlarmTrans;
 
 import java.util.Date;
+import java.util.List;
 
 public interface AlarmService {
     int getThreshold();
@@ -18,4 +20,10 @@ public interface AlarmService {
     Integer getAnchorIdByAlarm(String alarmId);
 
     void processAlarm(String alarmId, int operation);
+
+    List<AnchorAlarmTrans> getAlarms();
+
+    void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
+
+    AnchorAlarm getAlarmById(String alarmId);
 }

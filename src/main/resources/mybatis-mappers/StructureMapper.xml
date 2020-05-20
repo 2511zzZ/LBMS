@@ -39,6 +39,6 @@
         (select anchor_id from struc_manage where team_id = #{teamId})
     </select>
     <select id="getEmployeeIdByAnchor" resultType="java.lang.Integer">
-        select team_id from struc_manage where anchor_id = #{anchorId}
+        select employee_id from struc_team where team_id = (select team_id from struc_manage where anchor_id = #{anchorId})
     </select>
 </mapper>

@@ -16,7 +16,7 @@ public class HistoryData extends BaseEntity<Long> {
     private Integer bulletScreen;
     private Integer maxWatchNum;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date = new Date();
+    private Date date;
 
     public HistoryData(){}
 
