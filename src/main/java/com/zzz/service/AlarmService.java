@@ -1,5 +1,6 @@
 package com.zzz.service;
 
+import com.zzz.model.AlarmOverview;
 import com.zzz.model.AnchorAlarm;
 import com.zzz.model.AnchorAlarmTrans;
 
@@ -26,4 +27,6 @@ public interface AlarmService {
     void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
 
     AnchorAlarm getAlarmById(String alarmId);
+
+    AlarmOverview getAlarmOverview(Integer employeeId);
 }

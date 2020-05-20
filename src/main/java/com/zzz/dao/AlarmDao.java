@@ -28,4 +28,8 @@ public interface AlarmDao {
     void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
 
     AnchorAlarm getAlarmById(String alarmId);
+
+    Integer getWaitingNum(int employeeId);
+
+    List<AnchorAlarm> getAlarmsOverview(Integer employeeId, Date date);
 }

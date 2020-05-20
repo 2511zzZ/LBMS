@@ -58,4 +58,11 @@
     <select id="getAlarmById" resultType="com.zzz.model.AnchorAlarm">
         select * from anchor_alarm where alarm_id = #{alarmId}
     </select>
+    <select id="getWaitingNum" resultType="java.lang.Integer">
+        select count(*) from anchor_alarm where
+        alarm_id in (select alarm_id from anchor_alarm_trans where employee_id = #{employeeId}) and status = 1
+    </select>
+    <select id="getAlarmsOverview" resultType="com.zzz.model.AnchorAlarm">
+        select * from anchor_alarm where final_deal_id = #{employeeId} and start_time >= #{date}
+    </select>
 </mapper>

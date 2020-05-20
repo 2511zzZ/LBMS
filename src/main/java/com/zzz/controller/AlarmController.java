@@ -3,6 +3,7 @@ package com.zzz.controller;
 import com.zzz.exception.AnchorNotExistException;
 import com.zzz.exception.BadOperationException;
 import com.zzz.exception.ForBiddenException;
+import com.zzz.model.AlarmOverview;
 import com.zzz.model.AnchorAlarmTrans;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
@@ -79,7 +80,6 @@ public class AlarmController {
         return Results.success();
     }
 
-    // TODO: 根据employeeId获取全部警报
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Results<AnchorAlarmTrans> getAlarmsTrans() {
@@ -88,6 +88,12 @@ public class AlarmController {
             alarmTrans.setAlarm(alarmService.getAlarmById(alarmTrans.getAlarmId()));
         }
         return Results.success(ResponseCode.SUCCESS, anchorAlarmTrans.size(), anchorAlarmTrans);
+    }
+
+    @RequestMapping(value = "/overview", method = RequestMethod.GET)
+    public Results<AlarmOverview> getAlarmOverview() {
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        return Results.success(ResponseCode.SUCCESS, alarmService.getAlarmOverview(user.getEmployeeId()));
     }
 
     // 警报测试接口

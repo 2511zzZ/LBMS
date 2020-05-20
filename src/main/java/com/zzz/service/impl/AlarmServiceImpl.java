@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.AlarmDao;
+import com.zzz.model.AlarmOverview;
 import com.zzz.model.AnchorAlarm;
 import com.zzz.model.AnchorAlarmTrans;
 import com.zzz.model.SysUser;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -74,5 +76,28 @@ public class AlarmServiceImpl implements AlarmService {
     @Override
     public AnchorAlarm getAlarmById(String alarmId) {
         return alarmDao.getAlarmById(alarmId);
+    }
+
+    @Override
+    public AlarmOverview getAlarmOverview(Integer employeeId) {
+        int waitingNum = alarmDao.getWaitingNum(employeeId);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date firstDayInThisMonth = calendar.getTime();
+
+        List<AnchorAlarm> doneAnchorAlarms = alarmDao.getAlarmsOverview(employeeId, firstDayInThisMonth);
+
+        int doneNum = 0;
+        int avgDealCost = 0;    // 平均处理时间/秒
+        int avgDealCostSum = 0;
+        if(!doneAnchorAlarms.isEmpty()){
+            doneNum = doneAnchorAlarms.size();
+            for(AnchorAlarm anchorAlarm: doneAnchorAlarms){
+                avgDealCostSum += (anchorAlarm.getEndTime().getTime() - anchorAlarm.getStartTime().getTime())/1000;
+            }
+        }
+        avgDealCost = avgDealCostSum/doneAnchorAlarms.size();
+        return new AlarmOverview(waitingNum, doneNum, avgDealCost);
     }
 }
