@@ -48,19 +48,22 @@ public class AnchorAlarmTransformJob implements Job{
 //            System.out.println(alarmTrans.getTime().getTime() - new Date().getTime());
             if((new Date().getTime() - alarmTrans.getTime().getTime()) > trans_time * 60 * 1000){
                 // 获取该用户的上级用户
-                int superiorEmployeeId = structureService.getStructure(alarmTrans.getEmployeeId()).getSuperior();
-                SysUserDetails superior = userService.getUser(superiorEmployeeId);
-                // 插入一条新的警报传递信息
-                alarmService.insertAlarmTrans(new AnchorAlarmTrans(
-                        alarmTrans.getAlarmId(), superiorEmployeeId,
-                        superior.getName(),
-                        superior.getRole(),
-                        0,0,
-                        datetime
-                ));
-                // 发送websocket信息
-                String message = "new alarm";
-                WebSocketServer.sendInfo(message,String.valueOf(superiorEmployeeId));
+                Integer superiorEmployeeId = structureService.getStructure(alarmTrans.getEmployeeId()).getSuperior();
+                // 当前用户为总经理时，上级用户为null
+                if(superiorEmployeeId!=null){
+                    SysUserDetails superior = userService.getUser(superiorEmployeeId);
+                    // 插入一条新的警报传递信息
+                    alarmService.insertAlarmTrans(new AnchorAlarmTrans(
+                            alarmTrans.getAlarmId(), superiorEmployeeId,
+                            superior.getName(),
+                            superior.getRole(),
+                            0,0,
+                            datetime
+                    ));
+                    // 发送websocket信息
+                    String message = "new alarm";
+                    WebSocketServer.sendInfo(message,String.valueOf(superiorEmployeeId));
+                }
             }
         }
 
