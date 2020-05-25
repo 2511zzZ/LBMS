@@ -1,5 +1,6 @@
 package com.zzz.service;
 
+import com.zzz.model.Anchor;
 import com.zzz.model.levels.Branch;
 import com.zzz.model.levels.Group;
 import com.zzz.model.levels.Team;
@@ -9,32 +10,21 @@ import java.util.List;
 
 public interface LevelService {
 
-    List<Team> getTeamByParam(Integer teamId, String teamName, Integer employeeId, int page, int pageSize);
+    List<Team> getTeams(int page, int pageSize, Integer role, Integer employeeId);
 
-    List<Team> getTeams(int page, int pageSize);
+    int countTeam(Integer role, Integer employeeId);
 
-    int getTeamTotalNum();
+    List<Group> getGroups(int page, int pageSize, Integer role, Integer employeeId);
 
-    int getTeamNumWithParam(Integer teamId, String teamName, Integer employeeId);
+    int countGroup(Integer role, Integer employeeId);
 
+    List<Branch> getBranchs(int page, int pageSize, Integer role, Integer employeeId);
 
-    List<Group> getGroupByParam(Integer groupId, String groupName, Integer employeeId, int page, int pageSize);
+    int countBranch(Integer role, Integer employeeId);
 
-    List<Group> getGroups(int page, int pageSize);
+    List<Anchor> getAnchors(int page, int pageSize, Integer role, Integer employeeId);
 
-    int getGroupTotalNum();
-
-    int getGroupNumWithParam(Integer groupId, String groupName, Integer employeeId);
-
-
-    List<Branch> getBranchByParam(Integer branchId, String branchName, Integer employeeId, int page, int pageSize);
-
-    List<Branch> getBranchs(int page, int pageSize);
-
-    int getBranchTotalNum();
-
-    int getBranchNumWithParam(Integer branchId, String branchName, Integer employeeId);
-
+    int countAnchor(Integer role, Integer employeeId);
 
     Total getTotal();
 
@@ -43,4 +33,6 @@ public interface LevelService {
     List<Integer> getGroupIds();
 
     List<Integer> getBranchIds();
+
+    Integer getLevelIdByEmployeeId(Integer role, Integer employeeId);
 }

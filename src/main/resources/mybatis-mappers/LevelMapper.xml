@@ -15,12 +15,6 @@
         </if>
         limit #{offset}, #{limit}
     </select>
-    <select id="getTeams" resultType="com.zzz.model.levels.Team">
-        select * from struc_team limit #{offset}, #{limit}
-    </select>
-    <select id="getTeamTotalNum" resultType="java.lang.Integer">
-        select count(*) from struc_team
-    </select>
     <select id="getTeamNumWithParam" resultType="java.lang.Integer">
         select count(*) from struc_team where 1 = 1
         <if test="teamId!=null">
@@ -46,12 +40,6 @@
             and employee_id = #{employeeId}
         </if>
         limit #{offset}, #{limit}
-    </select>
-    <select id="getGroups" resultType="com.zzz.model.levels.Group">
-        select * from struc_group limit #{offset}, #{limit}
-    </select>
-    <select id="getGroupTotalNum" resultType="java.lang.Integer">
-        select count(*) from struc_group
     </select>
     <select id="getGroupNumWithParam" resultType="java.lang.Integer">
         select count(*) from struc_group where 1 = 1
@@ -79,12 +67,6 @@
         </if>
         limit #{offset}, #{limit}
     </select>
-    <select id="getBranchs" resultType="com.zzz.model.levels.Branch">
-        select * from struc_branch limit #{offset}, #{limit}
-    </select>
-    <select id="getBranchTotalNum" resultType="java.lang.Integer">
-        select count(*) from struc_branch
-    </select>
     <select id="getBranchNumWithParam" resultType="java.lang.Integer">
         select count(*) from struc_branch where 1 = 1
         <if test="branchId!=null">
@@ -109,6 +91,35 @@
     </select>
     <select id="getBranchIds" resultType="java.lang.Integer">
         select branch_id from struc_manage group by branch_id
+    </select>
+
+    <select id="getLevelIdByEmployeeId" resultType="java.lang.Integer">
+        select ${levelIdName} from ${tableName} where employee_id = #{employeeId}
+    </select>
+
+    <select id="getTeamsByUser" resultType="com.zzz.model.levels.Team">
+        select * from struc_team where team_id in (select team_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+    </select>
+    <select id="getGroupsByUser" resultType="com.zzz.model.levels.Group">
+        select * from struc_group where group_id in (select group_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+    </select>
+    <select id="getBranchsByUser" resultType="com.zzz.model.levels.Branch">
+        select * from struc_branch where branch_id in (select branch_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+    </select>
+    <select id="countTeam" resultType="java.lang.Integer">
+        select count(*) from struc_team where team_id in (select team_id from struc_manage where ${levelIdName} = #{levelId})
+    </select>
+    <select id="countGroup" resultType="java.lang.Integer">
+        select count(*) from struc_group where group_id in (select group_id from struc_manage where ${levelIdName} = #{levelId})
+    </select>
+    <select id="countBranch" resultType="java.lang.Integer">
+        select count(*) from struc_branch where branch_id in (select branch_id from struc_manage where ${levelIdName} = #{levelId})
+    </select>
+    <select id="getAnchorsByUser" resultType="com.zzz.model.Anchor">
+        select * from anchor where anchor_id in (select anchor_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+    </select>
+    <select id="countAnchor" resultType="java.lang.Integer">
+        select count(*) from anchor where anchor_id in (select anchor_id from struc_manage where ${levelIdName} = #{levelId})
     </select>
 
 

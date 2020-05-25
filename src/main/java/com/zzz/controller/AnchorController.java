@@ -31,15 +31,6 @@ public class AnchorController {
     @Autowired
     private PermissionService permissionService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Results<Anchor> getAnchorList(@RequestParam(name="page", defaultValue = "1") int page,
-                                       @RequestParam(name="pageSize", defaultValue = "30") int pageSize){
-
-        List<Anchor> anchorList = anchorService.getAnchors(page, pageSize);
-        int total = anchorService.getTotalNum();
-        return Results.success(ResponseCode.SUCCESS, total, anchorList);
-    }
-
     @RequestMapping(value="/list/online",method = RequestMethod.GET)
     public Results<Anchor> getOnlineAnchorList(@RequestParam(name="page", defaultValue = "1") int page,
                                                @RequestParam(name="pageSize", defaultValue = "30") int pageSize){

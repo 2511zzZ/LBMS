@@ -1,5 +1,6 @@
 package com.zzz.dao;
 
+import com.zzz.model.Anchor;
 import com.zzz.model.levels.Branch;
 import com.zzz.model.levels.Group;
 import com.zzz.model.levels.Team;
@@ -13,27 +14,13 @@ public interface LevelDao {
 
     List<Team> getTeamByParam(Integer teamId, String teamName, Integer employeeId, int offset, int limit);
 
-    List<Team> getTeams(int offset, int limit);
-
-    int getTeamTotalNum();
-
     int getTeamNumWithParam(Integer teamId, String teamName, Integer employeeId);
-
 
     List<Group> getGroupByParam(Integer groupId, String groupName, Integer employeeId, int offset, int limit);
 
-    List<Group> getGroups(int offset, int limit);
-
-    int getGroupTotalNum();
-
     int getGroupNumWithParam(Integer groupId, String groupName, Integer employeeId);
 
-
     List<Branch> getBranchByParam(Integer branchId, String branchName, Integer employeeId, int offset, int limit);
-
-    List<Branch> getBranchs(int offset, int limit);
-
-    int getBranchTotalNum();
 
     int getBranchNumWithParam(Integer branchId, String branchName, Integer employeeId);
 
@@ -45,4 +32,22 @@ public interface LevelDao {
     List<Integer> getGroupIds();
 
     List<Integer> getBranchIds();
+
+    Integer getLevelIdByEmployeeId(String tableName, String levelIdName, Integer employeeId);
+
+    List<Team> getTeamsByUser(String levelIdName, Integer levelId, Integer offset, Integer limit);
+
+    List<Group> getGroupsByUser(String levelIdName, Integer levelId, Integer offset, Integer limit);
+
+    List<Branch> getBranchsByUser(String levelIdName, Integer levelId, Integer offset, Integer limit);
+
+    List<Anchor> getAnchorsByUser(String levelIdName, Integer levelId, Integer offset, Integer limit);
+
+    int countAnchor(String levelIdName, Integer levelId);
+    
+    int countTeam(String levelIdName, Integer levelId);
+
+    int countGroup(String levelIdName, Integer levelId);
+
+    int countBranch(String levelIdName, Integer levelId);
 }

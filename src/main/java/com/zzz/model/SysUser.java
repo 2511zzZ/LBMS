@@ -12,11 +12,11 @@ public class SysUser extends BaseEntity<Long> {
     private Integer employeeId;
     private String username;
     private String password;
-    private int role;
+    private Integer role;
 
     public SysUser(){}
 
-    public SysUser(int employeeId, String username, String password, int role){
+    public SysUser(Integer employeeId, String username, String password, Integer role){
         this.employeeId = employeeId;
         this.username = username;
         this.password = password;

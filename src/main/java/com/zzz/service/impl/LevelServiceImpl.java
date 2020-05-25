@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.LevelDao;
+import com.zzz.model.Anchor;
 import com.zzz.model.levels.Branch;
 import com.zzz.model.levels.Group;
 import com.zzz.model.levels.Team;
@@ -19,75 +20,6 @@ public class LevelServiceImpl implements LevelService {
 
     @Autowired
     LevelDao levelDao;
-
-    @Override
-    public List<Team> getTeamByParam(Integer teamId, String teamName, Integer employeeId, int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getTeamByParam(teamId, teamName, employeeId, offset, pageSize);
-    }
-
-    @Override
-    public List<Team> getTeams(int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getTeams(offset, pageSize);
-    }
-
-    @Override
-    public int getTeamTotalNum() {
-        return levelDao.getTeamTotalNum();
-    }
-
-    @Override
-    public int getTeamNumWithParam(Integer teamId, String teamName, Integer employeeId) {
-        return levelDao.getTeamNumWithParam(teamId, teamName, employeeId);
-    }
-
-
-    @Override
-    public List<Group> getGroupByParam(Integer groupId, String groupName, Integer employeeId, int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getGroupByParam(groupId, groupName, employeeId, offset, pageSize);
-    }
-
-    @Override
-    public List<Group> getGroups(int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getGroups(offset, pageSize);
-    }
-
-    @Override
-    public int getGroupTotalNum() {
-        return levelDao.getGroupTotalNum();
-    }
-
-    @Override
-    public int getGroupNumWithParam(Integer groupId, String groupName, Integer employeeId) {
-        return levelDao.getGroupNumWithParam(groupId, groupName, employeeId);
-    }
-
-
-
-    @Override
-    public List<Branch> getBranchByParam(Integer branchId, String branchName, Integer employeeId, int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getBranchByParam(branchId, branchName, employeeId, offset, pageSize);
-    }
-
-    @Override
-    public List<Branch> getBranchs(int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return levelDao.getBranchs(offset, pageSize);
-    }
-
-    @Override
-    public int getBranchTotalNum() {
-        return levelDao.getBranchTotalNum();
-    }
-
-    @Override
-    public int getBranchNumWithParam(Integer branchId, String branchName, Integer employeeId) {
-        return levelDao.getBranchNumWithParam(branchId, branchName, employeeId);
-    }
 
     @Override
     public Total getTotal() {
@@ -109,5 +41,92 @@ public class LevelServiceImpl implements LevelService {
         return levelDao.getBranchIds();
     }
 
+    @Override
+    public Integer getLevelIdByEmployeeId(Integer role, Integer employeeId) {
+        return levelDao.getLevelIdByEmployeeId(getTableName(role), getLevelIdName(role), employeeId);
+    }
 
+    @Override
+    public List<Team> getTeams(int page, int pageSize, Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        int offset = (page - 1) * pageSize;
+        return levelDao.getTeamsByUser(getLevelIdName(role), levelId, offset, pageSize);
+    }
+
+    @Override
+    public int countTeam(Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        return levelDao.countTeam(getLevelIdName(role), levelId);
+    }
+
+    @Override
+    public List<Group> getGroups(int page, int pageSize, Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        int offset = (page - 1) * pageSize;
+        return levelDao.getGroupsByUser(getLevelIdName(role), levelId, offset, pageSize);
+    }
+
+    @Override
+    public int countGroup(Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        return levelDao.countGroup(getLevelIdName(role), levelId);
+    }
+
+    @Override
+    public List<Branch> getBranchs(int page, int pageSize, Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        int offset = (page - 1) * pageSize;
+        return levelDao.getBranchsByUser(getLevelIdName(role), levelId, offset, pageSize);
+    }
+
+    @Override
+    public int countBranch(Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        return levelDao.countBranch(getLevelIdName(role), levelId);
+    }
+
+    @Override
+    public List<Anchor> getAnchors(int page, int pageSize, Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        int offset = (page - 1) * pageSize;
+        return levelDao.getAnchorsByUser(getLevelIdName(role), levelId, offset, pageSize);
+    }
+
+    @Override
+    public int countAnchor(Integer role, Integer employeeId) {
+        Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        return levelDao.countAnchor(getLevelIdName(role), levelId);
+    }
+
+    private static String getLevelIdName(int role){
+        if(role == 1){
+            return "total_id";
+        }
+        if(role == 2){
+            return "branch_id";
+        }
+        if(role == 3){
+            return "group_id";
+        }
+        if(role == 4){
+            return "team_id";
+        }
+        return null;
+    }
+
+    private static String getTableName(int role){
+        if(role == 1){
+            return "struc_total";
+        }
+        if(role == 2){
+            return "struc_branch";
+        }
+        if(role == 3){
+            return "struc_group";
+        }
+        if(role == 4){
+            return "struc_team";
+        }
+        return null;
+    }
 }
