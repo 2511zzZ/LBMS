@@ -41,4 +41,8 @@ public interface AnchorDao {
     List<Anchor> recommendAnchors();
 
     List<Integer> getAnchorIds();
+
+    void fakeAnchorOnlineData(int anchorId, int isOnline, Date datetime);
+
+    Integer getOnlineAnchorNum(String levelIdName, Integer levelId);
 }

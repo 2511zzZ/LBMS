@@ -31,14 +31,6 @@ public class AnchorController {
     @Autowired
     private PermissionService permissionService;
 
-    @RequestMapping(value="/list/online",method = RequestMethod.GET)
-    public Results<Anchor> getOnlineAnchorList(@RequestParam(name="page", defaultValue = "1") int page,
-                                               @RequestParam(name="pageSize", defaultValue = "30") int pageSize){
-        List<Anchor> onlineAnchorList = anchorService.getOnlineAnchors(page, pageSize);
-        int total = anchorService.getOnlineTotalNum();
-        return Results.success(ResponseCode.SUCCESS, total, onlineAnchorList);
-    }
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Results<Anchor> getAnchor(@RequestParam int anchorId) throws ForBiddenException {
 

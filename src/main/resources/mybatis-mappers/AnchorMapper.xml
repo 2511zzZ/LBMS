@@ -4,6 +4,9 @@
     <insert id="banAnchor">
         insert into anchor_banned values (null,#{anchorId}, #{begin}, #{end}, #{reason})
     </insert>
+    <insert id="fakeAnchorOnlineData">
+        insert into anchor_online values (null, #{anchorId}, #{isOnline}, #{datetime})
+    </insert>
 
     <select id="getTotalNum" resultType="java.lang.Integer">
         select count(*) from anchor
@@ -70,6 +73,10 @@
     </select>
     <select id="getAnchorIds" resultType="java.lang.Integer">
         select anchor_id from anchor
+    </select>
+    <select id="getOnlineAnchorNum" resultType="java.lang.Integer">
+        select count(*) from anchor_online where is_online = 1 and anchor_id in
+        (select anchor_id from struc_manage where ${levelIdName} = #{levelId})
     </select>
 
 </mapper>

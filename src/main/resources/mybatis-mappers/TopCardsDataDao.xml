@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzz.dao.TopCardsDataDao">
+    <select id="getOnlineWatcher" resultType="java.lang.Integer">
+        select watch_num from ${tableName} where ${levelIdName} = #{levelId} order by time desc limit 1
+    </select>
+    <select id="getGiftSum" resultType="java.lang.Integer">
+        select gift from ${tableName} where ${levelIdName} = #{levelId} order by time desc limit 1
+    </select>
+</mapper>

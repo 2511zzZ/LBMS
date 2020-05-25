@@ -1,6 +1,7 @@
 package com.zzz.service;
 
 import com.zzz.model.Anchor;
+import com.zzz.model.SysUser;
 
 import java.util.Date;
 import java.util.List;
@@ -21,4 +22,6 @@ public interface AnchorService {
     List<Anchor> recommendAnchors();
 
     List<Integer> getAnchorIds();
+
+    Integer getOnlineAnchorNum(SysUser user);
 }

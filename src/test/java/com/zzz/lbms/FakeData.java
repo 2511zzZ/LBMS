@@ -1,11 +1,15 @@
 package com.zzz.lbms;
 
+import com.zzz.dao.AnchorDao;
 import com.zzz.quartz.QuartzScheduler;
 import com.zzz.service.fakedata.FakeDataService;
 import org.junit.jupiter.api.Test;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
+import java.util.List;
 
 // 由于集成了websocket,需要给Test配置webEnvironment
 // 每次测试都会选用一个随即可用的端口模拟启动一个完整的服务器
@@ -16,6 +20,8 @@ public class FakeData {
     FakeDataService fakeDataService;
     @Autowired
     QuartzScheduler quartzScheduler;
+    @Autowired
+    AnchorDao anchorDao;
 
     @Test
     void insertAnchors(){
@@ -47,4 +53,12 @@ public class FakeData {
         Thread.sleep(60*60*1000);
     }
 
+    @Test
+    void fakeAnchorOnlineData() {
+        List<Integer> anchorIds = anchorDao.getAnchorIds();
+        for(int anchorId:anchorIds){
+            int isOnline = Math.random() < 0.75 ? 1 : 0;
+            anchorDao.fakeAnchorOnlineData(anchorId, isOnline, new Date());
+        }
+    }
 }

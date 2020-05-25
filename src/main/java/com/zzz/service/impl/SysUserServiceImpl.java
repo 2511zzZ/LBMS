@@ -5,18 +5,18 @@ import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import com.zzz.model.SysUserSettings;
 import com.zzz.service.SysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class SysUserServiceImpl implements SysUserService {
 
-    @Autowired
+    @Resource
     SysUserDao userDao;
 
     @Override

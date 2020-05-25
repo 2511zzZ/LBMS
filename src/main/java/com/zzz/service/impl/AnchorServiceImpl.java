@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.AnchorDao;
+import com.zzz.dao.LevelDao;
 import com.zzz.dao.StructureDao;
 import com.zzz.model.Anchor;
 import com.zzz.model.SysUser;
@@ -23,6 +24,9 @@ public class AnchorServiceImpl implements AnchorService {
 
     @Autowired
     StructureDao structureDao;
+
+    @Autowired
+    LevelDao levelDao;
 
     @Override
     public List<Anchor> getAnchors(int page, int pageSize) {
@@ -94,5 +98,47 @@ public class AnchorServiceImpl implements AnchorService {
     @Override
     public List<Integer> getAnchorIds() {
         return anchorDao.getAnchorIds();
+    }
+
+    @Override
+    public Integer getOnlineAnchorNum(SysUser user) {
+        int role = user.getRole();
+        Integer levelId = levelDao.getLevelIdByEmployeeId(getTableName(role), getLevelIdName(role), user.getEmployeeId());
+        if(role == 1){
+            return anchorDao.getOnlineAnchorNum("1", levelId);
+        }
+        return anchorDao.getOnlineAnchorNum(getLevelIdName(role), levelId);
+    }
+
+    private static String getLevelIdName(int role){
+        if(role == 1){
+            return "total_id";
+        }
+        if(role == 2){
+            return "branch_id";
+        }
+        if(role == 3){
+            return "group_id";
+        }
+        if(role == 4){
+            return "team_id";
+        }
+        return null;
+    }
+
+    private static String getTableName(int role){
+        if(role == 1){
+            return "struc_total";
+        }
+        if(role == 2){
+            return "struc_branch";
+        }
+        if(role == 3){
+            return "struc_group";
+        }
+        if(role == 4){
+            return "struc_team";
+        }
+        return null;
     }
 }

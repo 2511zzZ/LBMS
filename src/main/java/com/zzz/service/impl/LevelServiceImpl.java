@@ -50,12 +50,18 @@ public class LevelServiceImpl implements LevelService {
     public List<Team> getTeams(int page, int pageSize, Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
         int offset = (page - 1) * pageSize;
+        if(role == 1){
+            return levelDao.getTeamsByUser("1", levelId, offset, pageSize);
+        }
         return levelDao.getTeamsByUser(getLevelIdName(role), levelId, offset, pageSize);
     }
 
     @Override
     public int countTeam(Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        if(role == 1){
+            return levelDao.countTeam("1", levelId);
+        }
         return levelDao.countTeam(getLevelIdName(role), levelId);
     }
 
@@ -63,12 +69,18 @@ public class LevelServiceImpl implements LevelService {
     public List<Group> getGroups(int page, int pageSize, Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
         int offset = (page - 1) * pageSize;
+        if(role == 1){
+            return levelDao.getGroupsByUser("1", levelId, offset, pageSize);
+        }
         return levelDao.getGroupsByUser(getLevelIdName(role), levelId, offset, pageSize);
     }
 
     @Override
     public int countGroup(Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        if(role == 1){
+            return levelDao.countGroup("1", levelId);
+        }
         return levelDao.countGroup(getLevelIdName(role), levelId);
     }
 
@@ -76,12 +88,18 @@ public class LevelServiceImpl implements LevelService {
     public List<Branch> getBranchs(int page, int pageSize, Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
         int offset = (page - 1) * pageSize;
+        if(role == 1){
+            return levelDao.getBranchsByUser("1", levelId, offset, pageSize);
+        }
         return levelDao.getBranchsByUser(getLevelIdName(role), levelId, offset, pageSize);
     }
 
     @Override
     public int countBranch(Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        if(role == 1){
+            return levelDao.countBranch("1", levelId);
+        }
         return levelDao.countBranch(getLevelIdName(role), levelId);
     }
 
@@ -89,12 +107,18 @@ public class LevelServiceImpl implements LevelService {
     public List<Anchor> getAnchors(int page, int pageSize, Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
         int offset = (page - 1) * pageSize;
+        if(role == 1){
+            return levelDao.getAnchorsByUser("1", levelId, offset, pageSize);
+        }
         return levelDao.getAnchorsByUser(getLevelIdName(role), levelId, offset, pageSize);
     }
 
     @Override
     public int countAnchor(Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
+        if(role == 1){
+            return levelDao.countAnchor("1", levelId);
+        }
         return levelDao.countAnchor(getLevelIdName(role), levelId);
     }
 
