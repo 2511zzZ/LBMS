@@ -17,6 +17,7 @@ public class QuartzScheduler {
         startJob1(scheduler);
         startJob2(scheduler);
         startJob3(scheduler);
+        startJob4(scheduler);
         scheduler.start();
     }
 
@@ -112,4 +113,11 @@ public class QuartzScheduler {
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 
+    private void startJob4(Scheduler scheduler) throws SchedulerException {
+        JobDetail jobDetail = JobBuilder.newJob(AnchorAlarmTransformJob.class).withIdentity("alarmTransform", "AlarmSystem").build();
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 * * * * ?");
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("alarmTransform", "AlarmSystem")
+                .withSchedule(cronScheduleBuilder).build();
+        scheduler.scheduleJob(jobDetail, cronTrigger);
+    }
 }

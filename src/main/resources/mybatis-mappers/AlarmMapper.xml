@@ -35,7 +35,7 @@
     </update>
     <update id="processAlarm">
         update anchor_alarm set status = #{operation}, end_time = #{endTime},
-        final_deal_id = #{employeeId}, final_deal_name = #{employeeName}
+        final_deal_id = #{employeeId}, final_deal_name = #{employeeName}, deal_role = #{role}
         where alarm_id = #{alarmId}
     </update>
     <delete id="deleteAlert">
@@ -69,5 +69,12 @@
     </select>
     <select id="getAlarmsOverview" resultType="com.zzz.model.AnchorAlarm">
         select * from anchor_alarm where final_deal_id = #{employeeId} and start_time >= #{date}
+    </select>
+    <select id="getUndoAlarms" resultType="com.zzz.model.AnchorAlarmTrans">
+        select * from
+        (select * from anchor_alarm_trans where alarm_id in
+        (select alarm_id from anchor_alarm where status = 1)
+        order by time desc) as t
+        group by t.alarm_id
     </select>
 </mapper>

@@ -63,13 +63,12 @@ public class AlarmServiceImpl implements AlarmService {
     public void processAlarm(String alarmId, int operation) {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         SysUserDetails userDetails = sysUserDao.getUserById(user.getEmployeeId());
-        alarmDao.processAlarm(alarmId, operation, new Date(), userDetails.getEmployeeId(), userDetails.getName());
+        alarmDao.processAlarm(alarmId, operation, new Date(), userDetails.getEmployeeId(), userDetails.getName(), userDetails.getRole());
     }
 
     @Override
-    public List<AnchorAlarmTrans> getAlarms(int status) {
-        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        List<AnchorAlarmTrans> anchorAlarmTrans = alarmDao.getAlarms(user.getEmployeeId());
+    public List<AnchorAlarmTrans> getAlarms(int status, int employeeId) {
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmDao.getAlarms(employeeId);
         for(AnchorAlarmTrans alarmTrans: anchorAlarmTrans){
             alarmTrans.setAlarm(alarmDao.getAlarmById(alarmTrans.getAlarmId()));
         }
@@ -82,6 +81,11 @@ public class AlarmServiceImpl implements AlarmService {
             }
         }
         return anchorAlarms;
+    }
+
+    @Override
+    public List<AnchorAlarmTrans> getUndoAlarms() {
+        return alarmDao.getUndoAlarms();
     }
 
     @Override

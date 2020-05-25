@@ -83,7 +83,8 @@ public class AlarmController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Results<AnchorAlarmTrans> getAlarms(int status) {
-        List<AnchorAlarmTrans> anchorAlarmTrans = alarmService.getAlarms(status);
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmService.getAlarms(status, user.getEmployeeId());
         return Results.success(ResponseCode.SUCCESS, anchorAlarmTrans.size(), anchorAlarmTrans);
     }
 

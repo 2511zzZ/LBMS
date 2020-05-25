@@ -21,7 +21,7 @@ public interface AlarmDao {
 
     Integer getAnchorIdByAlarm(String alarmId);
 
-    void processAlarm(String alarmId, Integer operation, Date endTime, Integer employeeId, String employeeName);
+    void processAlarm(String alarmId, Integer operation, Date endTime, Integer employeeId, String employeeName, Integer role);
 
     List<AnchorAlarmTrans> getAlarms(Integer employeeId);
 
@@ -34,4 +34,6 @@ public interface AlarmDao {
     List<AnchorAlarm> getAlarmsOverview(Integer employeeId, Date date);
 
     void deleteAlert(String alarmId);
+
+    List<AnchorAlarmTrans> getUndoAlarms();
 }

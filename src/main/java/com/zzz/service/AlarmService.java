@@ -22,7 +22,9 @@ public interface AlarmService {
 
     void processAlarm(String alarmId, int operation);
 
-    List<AnchorAlarmTrans> getAlarms(int status);
+    List<AnchorAlarmTrans> getAlarms(int status, int employeeId);
+
+    List<AnchorAlarmTrans> getUndoAlarms();
 
     void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
 
