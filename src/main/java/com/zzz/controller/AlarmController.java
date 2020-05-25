@@ -82,11 +82,8 @@ public class AlarmController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Results<AnchorAlarmTrans> getAlarmsTrans() {
-        List<AnchorAlarmTrans> anchorAlarmTrans = alarmService.getAlarms();
-        for(AnchorAlarmTrans alarmTrans: anchorAlarmTrans){
-            alarmTrans.setAlarm(alarmService.getAlarmById(alarmTrans.getAlarmId()));
-        }
+    public Results<AnchorAlarmTrans> getAlarms(int status) {
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmService.getAlarms(status);
         return Results.success(ResponseCode.SUCCESS, anchorAlarmTrans.size(), anchorAlarmTrans);
     }
 
@@ -94,6 +91,12 @@ public class AlarmController {
     public Results<AlarmOverview> getAlarmOverview() {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         return Results.success(ResponseCode.SUCCESS, alarmService.getAlarmOverview(user.getEmployeeId()));
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Results deleteAlert(@RequestParam String alarmId) {
+        alarmService.deleteAlert(alarmId);
+        return Results.success();
     }
 
     // 警报测试接口

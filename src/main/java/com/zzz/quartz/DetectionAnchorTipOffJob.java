@@ -1,6 +1,5 @@
 package com.zzz.quartz;
 
-import com.zzz.controller.websocket.WebSocketServer;
 import com.zzz.lbms.Utils;
 import com.zzz.model.Anchor;
 import com.zzz.model.AnchorAlarm;
@@ -50,7 +49,7 @@ public class DetectionAnchorTipOffJob implements Job{
             // 获取最近举报总数
             int sumTipNum = alarmService.getSumTipNum(anchorId, datetime, threshold);
             if(sumTipNum >= max_tip_num){
-                // 向anchorId的直接上级发送websocket警报
+                // anchorId对于的小组长id
                 int superiorEmployeeId = structureService.getEmployeeIdByAnchor(anchorId);
                 String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(datetime);
                 String message = dateStr + ":" + anchorId + "号主播收到了"+sumTipNum+"次警报";
@@ -73,7 +72,9 @@ public class DetectionAnchorTipOffJob implements Job{
                         datetime
 
                 ));
-                WebSocketServer.sendInfo(message,String.valueOf(superiorEmployeeId));
+
+                // WebSocket主动推送
+//                WebSocketServer.sendInfo(message,String.valueOf(superiorEmployeeId));
             }
         }
 

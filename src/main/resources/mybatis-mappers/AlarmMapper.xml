@@ -34,8 +34,13 @@
         update sys_settings set threshold = #{newThreshold}, max_alarm_num = #{maxTipNum}
     </update>
     <update id="processAlarm">
-        update anchor_alarm set status = #{operation}, end_time = #{endTime} where alarm_id = #{alarmId}
+        update anchor_alarm set status = #{operation}, end_time = #{endTime},
+        final_deal_id = #{employeeId}, final_deal_name = #{employeeName}
+        where alarm_id = #{alarmId}
     </update>
+    <delete id="deleteAlert">
+        update anchor_alarm_trans set is_delete = 1 where alarm_id = #{alarmId}
+    </delete>
 
     <select id="getThreshold" resultType="java.lang.Integer">
         select threshold from sys_settings

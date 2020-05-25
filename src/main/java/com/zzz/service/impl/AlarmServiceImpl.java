@@ -1,10 +1,8 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.AlarmDao;
-import com.zzz.model.AlarmOverview;
-import com.zzz.model.AnchorAlarm;
-import com.zzz.model.AnchorAlarmTrans;
-import com.zzz.model.SysUser;
+import com.zzz.dao.SysUserDao;
+import com.zzz.model.*;
 import com.zzz.service.AlarmService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +21,9 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Autowired
     AlarmDao alarmDao;
+
+    @Autowired
+    SysUserDao sysUserDao;
 
     @Override
     public int getThreshold() {
@@ -59,23 +61,32 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public void processAlarm(String alarmId, int operation) {
-        alarmDao.processAlarm(alarmId, operation, new Date());
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        SysUserDetails userDetails = sysUserDao.getUserById(user.getEmployeeId());
+        alarmDao.processAlarm(alarmId, operation, new Date(), userDetails.getEmployeeId(), userDetails.getName());
     }
 
     @Override
-    public List<AnchorAlarmTrans> getAlarms() {
+    public List<AnchorAlarmTrans> getAlarms(int status) {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        return alarmDao.getAlarms(user.getEmployeeId());
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmDao.getAlarms(user.getEmployeeId());
+        for(AnchorAlarmTrans alarmTrans: anchorAlarmTrans){
+            alarmTrans.setAlarm(alarmDao.getAlarmById(alarmTrans.getAlarmId()));
+        }
+
+        List<AnchorAlarmTrans> anchorAlarms = new ArrayList<>();
+        for(AnchorAlarmTrans alarmTrans: anchorAlarmTrans){
+            // status与输入分类相同且未被标记为delete
+            if(alarmTrans.getAlarm().getStatus() == status && alarmTrans.getIsDelete() == 0){
+                anchorAlarms.add(alarmTrans);
+            }
+        }
+        return anchorAlarms;
     }
 
     @Override
     public void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans) {
         alarmDao.insertAlarmTrans(anchorAlarmTrans);
-    }
-
-    @Override
-    public AnchorAlarm getAlarmById(String alarmId) {
-        return alarmDao.getAlarmById(alarmId);
     }
 
     @Override
@@ -99,5 +110,10 @@ public class AlarmServiceImpl implements AlarmService {
         }
         avgDealCost = avgDealCostSum/doneAnchorAlarms.size();
         return new AlarmOverview(waitingNum, doneNum, avgDealCost);
+    }
+
+    @Override
+    public void deleteAlert(String alarmId) {
+        alarmDao.deleteAlert(alarmId);
     }
 }

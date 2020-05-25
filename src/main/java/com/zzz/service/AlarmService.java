@@ -22,11 +22,11 @@ public interface AlarmService {
 
     void processAlarm(String alarmId, int operation);
 
-    List<AnchorAlarmTrans> getAlarms();
+    List<AnchorAlarmTrans> getAlarms(int status);
 
     void insertAlarmTrans(AnchorAlarmTrans anchorAlarmTrans);
 
-    AnchorAlarm getAlarmById(String alarmId);
-
     AlarmOverview getAlarmOverview(Integer employeeId);
+
+    void deleteAlert(String alarmId);
 }
