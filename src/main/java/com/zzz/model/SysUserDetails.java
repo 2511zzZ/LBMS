@@ -10,10 +10,10 @@ public class SysUserDetails extends BaseEntity<Long> {
     private static final long serialVersionUID = 8925514045582212338L;
 
     private Integer employeeId;
-    private String username;
-    private String name;
+    private String username;    // 用户名 拼音
+    private String name;        // 姓名 汉字
     private String gender;
-    private String nickname;
+    private String nickname;    // 昵称 用户自定义
     private String avatar;
     private Integer role;
 

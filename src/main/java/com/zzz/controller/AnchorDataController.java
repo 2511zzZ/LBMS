@@ -36,7 +36,15 @@ public class AnchorDataController {
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
     public Results<AnchorOnlineData> getAnchorOnlineData(@RequestParam int anchorId,
-                                                         @RequestParam Date datetime) throws ForBiddenException {
+                                                         @RequestParam String datetimeStr) throws ForBiddenException, BadDateFormatException {
+
+        Date datetime;
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
+            datetime = simpleDateFormat.parse(datetimeStr);
+        }catch (ParseException e){
+            throw new BadDateFormatException();
+        }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasPermission(user,anchorId)){

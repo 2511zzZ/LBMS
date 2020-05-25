@@ -36,7 +36,15 @@ public class GroupDataController {
 
     @RequestMapping(value = "/online", method = RequestMethod.GET)
     public Results<GroupOnlineData> getGroupOnlineData(@RequestParam int groupId,
-                                                       @RequestParam Date datetime) throws ForBiddenException {
+                                                       @RequestParam String datetimeStr) throws ForBiddenException, BadDateFormatException {
+
+        Date datetime;
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
+            datetime = simpleDateFormat.parse(datetimeStr);
+        }catch (ParseException e){
+            throw new BadDateFormatException();
+        }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         if(!permissionService.hasGroupPermission(user,groupId)){
