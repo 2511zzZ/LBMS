@@ -3,6 +3,7 @@ package com.zzz.service.impl;
 import com.zzz.dao.GroupDataDao;
 import com.zzz.model.HistoryDatas.GroupHistoryData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
+import com.zzz.model.OnlineDatas.TeamOnlineData;
 import com.zzz.service.GroupDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class GroupDataServiceImpl implements GroupDataService {
     @Override
     public GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime) {
         return groupDataDao.calGroupRealtimeDataFromTeams(groupId, datetime);
+    }
+
+    @Override
+    public List<TeamOnlineData> getTeamOnlineRank(int levelId) {
+        return groupDataDao.getTeamOnlineRank(levelId);
     }
 }

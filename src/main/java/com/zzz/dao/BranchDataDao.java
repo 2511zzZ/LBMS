@@ -2,6 +2,7 @@ package com.zzz.dao;
 
 import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
+import com.zzz.model.OnlineDatas.GroupOnlineData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -18,4 +19,6 @@ public interface BranchDataDao {
     Integer getHistoryDataNum(int branchId, Date begin, Date end);
 
     BranchOnlineData calBranchRealtimeDataFromGroups(int branchId, Date datetime);
+
+    List<GroupOnlineData> getGroupOnlineRank(int levelId);
 }

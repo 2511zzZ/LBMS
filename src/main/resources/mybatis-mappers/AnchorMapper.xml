@@ -78,5 +78,8 @@
         select count(*) from anchor_online where is_online = 1 and anchor_id in
         (select anchor_id from struc_manage where ${levelIdName} = #{levelId})
     </select>
+    <select id="getTeamIdByAnchorId" resultType="java.lang.Integer">
+        select team_id from struc_manage where anchor_id = #{anchorId}
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.zzz.service;
 
 import com.zzz.model.HistoryDatas.TeamHistoryData;
+import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
 
 import java.util.Date;
@@ -17,4 +18,6 @@ public interface TeamDataService {
     Integer getHistoryDataNum(int teamId, Date begin, Date end);
 
     TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime);
+
+    List<AnchorOnlineData> getAnchorOnlineRank(int levelId);
 }

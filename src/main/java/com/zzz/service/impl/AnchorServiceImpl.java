@@ -110,6 +110,11 @@ public class AnchorServiceImpl implements AnchorService {
         return anchorDao.getOnlineAnchorNum(getLevelIdName(role), levelId);
     }
 
+    @Override
+    public Integer getTeamIdByAnchorId(int anchorId) {
+        return anchorDao.getTeamIdByAnchorId(anchorId);
+    }
+
     private static String getLevelIdName(int role){
         if(role == 1){
             return "total_id";

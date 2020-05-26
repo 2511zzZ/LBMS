@@ -25,4 +25,10 @@
         (select team_id from struc_manage where group_id = #{groupId} group by team_id)
         and time = #{datetime}
     </select>
+    <select id="getTeamOnlineRank" resultType="com.zzz.model.OnlineDatas.TeamOnlineData">
+        select * from team_realtime where time =
+        (select time from team_realtime where time &lt;= NOW() ORDER BY time desc limit 1)
+        and team_id in
+        (select team_id from struc_manage where group_id = #{levelId} group by team_id)
+    </select>
 </mapper>

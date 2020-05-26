@@ -24,4 +24,6 @@ public interface AnchorService {
     List<Integer> getAnchorIds();
 
     Integer getOnlineAnchorNum(SysUser user);
+
+    Integer getTeamIdByAnchorId(int anchorId);
 }

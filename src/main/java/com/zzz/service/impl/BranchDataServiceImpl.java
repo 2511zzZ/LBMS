@@ -3,6 +3,7 @@ package com.zzz.service.impl;
 import com.zzz.dao.BranchDataDao;
 import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
+import com.zzz.model.OnlineDatas.GroupOnlineData;
 import com.zzz.service.BranchDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class BranchDataServiceImpl implements BranchDataService {
     @Override
     public BranchOnlineData calBranchRealtimeDataFromGroups(int branchId, Date datetime) {
         return branchDataDao.calBranchRealtimeDataFromGroups(branchId, datetime);
+    }
+
+    @Override
+    public List<GroupOnlineData> getGroupOnlineRank(int levelId) {
+        return branchDataDao.getGroupOnlineRank(levelId);
     }
 }

@@ -1,6 +1,7 @@
 package com.zzz.dao;
 
 import com.zzz.model.HistoryDatas.TeamHistoryData;
+import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,6 @@ public interface TeamDataDao {
     Integer getHistoryDataNum(int teamId, Date begin, Date end);
 
     TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime);
+
+    List<AnchorOnlineData> getAnchorOnlineRank(int levelId);
 }

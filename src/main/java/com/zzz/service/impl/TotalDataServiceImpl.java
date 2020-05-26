@@ -67,4 +67,9 @@ public class TotalDataServiceImpl implements TotalDataService {
     public List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end) {
         return totalDataDao.getBranchHistoryRank(begin, end);
     }
+
+    @Override
+    public List<BranchOnlineData> getBranchOnlineRank(Integer totalId) {
+        return totalDataDao.getBranchOnlineRankById(totalId);
+    }
 }

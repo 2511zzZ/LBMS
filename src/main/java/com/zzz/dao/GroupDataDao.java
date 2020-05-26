@@ -2,6 +2,7 @@ package com.zzz.dao;
 
 import com.zzz.model.HistoryDatas.GroupHistoryData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
+import com.zzz.model.OnlineDatas.TeamOnlineData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -18,4 +19,6 @@ public interface GroupDataDao {
     Integer getHistoryDataNum(int groupId, Date begin, Date end);
 
     GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime);
+
+    List<TeamOnlineData> getTeamOnlineRank(int levelId);
 }

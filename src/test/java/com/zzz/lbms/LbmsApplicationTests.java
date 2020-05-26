@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.HashSet;
 import java.util.Set;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class LbmsApplicationTests {
 
     @Autowired
@@ -40,6 +40,6 @@ class LbmsApplicationTests {
     void quartzTest() throws SchedulerException, InterruptedException {
         System.out.println("定时任务开始");
         quartzScheduler.startJob();
-        Thread.sleep(60000);
+        Thread.sleep(60 * 60 * 1000);
     }
 }

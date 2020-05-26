@@ -2,6 +2,7 @@ package com.zzz.service.impl;
 
 import com.zzz.dao.TeamDataDao;
 import com.zzz.model.HistoryDatas.TeamHistoryData;
+import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
 import com.zzz.service.TeamDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,10 @@ public class TeamDataServiceImpl implements TeamDataService {
     @Override
     public TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime) {
         return teamDataDao.calTeamRealtimeDataFromAnchors(teamId, datetime);
+    }
+
+    @Override
+    public List<AnchorOnlineData> getAnchorOnlineRank(int levelId) {
+        return teamDataDao.getAnchorOnlineRank(levelId);
     }
 }

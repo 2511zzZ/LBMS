@@ -71,6 +71,7 @@ public class BranchDataController {
 
         return Results.success(ResponseCode.SUCCESS, branchDataService.getBranchHistoryData(branchId, date));
     }
+
     @RequestMapping(value = "/historys", method = RequestMethod.GET)
     public Results<BranchHistoryData> getBranchHistoryData(@RequestParam int branchId,
                                                      @RequestParam String dateBeginStr,
@@ -95,4 +96,5 @@ public class BranchDataController {
         int total = branchDataService.getHistoryDataNum(branchId, begin, end);
         return Results.success(ResponseCode.SUCCESS, total, branchDataService.getBranchHistoryData(branchId, begin, end, page, pageSize));
     }
+
 }

@@ -111,8 +111,8 @@ public class AlarmServiceImpl implements AlarmService {
             for(AnchorAlarm anchorAlarm: doneAnchorAlarms){
                 avgDealCostSum += (anchorAlarm.getEndTime().getTime() - anchorAlarm.getStartTime().getTime())/1000;
             }
+            avgDealCost = avgDealCostSum/doneAnchorAlarms.size();
         }
-        avgDealCost = avgDealCostSum/doneAnchorAlarms.size();
         return new AlarmOverview(waitingNum, doneNum, avgDealCost);
     }
 

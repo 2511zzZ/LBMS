@@ -2,6 +2,7 @@ package com.zzz.service;
 
 import com.zzz.model.HistoryDatas.GroupHistoryData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
+import com.zzz.model.OnlineDatas.TeamOnlineData;
 
 import java.util.Date;
 import java.util.List;
@@ -17,4 +18,6 @@ public interface GroupDataService {
     Integer getHistoryDataNum(int groupId, Date begin, Date end);
 
     GroupOnlineData calGroupRealtimeDataFromTeams(int groupId, Date datetime);
+
+    List<TeamOnlineData> getTeamOnlineRank(int levelId);
 }

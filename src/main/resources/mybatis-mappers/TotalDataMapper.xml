@@ -44,4 +44,10 @@
         from branch_history
         where date BETWEEN #{begin} and #{end} GROUP BY branch_id
     </select>
+    <select id="getBranchOnlineRankById" resultType="com.zzz.model.OnlineDatas.BranchOnlineData">
+        select * from branch_realtime where time =
+        (select time from branch_realtime where time &lt;= NOW() ORDER BY time desc limit 1)
+        and branch_id in
+        (select branch_id from struc_manage group by branch_id)
+    </select>
 </mapper>

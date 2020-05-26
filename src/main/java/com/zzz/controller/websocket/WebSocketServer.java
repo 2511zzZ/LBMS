@@ -37,12 +37,10 @@ public class WebSocketServer {
         if(webSocketMap.containsKey(userId)){
             webSocketMap.remove(userId);
             webSocketMap.put(userId,this);
-            //加入set中
         }else{
             webSocketMap.put(userId,this);
-            //加入set中
-            addOnlineCount();
             //在线数加1
+            addOnlineCount();
         }
 
         log.info("用户连接:"+userId+",当前在线人数为:" + getOnlineCount());

@@ -45,4 +45,6 @@ public interface AnchorDao {
     void fakeAnchorOnlineData(int anchorId, int isOnline, Date datetime);
 
     Integer getOnlineAnchorNum(String levelIdName, Integer levelId);
+
+    Integer getTeamIdByAnchorId(int anchorId);
 }
