@@ -8,5 +8,6 @@ public class Group {
     private int groupId;
     private String groupName;
     private int employeeId;
+    private String employeeName;
 
 }

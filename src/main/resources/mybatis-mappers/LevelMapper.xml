@@ -81,7 +81,7 @@
     </select>
 
     <select id="getTotal" resultType="com.zzz.model.levels.Total">
-        select * from struc_total
+        select *,(select name from sys_user_details where role = 1) as employeeName from struc_total
     </select>
     <select id="getTeamIds" resultType="java.lang.Integer">
         select team_id from struc_manage group by team_id
@@ -98,13 +98,21 @@
     </select>
 
     <select id="getTeamsByUser" resultType="com.zzz.model.levels.Team">
-        select * from struc_team where team_id in (select team_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+        select *,(select name from sys_user_details as t2 where t2.employee_id = t1.employee_id) as employeeName
+        from struc_team as t1 where team_id in
+        (select team_id from struc_manage where ${levelIdName} = #{levelId} group by team_id) limit #{offset}, #{limit}
+<!--        select * from struc_team where team_id in (select team_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}-->
     </select>
     <select id="getGroupsByUser" resultType="com.zzz.model.levels.Group">
-        select * from struc_group where group_id in (select group_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+        select *,(select name from sys_user_details as t2 where t2.employee_id = t1.employee_id) as employeeName
+        from struc_group as t1 where group_id in
+        (select group_id from struc_manage where ${levelIdName} = #{levelId} group by group_id) limit #{offset}, #{limit}
+<!--        select * from struc_group where group_id in (select group_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}-->
     </select>
     <select id="getBranchsByUser" resultType="com.zzz.model.levels.Branch">
-        select * from struc_branch where branch_id in (select branch_id from struc_manage where ${levelIdName} = #{levelId}) limit #{offset}, #{limit}
+        select *,(select name from sys_user_details as t2 where t2.employee_id = t1.employee_id) as employeeName
+        from struc_branch as t1 where branch_id in
+        (select branch_id from struc_manage where ${levelIdName} = #{levelId} group by branch_id) limit #{offset}, #{limit}
     </select>
     <select id="countTeam" resultType="java.lang.Integer">
         select count(*) from struc_team where team_id in (select team_id from struc_manage where ${levelIdName} = #{levelId})

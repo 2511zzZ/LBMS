@@ -8,5 +8,6 @@ public class Branch {
     private int branchId;
     private String branchName;
     private int employeeId;
+    private String employeeName;
 
 }
