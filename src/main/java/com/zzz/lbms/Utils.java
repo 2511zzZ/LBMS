@@ -36,6 +36,15 @@ public class Utils {
 
     }
 
+    public static String generateExcelName(String level, Integer levelId, Date datetime){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(datetime);
+        String year = String.valueOf(cal.get(java.util.Calendar.YEAR)%100);
+        String month = datePaddingZero(cal.get(java.util.Calendar.MONTH) + 1);
+        return year + month + levelId + getLevelName(level) + "报表";
+
+    }
+
     public static String DoMD5(String password){
         String encryptedPassword;
         try {
@@ -52,6 +61,7 @@ public class Utils {
     private static String datePaddingZero(int i){
         return i>=10 ? ""+i : "0"+i;
     }
+
     private static String anchorIdPaddingZero(int anchorId){
         if(anchorId<10){
             return "0000" + anchorId;
@@ -66,5 +76,14 @@ public class Utils {
             return "0" + anchorId;
         }
         return anchorId+"";
+    }
+
+    private static String getLevelName(String level){
+        if(level.equals("total")){return "总览";}
+        if(level.equals("branch")){return "分支";}
+        if(level.equals("group")){return "大组";}
+        if(level.equals("team")){return "小组";}
+        if(level.equals("anchor")){return "主播";}
+        return "";
     }
 }
