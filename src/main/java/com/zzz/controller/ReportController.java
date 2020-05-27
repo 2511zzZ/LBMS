@@ -36,7 +36,7 @@ public class ReportController {
                                          @RequestParam Integer levelId,
                                          @RequestParam String datetimeStr,
                                          @RequestParam String type,
-                                         @RequestParam String password) throws ParseException, ForBiddenException, IOException, DocumentException {
+                                         @RequestParam(required = false) String password) throws ParseException, ForBiddenException, IOException, DocumentException {
 
         Date datetime = new SimpleDateFormat("yyyy-MM-dd").parse(datetimeStr);
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();

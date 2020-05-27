@@ -44,7 +44,10 @@ public class Excel2Pdf extends PdfTool{
     public void convert(String password) throws DocumentException, MalformedURLException, IOException {
         getDocument().setPageSize(PageSize.A4.rotate());
         PdfWriter writer = PdfWriter.getInstance(getDocument(), os);
-        writer.setEncryption(password.getBytes(), password.getBytes(),  PdfWriter.ALLOW_COPY, PdfWriter.ENCRYPTION_AES_128);
+        // 有密码则加密
+        if(password!=null){
+            writer.setEncryption(password.getBytes(), password.getBytes(),  PdfWriter.ALLOW_COPY, PdfWriter.ENCRYPTION_AES_128);
+        }
         writer.setPageEvent(new PDFPageEvent());
         //Open document
         getDocument().open();

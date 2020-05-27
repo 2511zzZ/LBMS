@@ -39,7 +39,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String getExcelFile(String level, Integer levelId, Date datetime) {
         // todo 根据项目根目录生成path
-        return path + generateExcelAndGetName(level, levelId, datetime);
+        return "http://127.0.0.1:8080/reportFiles/" + generateExcelAndGetName(level, levelId, datetime);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ReportServiceImpl implements ReportService {
         Excel2Pdf excel2Pdf = new Excel2Pdf(Collections.singletonList(new ExcelObject(in)), new FileOutputStream(fileOut(fileIn)));
         excel2Pdf.convert(password);
 //        String pdfFileName = ("D:\\Projects\\LBMS\\target\\classes\\static\\reportFiles\\" + excelFileName).replace("xls", "pdf");
-        return fileIn.replace("xls", "pdf");
+        return "http://127.0.0.1:8080/reportFiles/" + excelFileName.replace("xls", "pdf");
     }
 
     private String generateExcelAndGetName(String level, Integer levelId, Date datetime){
