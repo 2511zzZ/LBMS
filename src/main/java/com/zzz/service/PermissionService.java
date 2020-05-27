@@ -13,4 +13,6 @@ public interface PermissionService {
     boolean hasBranchPermission(SysUser user, int branchId);
 
     boolean hasTotalPermission(SysUser user, int totalId);
+
+    boolean hasPermission(SysUser user, String level, int levelId);
 }

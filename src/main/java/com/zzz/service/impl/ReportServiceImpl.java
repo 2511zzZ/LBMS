@@ -1,7 +1,10 @@
 package com.zzz.service.impl;
 
+import com.itextpdf.text.DocumentException;
 import com.zzz.lbms.Reporter;
 import com.zzz.lbms.Utils;
+import com.zzz.lbms.pdf.Excel2Pdf;
+import com.zzz.lbms.pdf.ExcelObject;
 import com.zzz.model.HistoryDatas.*;
 import com.zzz.service.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -12,10 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -34,15 +34,35 @@ public class ReportServiceImpl implements ReportService {
     @Resource
     AnchorDataService anchorDataService;
 
+    private static String path = "D:\\Projects\\LBMS\\src\\main\\resources\\static\\reportFiles\\";
+
     @Override
     public String getExcelFile(String level, Integer levelId, Date datetime) {
+        // todo 根据项目根目录生成path
+        return path + generateExcelAndGetName(level, levelId, datetime);
+    }
+
+    @Override
+    public String getPdfFile(String level, Integer levelId, Date datetime, String password) throws IOException, DocumentException {
+
+        String excelFileName = generateExcelAndGetName(level, levelId, datetime);
+        String fileIn = path + excelFileName;
+
+        InputStream in = new FileInputStream(fileIn);
+//        this.getClass().getResourceAsStream(excelFileName);
+        Excel2Pdf excel2Pdf = new Excel2Pdf(Collections.singletonList(new ExcelObject(in)), new FileOutputStream(fileOut(fileIn)));
+        excel2Pdf.convert(password);
+//        String pdfFileName = ("D:\\Projects\\LBMS\\target\\classes\\static\\reportFiles\\" + excelFileName).replace("xls", "pdf");
+        return fileIn.replace("xls", "pdf");
+    }
+
+    private String generateExcelAndGetName(String level, Integer levelId, Date datetime){
 
         Logger logger = LoggerFactory.getLogger(ReportServiceImpl.class);
 
 
-        // todo 根据项目根目录生成path
-        String reportPath = "D:\\Projects\\LBMS\\src\\main\\resources\\static\\reportFiles";
 
+        // todo 若文件已存在则直接返回
         String fileName = Utils.generateExcelName(level, levelId, datetime) + ".xls";
         logger.info("生成Excel文件[{}]", fileName);
 
@@ -69,7 +89,7 @@ public class ReportServiceImpl implements ReportService {
         HSSFWorkbook excel = Reporter.getExcel(excl, "历史数据");
 
         //保存在本地
-        File file = new File(reportPath);
+        File file = new File(path);
         OutputStream stream = null;
         try {
             stream = new FileOutputStream(new File(file, fileName));
@@ -79,12 +99,7 @@ public class ReportServiceImpl implements ReportService {
             e.printStackTrace();
         }
 
-        return reportPath + "\\" + fileName;
-    }
-
-    @Override
-    public String getPdfFile(String level, Integer levelId, Date datetime, String password) {
-        return null;
+        return fileName;
     }
 
     private Map<String, List> getExcelMap(List historyDataList, String level) {
@@ -148,5 +163,20 @@ public class ReportServiceImpl implements ReportService {
     static class BackObject{
         public Date first;
         public Date last;
+    }
+
+    private File fileOut(String fileIn) throws UnsupportedEncodingException {
+//        String uri = this.getClass().getResource(fileIn).getPath();
+//        String fileOut = uri.replaceAll(".xls$|.xlsx$", ".pdf");
+//        System.out.println(fileIn);
+//        // utf-8编码转化为汉字
+//        Pattern pattern = Pattern.compile("(?<=1).*(?=.)");
+//        Matcher m = pattern.matcher(fileOut);
+//        while(m.find()){
+//            fileOut = m.replaceAll(URLDecoder.decode(m.group(), "UTF-8"));
+//        }
+//        System.out.println(fileOut);
+        String fileOut = fileIn.replace(".xls", ".pdf");
+        return new File(fileOut);
     }
 }

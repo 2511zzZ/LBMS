@@ -80,7 +80,7 @@ public class Utils {
 
     private static String getLevelName(String level){
         if(level.equals("total")){return "总览";}
-        if(level.equals("branch")){return "分支";}
+        if(level.equals("branch")){return "分区";}
         if(level.equals("group")){return "大组";}
         if(level.equals("team")){return "小组";}
         if(level.equals("anchor")){return "主播";}

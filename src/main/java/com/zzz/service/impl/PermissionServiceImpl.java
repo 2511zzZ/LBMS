@@ -91,4 +91,24 @@ public class PermissionServiceImpl implements PermissionService {
     public boolean hasTotalPermission(SysUser user, int totalId) {
         return user.getRole() == 1;
     }
+
+    @Override
+    public boolean hasPermission(SysUser user, String level, int levelId) {
+        if(level.equals("anchor")){
+            return hasPermission(user, levelId);
+        }
+        if(level.equals("team")){
+            return hasTeamPermission(user, levelId);
+        }
+        if(level.equals("group")){
+            return hasGroupPermission(user, levelId);
+        }
+        if(level.equals("branch")){
+            return hasBranchPermission(user, levelId);
+        }
+        if(level.equals("total")){
+            return hasTotalPermission(user, levelId);
+        }
+        return false;
+    }
 }
