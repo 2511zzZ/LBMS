@@ -31,4 +31,15 @@
         and team_id in
         (select team_id from struc_manage where group_id = #{levelId} group by team_id)
     </select>
+    <select id="getTeamHistoryRank" resultType="com.zzz.model.HistoryDatas.TeamHistoryData">
+        select
+        team_id as team_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen
+        from team_history as t
+        where t.date BETWEEN #{begin} and #{end}
+        GROUP BY t.team_id
+        having team_id in (select team_id from struc_manage where group_id = #{groupId} group by team_id)
+    </select>
 </mapper>

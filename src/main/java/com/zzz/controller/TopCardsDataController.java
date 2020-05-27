@@ -1,5 +1,10 @@
 package com.zzz.controller;
 
+import com.zzz.exception.BadDateFormatException;
+import com.zzz.model.HistoryDatas.AnchorHistoryData;
+import com.zzz.model.HistoryDatas.BranchHistoryData;
+import com.zzz.model.HistoryDatas.GroupHistoryData;
+import com.zzz.model.HistoryDatas.TeamHistoryData;
 import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
@@ -17,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/online")
 public class TopCardsDataController {
 
     @Autowired
@@ -40,7 +47,7 @@ public class TopCardsDataController {
     @Autowired
     private TeamDataService teamDataService;
 
-    @RequestMapping(value = "/data", method = RequestMethod.GET)
+    @RequestMapping(value = "/online/data", method = RequestMethod.GET)
     public Results<TopCardsData> getLastOnlineData(){
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
@@ -59,8 +66,8 @@ public class TopCardsDataController {
     }
 
 
-    @RequestMapping(value = "/rank", method = RequestMethod.GET)
-    public Results getGroupOnlineRank(@RequestParam int levelId, @RequestParam String level){
+    @RequestMapping(value = "/online/rank", method = RequestMethod.GET)
+    public Results getOnlineRank(@RequestParam int levelId, @RequestParam String level){
         List<BranchOnlineData> branchOnlineData;
         List<GroupOnlineData> groupOnlineData;
         List<TeamOnlineData> teamOnlineData;
@@ -81,6 +88,44 @@ public class TopCardsDataController {
             case "anchor":
                 anchorOnlineData = teamDataService.getAnchorOnlineRank(anchorService.getTeamIdByAnchorId(levelId));
                 return Results.success(ResponseCode.SUCCESS, anchorOnlineData.size(), anchorOnlineData);
+        }
+        return Results.success(ResponseCode.SUCCESS, 0, null);
+    }
+
+    @RequestMapping(value = "/history/rank", method = RequestMethod.GET)
+    public Results getHistoryRank(@RequestParam String dateBeginStr,
+                                  @RequestParam String dateEndStr2,
+                                  @RequestParam int levelId,
+                                  @RequestParam String level) throws BadDateFormatException {
+
+        Date begin,end;
+        try{
+            begin = new SimpleDateFormat("yyyy-MM-dd").parse(dateBeginStr);
+            end = new SimpleDateFormat("yyyy-MM-dd").parse(dateEndStr2);
+        }catch (ParseException e){
+            throw new BadDateFormatException();
+        }
+
+        List<BranchHistoryData> branchHistoryData;
+        List<GroupHistoryData> groupHistoryData;
+        List<TeamHistoryData> teamHistoryData;
+        List<AnchorHistoryData> anchorHistoryData;
+        switch (level) {
+            case "total":
+                branchHistoryData = totalDataService.getBranchHistoryRank(begin,end,levelId);
+                return Results.success(ResponseCode.SUCCESS, branchHistoryData.size(), branchHistoryData);
+            case "branch":
+                groupHistoryData = branchDataService.getGroupHistoryRank(begin,end,levelId);
+                return Results.success(ResponseCode.SUCCESS, groupHistoryData.size(), groupHistoryData);
+            case "group":
+                teamHistoryData = groupDataService.getTeamHistoryRank(begin,end,levelId);
+                return Results.success(ResponseCode.SUCCESS, teamHistoryData.size(), teamHistoryData);
+            case "team":
+                anchorHistoryData = teamDataService.getAnchorHistoryRank(begin,end,levelId);
+                return Results.success(ResponseCode.SUCCESS, anchorHistoryData.size(), anchorHistoryData);
+            case "anchor":
+                anchorHistoryData = teamDataService.getAnchorHistoryRank(begin,end,anchorService.getTeamIdByAnchorId(levelId));
+                return Results.success(ResponseCode.SUCCESS, anchorHistoryData.size(), anchorHistoryData);
         }
         return Results.success(ResponseCode.SUCCESS, 0, null);
     }

@@ -2,6 +2,7 @@ package com.zzz.service.impl;
 
 import com.zzz.dao.BranchDataDao;
 import com.zzz.model.HistoryDatas.BranchHistoryData;
+import com.zzz.model.HistoryDatas.GroupHistoryData;
 import com.zzz.model.OnlineDatas.BranchOnlineData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
 import com.zzz.service.BranchDataService;
@@ -50,5 +51,10 @@ public class BranchDataServiceImpl implements BranchDataService {
     @Override
     public List<GroupOnlineData> getGroupOnlineRank(int levelId) {
         return branchDataDao.getGroupOnlineRank(levelId);
+    }
+
+    @Override
+    public List<GroupHistoryData> getGroupHistoryRank(Date begin, Date end, int branchId) {
+        return branchDataDao.getGroupHistoryRank(begin,end,branchId);
     }
 }

@@ -29,4 +29,6 @@ public interface TotalDataService {
     List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end);
 
     List<BranchOnlineData> getBranchOnlineRank(Integer totalId);
+
+    List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end, int levelId);
 }

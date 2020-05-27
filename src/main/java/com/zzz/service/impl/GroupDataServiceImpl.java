@@ -2,6 +2,7 @@ package com.zzz.service.impl;
 
 import com.zzz.dao.GroupDataDao;
 import com.zzz.model.HistoryDatas.GroupHistoryData;
+import com.zzz.model.HistoryDatas.TeamHistoryData;
 import com.zzz.model.OnlineDatas.GroupOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
 import com.zzz.service.GroupDataService;
@@ -50,5 +51,10 @@ public class GroupDataServiceImpl implements GroupDataService {
     @Override
     public List<TeamOnlineData> getTeamOnlineRank(int levelId) {
         return groupDataDao.getTeamOnlineRank(levelId);
+    }
+
+    @Override
+    public List<TeamHistoryData> getTeamHistoryRank(Date begin, Date end, int levelId) {
+        return groupDataDao.getTeamHistoryRank(begin, end, levelId);
     }
 }

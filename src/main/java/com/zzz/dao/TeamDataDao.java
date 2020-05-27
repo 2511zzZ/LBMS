@@ -1,5 +1,6 @@
 package com.zzz.dao;
 
+import com.zzz.model.HistoryDatas.AnchorHistoryData;
 import com.zzz.model.HistoryDatas.TeamHistoryData;
 import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
@@ -21,4 +22,6 @@ public interface TeamDataDao {
     TeamOnlineData calTeamRealtimeDataFromAnchors(int teamId, Date datetime);
 
     List<AnchorOnlineData> getAnchorOnlineRank(int levelId);
+
+    List<AnchorHistoryData> getAnchorHistoryRank(Date begin, Date end, int teamId);
 }

@@ -1,6 +1,7 @@
 package com.zzz.service.impl;
 
 import com.zzz.dao.TeamDataDao;
+import com.zzz.model.HistoryDatas.AnchorHistoryData;
 import com.zzz.model.HistoryDatas.TeamHistoryData;
 import com.zzz.model.OnlineDatas.AnchorOnlineData;
 import com.zzz.model.OnlineDatas.TeamOnlineData;
@@ -50,5 +51,10 @@ public class TeamDataServiceImpl implements TeamDataService {
     @Override
     public List<AnchorOnlineData> getAnchorOnlineRank(int levelId) {
         return teamDataDao.getAnchorOnlineRank(levelId);
+    }
+
+    @Override
+    public List<AnchorHistoryData> getAnchorHistoryRank(Date begin, Date end, int levelId) {
+        return teamDataDao.getAnchorHistoryRank(begin, end, levelId);
     }
 }

@@ -50,4 +50,15 @@
         and branch_id in
         (select branch_id from struc_manage group by branch_id)
     </select>
+    <select id="getBranchHistoryRank2" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
+        select
+        branch_id as branch_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen
+        from branch_history as t
+        where t.date BETWEEN #{begin} and #{end}
+        GROUP BY t.branch_id
+        having branch_id in (select branch_id from struc_manage where 1 = #{levelId} group by branch_id)
+    </select>
 </mapper>
