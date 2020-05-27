@@ -49,11 +49,6 @@ public class TotalDataServiceImpl implements TotalDataService {
     }
 
     @Override
-    public List<BranchOnlineData> getBranchOnlineRank() {
-        return totalDataDao.getBranchOnlineRank();
-    }
-
-    @Override
     public Integer getSumWatch() {
         return totalDataDao.getSumWatch();
     }
@@ -64,17 +59,12 @@ public class TotalDataServiceImpl implements TotalDataService {
     }
 
     @Override
-    public List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end) {
-        return totalDataDao.getBranchHistoryRank(begin, end);
-    }
-
-    @Override
     public List<BranchOnlineData> getBranchOnlineRank(Integer totalId) {
-        return totalDataDao.getBranchOnlineRankById(totalId);
+        return totalDataDao.getBranchOnlineRank(totalId);
     }
 
     @Override
     public List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end, int levelId) {
-        return totalDataDao.getBranchHistoryRank2(begin, end, levelId);
+        return totalDataDao.getBranchHistoryRank(begin, end, levelId);
     }
 }

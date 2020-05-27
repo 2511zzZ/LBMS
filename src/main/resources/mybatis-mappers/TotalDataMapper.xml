@@ -25,32 +25,19 @@
         (select branch_id from struc_manage group by branch_id)
         and time = #{datetime}
     </select>
-    <select id="getBranchOnlineRank" resultType="com.zzz.model.OnlineDatas.BranchOnlineData">
-        select * from branch_realtime where time =
-        (select time from branch_realtime where time &lt;= NOW() ORDER BY time desc limit 1)
-    </select>
     <select id="getSumWatch" resultType="java.lang.Integer">
         select watch_num from total_realtime ORDER BY time desc limit 1
     </select>
     <select id="getLastOnlineData" resultType="com.zzz.model.OnlineDatas.TotalOnlineData">
         select * from total_realtime ORDER BY time desc limit 1
     </select>
-    <select id="getBranchHistoryRank" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
-        select
-        branch_id as branch_id,
-        sum(watch_num) as watch_num,
-        sum(gift) as gift,
-        sum(bullet_screen) as bullet_screen
-        from branch_history
-        where date BETWEEN #{begin} and #{end} GROUP BY branch_id
-    </select>
-    <select id="getBranchOnlineRankById" resultType="com.zzz.model.OnlineDatas.BranchOnlineData">
+    <select id="getBranchOnlineRank" resultType="com.zzz.model.OnlineDatas.BranchOnlineData">
         select * from branch_realtime where time =
         (select time from branch_realtime where time &lt;= NOW() ORDER BY time desc limit 1)
         and branch_id in
         (select branch_id from struc_manage group by branch_id)
     </select>
-    <select id="getBranchHistoryRank2" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
+    <select id="getBranchHistoryRank" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
         select
         branch_id as branch_id,
         sum(watch_num) as watch_num,

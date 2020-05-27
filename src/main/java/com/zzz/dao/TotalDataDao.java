@@ -21,15 +21,11 @@ public interface TotalDataDao {
 
     TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
 
-    List<BranchOnlineData> getBranchOnlineRank();
-
     Integer getSumWatch();
 
     TotalOnlineData getLastOnlineData();
 
-    List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end);
+    List<BranchOnlineData> getBranchOnlineRank(Integer totalId);
 
-    List<BranchOnlineData> getBranchOnlineRankById(Integer totalId);
-
-    List<BranchHistoryData> getBranchHistoryRank2(Date begin, Date end, int levelId);
+    List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end, int levelId);
 }

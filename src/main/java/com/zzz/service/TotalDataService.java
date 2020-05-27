@@ -20,13 +20,9 @@ public interface TotalDataService {
 
     TotalOnlineData calTotalRealtimeDataFromBranchs(int totalId, Date datetime);
 
-    List<BranchOnlineData> getBranchOnlineRank();
-
     Integer getSumWatch();
 
     TotalOnlineData getLastOnlineData();
-
-    List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end);
 
     List<BranchOnlineData> getBranchOnlineRank(Integer totalId);
 
