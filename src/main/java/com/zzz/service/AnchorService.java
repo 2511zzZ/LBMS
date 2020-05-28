@@ -26,4 +26,6 @@ public interface AnchorService {
     Integer getOnlineAnchorNum(SysUser user);
 
     Integer getTeamIdByAnchorId(int anchorId);
+
+    void banAnchor(int anchorId);
 }

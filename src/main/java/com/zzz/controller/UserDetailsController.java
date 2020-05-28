@@ -1,5 +1,6 @@
 package com.zzz.controller;
 
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
 import com.zzz.result.ResponseCode;
@@ -37,9 +38,12 @@ public class UserDetailsController {
     }
 
     @RequestMapping(value="",method = RequestMethod.GET)
-    public Results<SysUserDetails> getUserDetails(){
+    public Results<SysUserDetails> getUserDetails() throws ForBiddenException {
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(user == null){
+            throw new ForBiddenException("用户身份已过期，请重新登录");
+        }
         int employeeId = user.getEmployeeId();
 
         SysUserDetails userDetails = userService.getUser(employeeId);

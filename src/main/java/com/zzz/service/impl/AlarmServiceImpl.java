@@ -120,4 +120,14 @@ public class AlarmServiceImpl implements AlarmService {
     public void deleteAlert(String alarmId) {
         alarmDao.deleteAlert(alarmId);
     }
+
+    @Override
+    public AnchorAlarmTransWay getAlarmTransWay(String alarmId) {
+        AnchorAlarm alarm = alarmDao.getAlarmById(alarmId);
+        Integer status = alarm.getStatus();
+        List<AnchorAlarmTrans> anchorAlarmTrans = alarmDao.getAnchorAlarmTrans(alarmId);
+        Integer finalDealLevel = alarm.getDealRole();
+        String finalDealName = alarm.getFinalDealName();
+        return new AnchorAlarmTransWay(alarmId, status, finalDealLevel, finalDealName, anchorAlarmTrans);
+    }
 }

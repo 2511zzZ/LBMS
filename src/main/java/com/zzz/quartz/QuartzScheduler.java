@@ -15,9 +15,9 @@ public class QuartzScheduler {
     // 开始执行所有任务
     public void startJob() throws SchedulerException {
         startJob1(scheduler);
-        startJob2(scheduler);
-        startJob3(scheduler);
-        startJob4(scheduler);
+//        startJob2(scheduler);
+//        startJob3(scheduler);
+//        startJob4(scheduler);
         scheduler.start();
     }
 

@@ -47,4 +47,6 @@ public interface AnchorDao {
     Integer getOnlineAnchorNum(String levelIdName, Integer levelId);
 
     Integer getTeamIdByAnchorId(int anchorId);
+
+    void banAnchorByAlarm(int anchorId);
 }

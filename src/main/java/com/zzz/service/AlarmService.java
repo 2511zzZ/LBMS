@@ -3,6 +3,7 @@ package com.zzz.service;
 import com.zzz.model.AlarmOverview;
 import com.zzz.model.AnchorAlarm;
 import com.zzz.model.AnchorAlarmTrans;
+import com.zzz.model.AnchorAlarmTransWay;
 
 import java.util.Date;
 import java.util.List;
@@ -31,4 +32,6 @@ public interface AlarmService {
     AlarmOverview getAlarmOverview(Integer employeeId);
 
     void deleteAlert(String alarmId);
+
+    AnchorAlarmTransWay getAlarmTransWay(String alarmId);
 }

@@ -5,6 +5,7 @@ import com.zzz.exception.BadOperationException;
 import com.zzz.exception.ForBiddenException;
 import com.zzz.model.AlarmOverview;
 import com.zzz.model.AnchorAlarmTrans;
+import com.zzz.model.AnchorAlarmTransWay;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
@@ -98,6 +99,11 @@ public class AlarmController {
     public Results deleteAlert(@RequestParam String alarmId) {
         alarmService.deleteAlert(alarmId);
         return Results.success();
+    }
+
+    @RequestMapping(value = "/transform", method = RequestMethod.GET)
+    public Results<AnchorAlarmTransWay> getAlarmTransWay(@RequestParam String alarmId) {
+        return Results.success(ResponseCode.SUCCESS, alarmService.getAlarmTransWay(alarmId));
     }
 
     // 警报测试接口

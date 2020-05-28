@@ -7,6 +7,9 @@
     <insert id="fakeAnchorOnlineData">
         insert into anchor_online values (null, #{anchorId}, #{isOnline}, #{datetime})
     </insert>
+    <update id="banAnchorByAlarm">
+        insert into anchor_banned values (null, #{anchorId}, null, null, null)
+    </update>
 
     <select id="getTotalNum" resultType="java.lang.Integer">
         select count(*) from anchor

@@ -36,4 +36,8 @@ public interface AlarmDao {
     void deleteAlert(String alarmId);
 
     List<AnchorAlarmTrans> getUndoAlarms();
+
+    int getStatusByAlarm(String alarmId);
+
+    List<AnchorAlarmTrans> getAnchorAlarmTrans(String alarmId);
 }

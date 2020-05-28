@@ -5,6 +5,7 @@ import com.zzz.model.Anchor;
 import com.zzz.model.SysUser;
 import com.zzz.result.ResponseCode;
 import com.zzz.result.Results;
+import com.zzz.service.AlarmService;
 import com.zzz.service.AnchorService;
 import com.zzz.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,9 @@ public class AnchorController {
 
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private AlarmService alarmService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Results<Anchor> getAnchor(@RequestParam int anchorId) throws ForBiddenException {
@@ -68,6 +72,22 @@ public class AnchorController {
         }
 
         anchorService.banAnchor(anchorId, begin, end, reason);
+        return Results.success(ResponseCode.SUCCESS);
+    }
+
+    // todo 凑数的 待删除
+    @RequestMapping(value="/ban/alarm",method = RequestMethod.POST)
+    public Results banAnchorWithAlarmId(@RequestParam String alarmId){
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+
+        int anchorId = alarmService.getAnchorIdByAlarm(alarmId);
+
+        if(!permissionService.hasPermission(user,anchorId)){
+            return Results.failure(403, "未授权");
+        }
+
+        anchorService.banAnchor(anchorId);
         return Results.success(ResponseCode.SUCCESS);
     }
 

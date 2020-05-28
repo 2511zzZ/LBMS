@@ -1,6 +1,7 @@
 package com.zzz.controller;
 
 import com.zzz.exception.BadDateFormatException;
+import com.zzz.exception.ForBiddenException;
 import com.zzz.model.HistoryDatas.AnchorHistoryData;
 import com.zzz.model.HistoryDatas.BranchHistoryData;
 import com.zzz.model.HistoryDatas.GroupHistoryData;
@@ -48,8 +49,11 @@ public class TopCardsDataController {
     private TeamDataService teamDataService;
 
     @RequestMapping(value = "/online/data", method = RequestMethod.GET)
-    public Results<TopCardsData> getLastOnlineData(){
+    public Results<TopCardsData> getLastOnlineData() throws ForBiddenException {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        if(user == null){
+            throw new ForBiddenException("用户身份已过期，请重新登录");
+        }
 
         Integer onlineNum = anchorService.getOnlineAnchorNum(user);
 

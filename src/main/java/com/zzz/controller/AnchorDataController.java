@@ -47,6 +47,7 @@ public class AnchorDataController {
         }
 
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+
         if(!permissionService.hasPermission(user,anchorId)){
             throw new ForBiddenException();
         }

@@ -115,6 +115,11 @@ public class AnchorServiceImpl implements AnchorService {
         return anchorDao.getTeamIdByAnchorId(anchorId);
     }
 
+    @Override
+    public void banAnchor(int anchorId) {
+        anchorDao.banAnchorByAlarm(anchorId);
+    }
+
     private static String getLevelIdName(int role){
         if(role == 1){
             return "total_id";

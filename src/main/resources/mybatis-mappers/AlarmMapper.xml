@@ -77,4 +77,10 @@
         order by time desc) as t
         group by t.alarm_id
     </select>
+    <select id="getStatusByAlarm" resultType="java.lang.Integer">
+        select status from anchor_alarm where alarm_id = #{alarmId}
+    </select>
+    <select id="getAnchorAlarmTrans" resultType="com.zzz.model.AnchorAlarmTrans">
+        select * from anchor_alarm_trans where alarm_id = #{alarmId}
+    </select>
 </mapper>
