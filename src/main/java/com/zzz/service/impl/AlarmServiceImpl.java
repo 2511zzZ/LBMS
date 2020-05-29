@@ -130,4 +130,14 @@ public class AlarmServiceImpl implements AlarmService {
         String finalDealName = alarm.getFinalDealName();
         return new AnchorAlarmTransWay(alarmId, status, finalDealLevel, finalDealName, anchorAlarmTrans);
     }
+
+    @Override
+    public Integer getAlarmTransSetting() {
+        return alarmDao.getAlarmTransSetting();
+    }
+
+    @Override
+    public void setAlarmTransSetting(int transTime) {
+        alarmDao.setAlarmTransSetting(transTime);
+    }
 }

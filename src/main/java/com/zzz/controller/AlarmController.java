@@ -36,6 +36,9 @@ public class AlarmController {
     @RequestMapping(value="/settings", method = RequestMethod.POST)
     public Results setThresholdAndMaxNum(@RequestParam int newThreshold,
                                          @RequestParam int maxTipNum){
+        newThreshold = Math.max(newThreshold, 1);
+        newThreshold = Math.min(newThreshold, 30);
+        maxTipNum = Math.max(maxTipNum, 1);
         alarmService.setThresholdAndMaxNum(newThreshold, maxTipNum);
         return Results.success();
     }
@@ -104,6 +107,19 @@ public class AlarmController {
     @RequestMapping(value = "/transform", method = RequestMethod.GET)
     public Results<AnchorAlarmTransWay> getAlarmTransWay(@RequestParam String alarmId) {
         return Results.success(ResponseCode.SUCCESS, alarmService.getAlarmTransWay(alarmId));
+    }
+
+    @RequestMapping(value = "/transform/settings", method = RequestMethod.GET)
+    public Results<Integer> getAlarmTransSetting() {
+        return Results.success(ResponseCode.SUCCESS, alarmService.getAlarmTransSetting());
+    }
+
+    @RequestMapping(value = "/transform/settings", method = RequestMethod.POST)
+    public Results<Integer> setAlarmTransSetting(@RequestParam int transTime) {
+        transTime = Math.max(transTime, 1);
+        transTime = Math.min(transTime, 30);
+        alarmService.setAlarmTransSetting(transTime);
+        return Results.success(ResponseCode.SUCCESS);
     }
 
     // 警报测试接口

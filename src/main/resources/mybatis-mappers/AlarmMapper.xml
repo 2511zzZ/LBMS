@@ -38,6 +38,9 @@
         final_deal_id = #{employeeId}, final_deal_name = #{employeeName}, deal_role = #{role}
         where alarm_id = #{alarmId}
     </update>
+    <update id="setAlarmTransSetting">
+        update sys_settings set trans_time = #{transTime}
+    </update>
     <delete id="deleteAlert">
         update anchor_alarm_trans set is_delete = 1 where alarm_id = #{alarmId}
     </delete>
@@ -82,5 +85,8 @@
     </select>
     <select id="getAnchorAlarmTrans" resultType="com.zzz.model.AnchorAlarmTrans">
         select * from anchor_alarm_trans where alarm_id = #{alarmId}
+    </select>
+    <select id="getAlarmTransSetting" resultType="java.lang.Integer">
+        select trans_time from sys_settings
     </select>
 </mapper>

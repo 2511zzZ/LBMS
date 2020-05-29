@@ -28,4 +28,6 @@ public interface AnchorService {
     Integer getTeamIdByAnchorId(int anchorId);
 
     void banAnchor(int anchorId);
+
+    void changeAnchor(int anchorId, int roomId, String nickname);
 }

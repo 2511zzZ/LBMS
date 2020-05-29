@@ -49,6 +49,18 @@ public class AnchorController {
         return Results.success(ResponseCode.SUCCESS, anchorService.getAnchor(anchorId));
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public Results changeAnchor(@RequestParam int anchorId,
+                                @RequestParam int roomId,
+                                @RequestParam String nickname) throws ForBiddenException {
+        SysUser user = (SysUser)SecurityUtils.getSubject().getPrincipal();
+        if(!permissionService.hasPermission(user, anchorId)){
+            throw new ForBiddenException("权限不足");
+        }
+        anchorService.changeAnchor(anchorId, roomId, nickname);
+        return Results.success(ResponseCode.SUCCESS, "修改成功");
+    }
+
 
     @RequestMapping(value="/ban",method = RequestMethod.POST)
     public Results banAnchor(@RequestParam int anchorId,
@@ -82,6 +94,18 @@ public class AnchorController {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
         int anchorId = alarmService.getAnchorIdByAlarm(alarmId);
+
+        if(!permissionService.hasPermission(user,anchorId)){
+            return Results.failure(403, "未授权");
+        }
+
+        anchorService.banAnchor(anchorId);
+        return Results.success(ResponseCode.SUCCESS);
+    }
+    @RequestMapping(value="/ban/id",method = RequestMethod.POST)
+    public Results banAnchorWithId(@RequestParam int anchorId){
+
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
         if(!permissionService.hasPermission(user,anchorId)){
             return Results.failure(403, "未授权");

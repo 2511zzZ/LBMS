@@ -120,6 +120,11 @@ public class AnchorServiceImpl implements AnchorService {
         anchorDao.banAnchorByAlarm(anchorId);
     }
 
+    @Override
+    public void changeAnchor(int anchorId, int roomId, String nickname) {
+        anchorDao.changeAnchor(anchorId, roomId, nickname);
+    }
+
     private static String getLevelIdName(int role){
         if(role == 1){
             return "total_id";

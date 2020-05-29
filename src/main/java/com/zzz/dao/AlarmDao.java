@@ -40,4 +40,8 @@ public interface AlarmDao {
     int getStatusByAlarm(String alarmId);
 
     List<AnchorAlarmTrans> getAnchorAlarmTrans(String alarmId);
+
+    Integer getAlarmTransSetting();
+
+    void setAlarmTransSetting(int transTime);
 }

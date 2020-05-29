@@ -34,4 +34,8 @@ public interface AlarmService {
     void deleteAlert(String alarmId);
 
     AnchorAlarmTransWay getAlarmTransWay(String alarmId);
+
+    Integer getAlarmTransSetting();
+
+    void setAlarmTransSetting(int transTime);
 }

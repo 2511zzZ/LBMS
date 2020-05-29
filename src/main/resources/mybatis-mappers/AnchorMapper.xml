@@ -10,6 +10,9 @@
     <update id="banAnchorByAlarm">
         insert into anchor_banned values (null, #{anchorId}, null, null, null)
     </update>
+    <update id="changeAnchor">
+        update anchor set room_id = #{roomId}, nickname = #{nickname} where anchor_id = #{anchorId}
+    </update>
 
     <select id="getTotalNum" resultType="java.lang.Integer">
         select count(*) from anchor

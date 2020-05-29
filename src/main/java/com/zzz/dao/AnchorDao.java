@@ -49,4 +49,6 @@ public interface AnchorDao {
     Integer getTeamIdByAnchorId(int anchorId);
 
     void banAnchorByAlarm(int anchorId);
+
+    void changeAnchor(int anchorId, int roomId, String nickname);
 }
