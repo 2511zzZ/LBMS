@@ -16,11 +16,19 @@
 
 ### 预览
 
-![image-20200621164410647](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091315history.png)
+更多预览图请查看前端项目：[LBMS-Web](https://github.com/2511zzZ/LBMS-web)，或项目展示博客：[LBMS直播数据可视化系统展示](https://www.cnblogs.com/2511zzZ/p/13173545.html)
 
-![image-20200621164324047](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091320report.png)
+**实时总览数据：**
 
-![image-20200621164426222](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091309alarm.png)
+![online/total](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621100049image-20200530134220601.png)
+
+**分区历史数据：**
+
+![alarm/my-alarm](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621100118image-20200530134310817.png)
+
+**警报处理页面**
+
+![alarm/my-alarm](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621100251image-20200530135131336.png)
 
 ### API
 本项目集成了Swagger2，**/api** 页面列出了本项目所有接口

@@ -34,7 +34,7 @@ public class Swagger2Config {
                 .build();
     }    private ApiInfo apiInfo() {        return new ApiInfoBuilder()
             .title("RESTful APIs")
-            .description("xxx")
+            .description("直播后台管理系统后端接口")
             .version("0.1")
             .contact(new Contact("zzZ", "-", "2511672322@qq.com"))
             .build();
