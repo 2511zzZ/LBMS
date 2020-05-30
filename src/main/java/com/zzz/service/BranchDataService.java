@@ -23,4 +23,6 @@ public interface BranchDataService {
     List<GroupOnlineData> getGroupOnlineRank(int levelId);
 
     List<GroupHistoryData> getGroupHistoryRank(Date begin, Date end, int levelId);
+
+    BranchHistoryData calHistory(int branchId, Date datetime);
 }

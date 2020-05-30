@@ -1,6 +1,7 @@
 package com.zzz.quartz;
 
 import com.zzz.controller.websocket.WebSocketServer;
+import com.zzz.dao.AlarmDao;
 import com.zzz.model.AnchorAlarmTrans;
 import com.zzz.model.SysUserDetails;
 import com.zzz.service.AlarmService;
@@ -23,6 +24,9 @@ public class AnchorAlarmTransformJob implements Job{
     AlarmService alarmService;
 
     @Autowired
+    AlarmDao alarmDao;
+
+    @Autowired
     StructureService structureService;
 
     @Autowired
@@ -39,14 +43,25 @@ public class AnchorAlarmTransformJob implements Job{
         );
 
         // 系统设置 警报传递阈值
-        int trans_time = 10;
+        int transTime = alarmService.getAlarmTransSetting();
+        // 超时时间
+        int timeout = 60;
 
         // 找到当前所有未处理警报 其每条警报时间最大的数据
         List<AnchorAlarmTrans> anchorAlarms = alarmService.getUndoAlarms();
         for(AnchorAlarmTrans alarmTrans:anchorAlarms){
+
+            int timeToNow = (int) (new Date().getTime() - alarmTrans.getTime().getTime());
+
+            // 超时则关闭警报
+            if(timeToNow > timeout * 60 * 1000){
+                int timeoutStatus = 3;
+                alarmDao.processAlarm(alarmTrans.getAlarmId(), timeoutStatus, null, null, null, null);
+                continue;
+            }
             // 如果该时间距离现在超过10分钟
 //            System.out.println(alarmTrans.getTime().getTime() - new Date().getTime());
-            if((new Date().getTime() - alarmTrans.getTime().getTime()) > trans_time * 60 * 1000){
+            if(timeToNow > transTime * 60 * 1000){
                 // 获取该用户的上级用户
                 Integer superiorEmployeeId = structureService.getStructure(alarmTrans.getEmployeeId()).getSuperior();
                 // 当前用户为总经理时，上级用户为null
@@ -54,7 +69,7 @@ public class AnchorAlarmTransformJob implements Job{
                     SysUserDetails superior = userService.getUser(superiorEmployeeId);
                     // 插入一条新的警报传递信息
                     alarmService.insertAlarmTrans(new AnchorAlarmTrans(
-                            alarmTrans.getAlarmId(), superiorEmployeeId,
+                            alarmTrans.getAlarmId(), superior.getEmployeeId(),
                             superior.getName(),
                             superior.getRole(),
                             0,0,

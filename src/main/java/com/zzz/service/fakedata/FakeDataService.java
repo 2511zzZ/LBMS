@@ -5,7 +5,7 @@ import com.zzz.fakedata.AnchorGenerator;
 import com.zzz.fakedata.FakeDataConfig;
 import com.zzz.fakedata.SysUserGenerator;
 import com.zzz.model.AnchorTipOff;
-import com.zzz.model.HistoryDatas.AnchorHistoryData;
+import com.zzz.model.HistoryDatas.*;
 import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +90,18 @@ public class FakeDataService {
 
     public void insertAnchorHistoryData(List<AnchorHistoryData> anchorHistoryData) {
         fakeDataDao.insertAnchorHistoryData(anchorHistoryData);
+    }
+
+    public void insertTeamHistoryData(List<TeamHistoryData> teamHistoryData) {
+        fakeDataDao.insertTeamHistoryData(teamHistoryData);
+    }
+    public void insertGroupHistoryData(List<GroupHistoryData> groupHistoryData) {
+        fakeDataDao.insertGroupHistoryData(groupHistoryData);
+    }
+    public void insertBranchHistoryData(List<BranchHistoryData> branchHistoryData) {
+        fakeDataDao.insertBranchHistoryData(branchHistoryData);
+    }
+    public void insertTotalHistoryData(TotalHistoryData totalHistoryData) {
+        fakeDataDao.insertTotalHistoryData(totalHistoryData);
     }
 }

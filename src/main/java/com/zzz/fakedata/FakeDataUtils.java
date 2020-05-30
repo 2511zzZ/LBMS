@@ -85,11 +85,19 @@ public class FakeDataUtils {
         return (int)(Math.random()*1000);
     }
 
+    public static int randomMaxWatchNum() {
+        return (int)(Math.random()*1600);
+    }
+
     public static int randomGift() {
         if(Math.random()>0.3){
             return 0;
         }
         return (int)(Math.random()*100);
+    }
+
+    public static int randomHistoryGift() {
+        return (int)(Math.random() * 15 * 4 * 60);
     }
 
     public static int randomBulletScreen() {

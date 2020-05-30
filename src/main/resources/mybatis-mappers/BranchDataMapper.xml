@@ -42,4 +42,16 @@
         GROUP BY t.group_id
         having group_id in (select group_id from struc_manage where branch_id = #{branchId} group by group_id)
     </select>
+    <select id="calHistory" resultType="com.zzz.model.HistoryDatas.BranchHistoryData">
+        select
+        #{branchId} as branch_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        sum(max_watch_num) as max_watch_num,
+        date as date
+        from group_history where group_id in
+        (select group_id from struc_manage where branch_id = #{branchId} group by group_id)
+        and date = #{datetime}
+    </select>
 </mapper>

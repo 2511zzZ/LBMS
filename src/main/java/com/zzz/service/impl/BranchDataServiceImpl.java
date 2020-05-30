@@ -57,4 +57,9 @@ public class BranchDataServiceImpl implements BranchDataService {
     public List<GroupHistoryData> getGroupHistoryRank(Date begin, Date end, int branchId) {
         return branchDataDao.getGroupHistoryRank(begin,end,branchId);
     }
+
+    @Override
+    public BranchHistoryData calHistory(int branchId, Date datetime) {
+        return branchDataDao.calHistory(branchId, datetime);
+    }
 }

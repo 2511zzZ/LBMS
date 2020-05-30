@@ -48,4 +48,14 @@
         GROUP BY t.branch_id
         having branch_id in (select branch_id from struc_manage where 1 = #{levelId} group by branch_id)
     </select>
+    <select id="calHistory" resultType="com.zzz.model.HistoryDatas.TotalHistoryData">
+        select
+        #{totalId} as total_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        sum(max_watch_num) as max_watch_num,
+        date as date
+        from branch_history where date = #{datetime}
+    </select>
 </mapper>

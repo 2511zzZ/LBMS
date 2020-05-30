@@ -150,7 +150,65 @@
             )
         </foreach>
     </insert>
+    <insert id="insertTeamHistoryData">
+    insert into team_history
+    (team_id, watch_num, gift, bullet_screen, max_watch_num, date)
+    values
+    <foreach collection="list" item="teamHistoryData" index="index" separator=",">
+        (
+        #{teamHistoryData.teamId},
+        #{teamHistoryData.watchNum},
+        #{teamHistoryData.gift},
+        #{teamHistoryData.bulletScreen},
+        #{teamHistoryData.maxWatchNum},
+        #{teamHistoryData.date}
+        )
+    </foreach>
+</insert>
 
+    <insert id="insertGroupHistoryData">
+        insert into group_history
+        (group_id, watch_num, gift, bullet_screen, max_watch_num, date)
+        values
+        <foreach collection="list" item="groupHistoryData" index="index" separator=",">
+            (
+            #{groupHistoryData.groupId},
+            #{groupHistoryData.watchNum},
+            #{groupHistoryData.gift},
+            #{groupHistoryData.bulletScreen},
+            #{groupHistoryData.maxWatchNum},
+            #{groupHistoryData.date}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertBranchHistoryData">
+        insert into branch_history
+        (branch_id, watch_num, gift, bullet_screen, max_watch_num, date)
+        values
+        <foreach collection="list" item="branchHistoryData" index="index" separator=",">
+            (
+            #{branchHistoryData.branchId},
+            #{branchHistoryData.watchNum},
+            #{branchHistoryData.gift},
+            #{branchHistoryData.bulletScreen},
+            #{branchHistoryData.maxWatchNum},
+            #{branchHistoryData.date}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertTotalHistoryData">
+        insert into total_history values
+        (
+        null,
+        #{totalId},
+        #{watchNum},
+        #{gift},
+        #{bulletScreen},
+        #{maxWatchNum},
+        #{date}
+        )
+    </insert>
 
     <select id="queryAllUserDetails" resultType="com.zzz.model.SysUserDetails">
         select * from sys_user_details

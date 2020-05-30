@@ -57,4 +57,9 @@ public class TeamDataServiceImpl implements TeamDataService {
     public List<AnchorHistoryData> getAnchorHistoryRank(Date begin, Date end, int levelId) {
         return teamDataDao.getAnchorHistoryRank(begin, end, levelId);
     }
+
+    @Override
+    public TeamHistoryData calHistory(int teamId, Date datetime) {
+        return teamDataDao.calHistory(teamId, datetime);
+    }
 }

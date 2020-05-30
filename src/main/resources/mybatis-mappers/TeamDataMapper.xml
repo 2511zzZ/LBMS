@@ -42,4 +42,16 @@
         GROUP BY t.anchor_id
         having anchor_id in (select anchor_id from struc_manage where team_id = #{teamId} group by anchor_id)
     </select>
+    <select id="calHistory" resultType="com.zzz.model.HistoryDatas.TeamHistoryData">
+        select
+        #{teamId} as team_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        sum(max_watch_num) as max_watch_num,
+        date as date
+        from anchor_history where anchor_id in
+        (select anchor_id from struc_manage where team_id = #{teamId} group by anchor_id)
+        and date = #{datetime}
+    </select>
 </mapper>

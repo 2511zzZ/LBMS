@@ -24,4 +24,6 @@ public interface GroupDataDao {
     List<TeamOnlineData> getTeamOnlineRank(int levelId);
 
     List<TeamHistoryData> getTeamHistoryRank(Date begin, Date end, int groupId);
+
+    GroupHistoryData calHistory(int groupId, Date datetime);
 }

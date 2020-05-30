@@ -24,4 +24,6 @@ public interface TeamDataDao {
     List<AnchorOnlineData> getAnchorOnlineRank(int levelId);
 
     List<AnchorHistoryData> getAnchorHistoryRank(Date begin, Date end, int teamId);
+
+    TeamHistoryData calHistory(int teamId, Date datetime);
 }

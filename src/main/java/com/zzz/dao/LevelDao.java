@@ -50,4 +50,6 @@ public interface LevelDao {
     int countGroup(String levelIdName, Integer levelId);
 
     int countBranch(String levelIdName, Integer levelId);
+
+    int countAllAnchor();
 }

@@ -129,6 +129,9 @@
     <select id="countAnchor" resultType="java.lang.Integer">
         select count(*) from anchor where anchor_id in (select anchor_id from struc_manage where ${levelIdName} = #{levelId})
     </select>
+    <select id="countAllAnchor" resultType="java.lang.Integer">
+        select count(*) from anchor
+    </select>
 
 
 </mapper>

@@ -28,4 +28,6 @@ public interface TotalDataDao {
     List<BranchOnlineData> getBranchOnlineRank(Integer totalId);
 
     List<BranchHistoryData> getBranchHistoryRank(Date begin, Date end, int levelId);
+
+    TotalHistoryData calHistory(int totalId, Date datetime);
 }

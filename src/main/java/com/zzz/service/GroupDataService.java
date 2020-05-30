@@ -23,4 +23,6 @@ public interface GroupDataService {
     List<TeamOnlineData> getTeamOnlineRank(int levelId);
 
     List<TeamHistoryData> getTeamHistoryRank(Date begin, Date end, int levelId);
+
+    GroupHistoryData calHistory(int groupId, Date datetime);
 }

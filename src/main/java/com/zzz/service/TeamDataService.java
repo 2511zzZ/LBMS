@@ -23,4 +23,6 @@ public interface TeamDataService {
     List<AnchorOnlineData> getAnchorOnlineRank(int levelId);
 
     List<AnchorHistoryData> getAnchorHistoryRank(Date begin, Date end, int levelId);
+
+    TeamHistoryData calHistory(int teamId, Date datetime);
 }

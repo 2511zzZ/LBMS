@@ -42,4 +42,16 @@
         GROUP BY t.team_id
         having team_id in (select team_id from struc_manage where group_id = #{groupId} group by team_id)
     </select>
+    <select id="calHistory" resultType="com.zzz.model.HistoryDatas.GroupHistoryData">
+        select
+        #{groupId} as group_id,
+        sum(watch_num) as watch_num,
+        sum(gift) as gift,
+        sum(bullet_screen) as bullet_screen,
+        sum(max_watch_num) as max_watch_num,
+        date as date
+        from team_history where team_id in
+        (select team_id from struc_manage where group_id = #{groupId} group by team_id)
+        and date = #{datetime}
+    </select>
 </mapper>

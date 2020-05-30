@@ -117,7 +117,7 @@ public class LevelServiceImpl implements LevelService {
     public int countAnchor(Integer role, Integer employeeId) {
         Integer levelId = this.getLevelIdByEmployeeId(role, employeeId);
         if(role == 1){
-            return levelDao.countAnchor("1", levelId);
+            return levelDao.countAllAnchor();
         }
         return levelDao.countAnchor(getLevelIdName(role), levelId);
     }

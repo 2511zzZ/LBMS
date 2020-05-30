@@ -2,7 +2,7 @@ package com.zzz.dao;
 
 import com.zzz.model.Anchor;
 import com.zzz.model.AnchorTipOff;
-import com.zzz.model.HistoryDatas.AnchorHistoryData;
+import com.zzz.model.HistoryDatas.*;
 import com.zzz.model.OnlineDatas.*;
 import com.zzz.model.SysUser;
 import com.zzz.model.SysUserDetails;
@@ -46,4 +46,12 @@ public interface FakeDataDao {
     void insertAnchorTipOff(List<AnchorTipOff> fakeAnchorTipOffData);
 
     void insertAnchorHistoryData(List<AnchorHistoryData> anchorHistoryData);
+
+    void insertTeamHistoryData(List<TeamHistoryData> teamHistoryData);
+
+    void insertGroupHistoryData(List<GroupHistoryData> groupHistoryData);
+
+    void insertBranchHistoryData(List<BranchHistoryData> branchHistoryData);
+
+    void insertTotalHistoryData(TotalHistoryData totalHistoryData);
 }

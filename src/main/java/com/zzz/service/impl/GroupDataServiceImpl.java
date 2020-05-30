@@ -57,4 +57,9 @@ public class GroupDataServiceImpl implements GroupDataService {
     public List<TeamHistoryData> getTeamHistoryRank(Date begin, Date end, int levelId) {
         return groupDataDao.getTeamHistoryRank(begin, end, levelId);
     }
+
+    @Override
+    public GroupHistoryData calHistory(int groupId, Date datetime) {
+        return groupDataDao.calHistory(groupId, datetime);
+    }
 }
