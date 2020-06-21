@@ -16,14 +16,14 @@
 
 ### 预览
 
-![image-20200621164410647](D:\Projects\LBMS\image-20200621164410647.png)
+![image-20200621164410647](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091315history.png)
 
-![image-20200621164324047](D:\Projects\LBMS\image-20200621164324047.png)
+![image-20200621164324047](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091320report.png)
 
-![image-20200621164426222](D:\Projects\LBMS\image-20200621164426222.png)
+![image-20200621164426222](https://images.cnblogs.com/cnblogs_com/2511zzZ/1791329/o_200621091309alarm.png)
 
 ### API
-本项目集成了Swagger2，http://127.0.0.1:8080/api 页面列出了本项目所有接口
+本项目集成了Swagger2，**/api** 页面列出了本项目所有接口
 
 ### 权限管理
 1. 本项目拥有四种权限:team、group、branch、total
